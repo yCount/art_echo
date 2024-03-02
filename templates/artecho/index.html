@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-
+{% extends 'artecho/base-navbar.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <title>ArtEcho</title>
-    </head>
-    <body>
-        <h1>ArtEcho says...</h1>
-        <div>
-            <strong>{{ boldmessage }}</strong>
-        </div>
-        <div>
-            <a href="/artecho/about/">About</a><br />
-            <img src="{% static 'images/dart_vader.png' %}" alt="Dart dart_vader" width="400px%">
-        </div>
-    </body>
-</html>
+{% block title_block %}
+Index
+{% endblock %}
+
+{% block body_block %}
+{% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title> ArtEcho
+        {% block title_block %}
+        {% endblock %}
+        </title>
+    </head>
+    <body>
+        <nav id="topnav">
+            <!-- Note that we should have an if condition checking for whether logged in or not -->
+            <a href="">ArtEcho</a>
+            <input type="text" placeholder="Search..">
+            <!-- following anchor(a) tags have not yet have page links to direct the user -->
+            <a href="">i</a>
+            <a href="">Sign up</a>
+            <a href="">Log in</a>
+        </nav>
+        <div id="content">
+            {% block body_block %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

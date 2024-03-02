@@ -3,25 +3,24 @@
 <!-- This template is going to be used for log-in, sign-up, and about page. -->
 
 {% load staticfiles %}
+<html>
+    <head>
+        <title> ArtEcho
+        <!-- Note that title closing tag is in the title_block template. This is purposeful design choice
+        This allows other htmls that extend this base-template to both amend the title and include link css files
+        Downside of this design however, other HTML's have to include closing title tag if they were to override title_block. Otherwise, html page does not load correctly -->
+        {% block title_block %}
+            </title>
+        {% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> ArtEcho
-    <!-- Note that title closing tag is in the title_block template. This is purposeful design choice
-    This allows other htmls that extend this base-template to both amend the title and include link css files
-    Downside of this design however, other HTML's have to include closing title tag if they were to override title_block. Otherwise, html page does not load correctly -->
-    {% block title_block %}
-        </title>
-    {% endblock %}
-    <link rel="stylesheet" href="{% static 'css/card.css' %}">
-</head>
-<body>
+        <link rel="stylesheet" href="{% static 'css/card.css' %}">
+    </head>
+    <body>
 
-<div class="card">
-    {% block card_content %}
-    {% endblock %}
-</div>
+        <div class="card">
+            {% block card_content %}
+            {% endblock %}
+        </div>
 
-</body>
+    </body>
 </html>

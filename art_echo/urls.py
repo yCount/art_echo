@@ -20,6 +20,10 @@ from artecho import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    # added for html test viewing:
+    path('card/', views.card, name='card'),
+    path('add_root', views.add_root, name='add_root'),
+    # html test urlpatters end here---
     path('artecho/', include('artecho.urls')),
     path('admin/', admin.site.urls),
 ]

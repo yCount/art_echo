@@ -16,8 +16,8 @@
             <input type="text" placeholder="Search..">
             <!-- following anchor(a) tags have not yet have page links to direct the user -->
             <a href="{% url 'artecho:about' %}">i</a>
-            <a href="">Sign up</a>
-            <a href="">Log in</a>
+            <a href="{% url 'artecho:signup'%}">Sign up</a>
+            <a href="{% url 'artecho:login' %}">Log in</a>
         </nav>
         <div id="content">
             {% block body_block %}

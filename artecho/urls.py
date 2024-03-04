@@ -10,5 +10,6 @@ urlpatterns = [
     path('card', views.card, name='card'),
     path('login/', views.user_login, name='login'),
     path('about/', views.about, name='about'),
+    path('signup/', views.signup, name='signup'),
     # html test urlpatters end here---
 ]

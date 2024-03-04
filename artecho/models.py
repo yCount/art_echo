@@ -31,7 +31,7 @@ class User(models.Model):
     forename = models.CharField(max_length=128, null = False)
     surname = models.CharField(max_length=128, null = False)
     totalLikes = models.IntegerField(default = 0)
-    liked = models.ManyToManyField('Image', default = None)
+    liked = models.ManyToManyField('Image', default = None)  ###not working correctly
     password = models.CharField(max_length=128, null = False)  ###will be encrypted when taken in via a form "(widget=forms.PasswordInput()"
     slug = models.SlugField()
 
@@ -47,7 +47,7 @@ class User(models.Model):
 
 class Image(models.Model):
     name = models.CharField(max_length=128, null = False)
-    isAI = models.BooleanField()
+    isAI = models.BooleanField(default = False)
     file = models.ImageField(null = False, upload_to= 'images/')
     parent = models.ForeignKey('Image', on_delete=models.PROTECT, null = True) ###unsure if this is the correct delete mode
     likes = models.IntegerField(default = 0)

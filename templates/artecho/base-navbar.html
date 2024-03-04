@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-{% load staticfiles %}
+{% load static %}
 
 <html>
     <head>
@@ -15,7 +15,7 @@
             <a href="">ArtEcho</a>
             <input type="text" placeholder="Search..">
             <!-- following anchor(a) tags have not yet have page links to direct the user -->
-            <a href="">i</a>
+            <a href="{% url 'artecho:about' %}">i</a>
             <a href="">Sign up</a>
             <a href="">Log in</a>
         </nav>

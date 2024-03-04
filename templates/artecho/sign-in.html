@@ -1,0 +1,18 @@
+{% extends 'base-card.html' %}
+
+{% block title_block %}
+    Log In
+</title>
+{% endblock %}
+
+{% block body_block %}
+    <div class="login-container">
+        <h2>Log In</h2>
+        <form method="post">
+            {% csrf_token %}
+            <!-- Here we will need to add the login form-->
+            <button type="submit">Log In</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'sign-up' %}">Sign Up</a></p>
+    </div>
+{% endblock %}

@@ -12,6 +12,7 @@ from art_echo import settings
 from PIL import Image as img
 import io
 import sys 
+import glob
 
 
 
@@ -157,6 +158,19 @@ def convert_to_file(image, name): ##function to convert PIL image to an uploadab
     
 if __name__ == '__main__':
     print('Starting ArtEcho population script...')
+    #clears previous contents of database
+    Image.objects.all().delete()
+    User.objects.all().delete()
+    Category.objects.all().delete()
+    imageFiles = glob.glob(os.path.join(settings.MEDIA_DIR, 'images') + "/*.png")
+    for file in imageFiles:
+        os.remove(file)
+    pfpFiles = glob.glob(os.path.join(settings.MEDIA_DIR, 'profilePics') + "/*.png")
+    for file in pfpFiles:
+        os.remove(file)
+
+
+
     populate()
     print("population complete")
     

@@ -20,7 +20,7 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
 
     def __str__(self):
-        return self.name
+        return self.slug
     
 class User(models.Model):
     username = models.CharField(max_length=128, unique=True, null = False)
@@ -31,7 +31,7 @@ class User(models.Model):
     forename = models.CharField(max_length=128, null = False)
     surname = models.CharField(max_length=128, null = False)
     totalLikes = models.IntegerField(default = 0)
-    liked = models.ManyToManyField('Image')
+    liked = models.ManyToManyField('Image', default = None)
     password = models.CharField(max_length=128, null = False)  ###will be encrypted when taken in via a form "(widget=forms.PasswordInput()"
     slug = models.SlugField()
 
@@ -43,26 +43,30 @@ class User(models.Model):
         verbose_name_plural = 'users'
 
     def __str__(self):
-        return self.username
+        return self.slug
 
 class Image(models.Model):
-    name = models.CharField(max_length=128, unique=True, null = False)
+    name = models.CharField(max_length=128, null = False)
     isAI = models.BooleanField()
-    file = models.ImageField(null = False)
+    file = models.ImageField(null = False, upload_to= 'images/')
     parent = models.ForeignKey('Image', on_delete=models.PROTECT, null = True) ###unsure if this is the correct delete mode
     likes = models.IntegerField(default = 0)
     category = models.ForeignKey('Category', on_delete=models.DO_NOTHING, null = False)
-    poster = models.ForeignKey('User', on_delete=models.PROTECT, null = False)
+    poster = models.ForeignKey('User', on_delete=models.PROTECT, null = True)
     description = models.TextField(max_length=1000, unique=False)
     slug = models.SlugField()
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        if self.poster == None:
+            full_slug = self.name
+        else:
+            full_slug = str(self.poster) + "-" + self.name
+        self.slug = slugify(full_slug) #Image slug is a concatenation of the user who posted it and the name
         super(Image, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'images'
 
     def __str__(self):
-        return self.name
+        return self.slug
     

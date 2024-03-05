@@ -23,6 +23,7 @@ urlpatterns = [
     # added for html test viewing:
     path('card/', views.card, name='card'),
     path('add_root', views.add_root, name='add_root'),
+    path('tree', views.tree_view, name='tree'),
     # html test urlpatters end here---
     path('artecho/', include('artecho.urls')),
     path('admin/', admin.site.urls),

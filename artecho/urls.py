@@ -11,5 +11,6 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
     path('about/', views.about, name='about'),
     path('signup/', views.signup, name='signup'),
+    path('tree', views.tree_view, name='tree'),
     # html test urlpatters end here---
 ]

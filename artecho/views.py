@@ -24,6 +24,9 @@ def about(request):
     print(request.user)
     return render(request, 'artecho/about.html', context=context_dict)
 
+def tree_view(request):
+    return render(request, 'artecho/tree-view.html')
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')

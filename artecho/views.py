@@ -29,21 +29,24 @@ def tree_view(request):
 
 def user_login(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        form = UserForm(request.POST)
+        if form.is_valid():
+            username = request.POST.get('username')
+            password = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)
-        if user:
-            if user.is_active:
-                login(request, user)
-                return redirect(reverse('artecho:index'))
+            user = authenticate(username=username, password=password)
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return redirect(reverse('artecho:index'))
+                else:
+                    return HttpResponse("Your artecho account is disabled.")
             else:
-                return HttpResponse("Your artecho account is disabled.")
-        else:
-            print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
+                print(f"Invalid login details: {username}, {password}")
+                return HttpResponse("Invalid login details supplied.")
     else:
-        return render(request, 'artecho/login.html')
+        form = UserForm()
+    return render(request, 'artecho/login.html', {'form': form})
 
 def signup(request):
     registered = False
@@ -54,7 +57,7 @@ def signup(request):
         profile_form = UserProfileForm(request.POST)
 
         if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
+            user = user_form.save(commit=False)
 
             user.set_password(user.password)
             user.save()

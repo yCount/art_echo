@@ -7,6 +7,13 @@
     padding: 0 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: add a slight shadow for depth */
     border-radius: 15px;
+    position: absolute;
+    top: 0;
+    width: 99%;
+    box-sizing: border-box;
+    /* 2 following lines should help navbar to center but not sure if it actually works */
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #topnav a {
@@ -26,4 +33,8 @@
 /* Optionally, :hover effects for the links. This may be deleted later */
 #topnav a:hover {
     color: #007bff; /* Change color on hover */
+}
+
+#blank_space {
+    height: 80px;
 }

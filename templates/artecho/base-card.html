@@ -2,15 +2,11 @@
 <!-- This base template defines how a card-like page will generally look like. -->
 <!-- This template is going to be used for log-in, sign-up, and about page. -->
 
-{% load staticfiles %}
+{% load static %}
 <html>
     <head>
-        <title> ArtEcho
-        <!-- Note that title closing tag is in the title_block template. This is purposeful design choice
-        This allows other htmls that extend this base-template to both amend the title and include link css files
-        Downside of this design however, other HTML's have to include closing title tag if they were to override title_block. Otherwise, html page does not load correctly -->
         {% block title_block %}
-            </title>
+        <title> ArtEcho </title>
         {% endblock %}
 
         <link rel="stylesheet" href="{% static 'css/card.css' %}">

@@ -1,0 +1,28 @@
+{% extends 'artecho/base-navbar.html' %}
+{% load static %}
+
+{% block title_block %}
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/figure_display.css' %}">
+{% endblock %}
+
+{% block body_block %}
+    <div class="profile">
+        <img src="" alt="profile picture here. Should align to the center later">
+    </div>
+
+    <div class="container">
+        <!-- Following lines are for display. They are to be deleted later -->
+        <!-- One sample active figure -->
+        <figure>
+            <img src="https://assets.codepen.io/12005/windmill.jpg" alt="A windmill" />
+            <figcaption class="username"><a href="#">username01</a></figcaption>
+            <figcaption class="likes">👍 45</figcaption>
+            <figcaption class="download"><a href="">↓</a></figcaption>
+        </figure>
+        <!-- the active image figure ends here -->
+        <figure>
+            <img src="{% static '/images/dart_vader.png' %}" alt="dart vader" />
+        </figure>
+    </div>
+{% endblock %}

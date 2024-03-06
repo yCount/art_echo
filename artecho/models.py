@@ -1,10 +1,8 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-# Create your models here.
+from django.contrib.auth.models import User
 
-##admin details
-#username = admin1
-#password = ArtEcho1
+# Create your models here.
  
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True, null = False)
@@ -69,4 +67,15 @@ class Image(models.Model):
 
     def __str__(self):
         return self.slug
-    
+
+# After here is pushed from front-end:
+class UserProfile(models.Model):
+    # This line is required. Links UserProfile to a User model instance.
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    # The additional attributes we wish to include.
+    website = models.URLField(blank=True)
+    picture = models.ImageField(upload_to='profile_images', blank=True)
+
+    def __str__(self):
+        return self.user.username

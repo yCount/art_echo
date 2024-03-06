@@ -7,7 +7,7 @@
     padding: 0 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: add a slight shadow for depth */
     border-radius: 15px;
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 99%;
     box-sizing: border-box;
@@ -29,9 +29,8 @@
     border-radius: 8px;
 }
 
-/* Optionally, :hover effects for the links. This may be deleted later */
 #blank_space {
-    height: 80px;
+    height: 120px;
 }
 
 .nav-button {
@@ -43,10 +42,11 @@
     text-decoration: none;
     transition: background-color 0.3s ease;
     font-family: Helvetica;
+    white-space: nowrap
 }
 
 #artecho-link {
-    background: linear-gradient(to right, #40E0D0 0%, #2575fc 40%, #6a11cb 100%);
+    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
 }
 
 #about-link {

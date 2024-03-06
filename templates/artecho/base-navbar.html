@@ -19,6 +19,11 @@
             <a href="{% url 'artecho:signup'%}">Sign up</a>
             <a href="{% url 'artecho:login' %}">Log in</a>
         </nav>
+        
+        <div id="blank_space">
+            <!-- This blank space is to cover #topnav's area, so #content don't go under it -->
+        </div>
+
         <div id="content">
             {% block body_block %}
             {% endblock %}

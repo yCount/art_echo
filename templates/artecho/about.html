@@ -6,13 +6,26 @@
 
 {% block card_content %}
     <div class="about-container">
-        <h2>About ArtEcho</h2>
+        <div class="heading-container">
+            <h2>ArtEcho</h2>
+        </div>
         <p>
-            ArtEcho is a platform for digital artists to share their work, contribute to others' projects and connect with digital artists in the community. 
-            Whether you're a professional artist or just starting out, ArtEcho is a place for you to share your creativity with the world.
+            Welcome to Artecho, a vibrant community where art meets innovation. Here you can share your masterpieces or discover new dimensions of creativity through AI. 
+        </p>
+        <p>
+            Upload your artwork, whether human or AI-created, and explore. Watch as your image transforms, offering a new perspective. Or dive into the communities 
+            creations and add your own unique touch.
+        </p>
+        <p>
+            Join forces with artists and tech enthusiasts alike. Whether you're starting with your own peice or iterating on someone else's, every image is a branch of endless possibilities.
+        </p>
+        <p>
+            ready to Echo your creativity? Start exploring, creating and sharing on ArtEcho today.
         </p>
     </div>
-    <div class="homebtn">
-        <a href="{% url 'artecho:index' %}">Home</a>
+    <div class="navigation-links">
+        <p>Already a member? <a class="login-button" href="{% url 'artecho:login' %}">Log in</a></p>
+        <p>New here? <a class="signup-button" href="{% url 'artecho:signup' %}">Sign up</a></p>
+        <p>Get back to <a class="home-button" href="{% url 'artecho:index' %}">Home Page</a></p>
     </div>
 {% endblock %}

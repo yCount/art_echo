@@ -38,6 +38,11 @@ html {
     font-weight: 400;
     color: #ffff;
 }
+.card h1 {
+    font-family: helvetica;
+    font-weight: 400;
+    color: #000;
+}
 form .helptext {
     display: block;
     color: red;

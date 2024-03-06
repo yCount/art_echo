@@ -6,7 +6,7 @@
 
 {% block card_content %}
     <div class="signup-container">
-        <h2>Sign Up</h2>
+        <h1>Sign Up</h1>
         <form method="post">
             {% csrf_token %}
             {{ user_form.as_p }}

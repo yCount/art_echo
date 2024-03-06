@@ -27,6 +27,9 @@ def about(request):
 def tree_view(request):
     return render(request, 'artecho/tree-view.html')
 
+def profile(request):
+    return render(request, 'artecho/profile.html')
+
 def user_login(request):
     if request.method == 'POST':
         form = UserForm(request.POST)

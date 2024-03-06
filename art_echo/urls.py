@@ -27,4 +27,5 @@ urlpatterns = [
     # html test urlpatters end here---
     path('artecho/', include('artecho.urls')),
     path('admin/', admin.site.urls),
+    path('profile', views.profile, name='profile')
 ]

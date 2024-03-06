@@ -12,12 +12,12 @@
     <body>
         <nav id="topnav">
             <!-- Note that we should have an if condition checking for whether logged in or not -->
-            <a href="">ArtEcho</a>
+            <a class="nav-button" id="artecho-link" href="">ArtEcho</a>
             <input type="text" placeholder="Search..">
             <!-- following anchor(a) tags have not yet have page links to direct the user -->
-            <a href="{% url 'artecho:about' %}">i</a>
-            <a href="{% url 'artecho:signup'%}">Sign up</a>
-            <a href="{% url 'artecho:login' %}">Log in</a>
+            <a class="nav-button" id="about-link" href="{% url 'artecho:about' %}">i</a>
+            <a class="nav-button" id="signup-link" href="{% url 'artecho:signup'%}">Sign up</a>
+            <a class="nav-button" id="login-link" href="{% url 'artecho:login' %}">Log in</a>
         </nav>
         
         <div id="blank_space">

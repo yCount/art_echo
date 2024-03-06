@@ -19,7 +19,6 @@
 #topnav a {
     text-decoration: none;
     margin-right: 20px;
-    color: #333;
     font-size: 16px;
 }
 
@@ -31,10 +30,40 @@
 }
 
 /* Optionally, :hover effects for the links. This may be deleted later */
-#topnav a:hover {
-    color: #007bff; /* Change color on hover */
-}
-
 #blank_space {
     height: 80px;
+}
+
+.nav-button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-family: Helvetica;
+}
+
+#artecho-link {
+    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+}
+
+#about-link {
+    background-color: #f4e330;
+    font-style: italic;
+    font-weight: bold;
+    color: black;
+}
+
+#signup-link {
+    background-color: #00008b;
+}
+
+#login-link {
+    background-color: #007BFF;
+}
+
+.nav-button:hover {
+    opacity: 0.8;
 }

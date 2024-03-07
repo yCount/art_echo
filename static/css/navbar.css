@@ -14,6 +14,8 @@
     /* 2 following lines should help navbar to center but not sure if it actually works */
     margin-right: auto;
     margin-left: auto;
+    z-index: 1000; /* High z-index to ensure it's on top */
+
 }
 
 #topnav a {

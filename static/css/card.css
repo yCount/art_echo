@@ -79,6 +79,9 @@ button{
     text-decoration: none;
     font-family: helvetica;
 }
+
+.signup-container h2,
+.login-container h2,
 .heading-container {
     display: flex;
     justify-content: center;
@@ -88,4 +91,23 @@ button{
     padding: 10px;
     border-radius: 12px;
     max-width: 350px;
+}
+
+.signup-container form p,
+.login-container form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.signup-container form p label,
+.login-container form p label {
+    margin-bottom: 5px;
+}
+
+.signup-container form p input,
+.login-container form p input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
 }

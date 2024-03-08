@@ -1,7 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User
-from artecho.models import UserProfile
+from artecho.models import User as UserProfile
 
+class LoginForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+    class Meta:
+        model = User
+        fields = ('email', 'password',)
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
     username = forms.CharField(help_text="")
@@ -11,7 +16,7 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ( 'picture',)
+        fields = ( )
 
 class SignUpForm(UserForm):
     password_confirm = forms.CharField(widget=forms.PasswordInput(), label='Confirm password')

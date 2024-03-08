@@ -7,13 +7,15 @@
     padding: 0 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: add a slight shadow for depth */
     border-radius: 15px;
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 99%;
     box-sizing: border-box;
     /* 2 following lines should help navbar to center but not sure if it actually works */
     margin-right: auto;
     margin-left: auto;
+    z-index: 1000; /* High z-index to ensure it's on top */
+
 }
 
 #topnav a {
@@ -29,9 +31,8 @@
     border-radius: 8px;
 }
 
-/* Optionally, :hover effects for the links. This may be deleted later */
 #blank_space {
-    height: 80px;
+    height: 120px;
 }
 
 .nav-button {
@@ -43,6 +44,7 @@
     text-decoration: none;
     transition: background-color 0.3s ease;
     font-family: Helvetica;
+    white-space: nowrap
 }
 
 #artecho-link {

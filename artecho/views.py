@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.shortcuts import redirect
-from artecho.forms import UserForm, UserProfileForm
+from artecho.forms import UserForm, UserProfileForm, LoginForm
 
 
 def index(request):
@@ -32,7 +32,7 @@ def profile(request):
 
 def user_login(request):
     if request.method == 'POST':
-        form = UserForm(request.POST)
+        form = LoginForm(request.POST)
         if form.is_valid():
             username = request.POST.get('username')
             password = request.POST.get('password')
@@ -48,7 +48,7 @@ def user_login(request):
                 print(f"Invalid login details: {username}, {password}")
                 return HttpResponse("Invalid login details supplied.")
     else:
-        form = UserForm()
+        form = LoginForm()
     return render(request, 'artecho/login.html', {'form': form})
 
 def signup(request):

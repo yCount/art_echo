@@ -1,30 +1,10 @@
 {% extends 'artecho/base-navbar.html' %}
-{% load static %}
 
 {% block title_block %}
     <title>ArtEch <!-- Name of the image should be should be here -->></title>
-    <link rel="stylesheet" href="{% static 'css/view-tree.css' %}">
 {% endblock %}
 
 {% block body_block %}
 <!-- Tree-view demo should be integrated here -->
 <!--  http://127.0.0.1:8000/tree should lead to the view of current page -->
-
-    <div class="row">
-        <div class="tree">
-            <ul>
-                <li> <a href="#"><img src="{% static 'images/darth_vader_realistic.png' %}"><span>Child</span></a>
-                <ul>
-                    <li> <a href="#"><img src="{% static 'images/dart_vader.png' %}"><span>Grand Child</span></a>
-                    <ul>
-                        <li> <a href="#"><img src="{% static 'images/stranger_things_logo.png' %}"><span>Great Grand Child</span></a> </li>
-                        <li> <a href="#"><img src="{% static 'images/jim_hopper.png' %}"><span>Great Grand Child</span></a> </li>
-                        <li> <a href="#"><img src="{% static 'images/dart_vader.png' %}"><span>Great Grand Child</span></a> </li>
-                    </ul>
-                    </li>
-                </ul>
-                </li>
-            </ul>
-        </div>
-    </div>  
 {% endblock %}

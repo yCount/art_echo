@@ -1,5 +1,5 @@
 {% extends 'artecho/base-navbar.html' %}
-{% load staticfiles %}
+{% load static %}
 
 {% block title_block %}
     <title> ArtEcho - Add Root </title>
@@ -14,10 +14,8 @@
     </div>
     <div id="details-section" class="section" style="display:none;">
         <form id="imageDetailsForm">
-            <label for="imageName">Image Name:</label>
-            <input type="text" id="imageName" name="imageName"><br><br>
-            <label for="imageDescription">Description:</label>
-            <textarea id="imageDescription" name="imageDescription"></textarea><br><br>
+            {% csrf_token %}
+            {{ form.as_p }}
             <input type="submit" value="Submit">
         </form>
     </div>

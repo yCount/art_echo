@@ -24,3 +24,38 @@
     max-width: 100%;
     height: auto;
 }
+
+#imageDetailsForm {
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+#imageDetailsForm p {
+    display: flex;
+    flex-direction: column;
+}
+
+#imageDetailsForm p > label {
+   font-family: helvetica;
+   font-size: 16px;
+   color: #000;
+   margin: 5px;
+}
+#imageDetailsForm p > input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: helvetica;
+}
+
+#imageDetailsForm input[type="submit"] {
+    background-color: #007BFF;
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center; 
+    margin: auto;
+    display: block; 
+    font-size: 16px; ;
+}

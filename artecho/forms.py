@@ -38,5 +38,5 @@ class ImageForm(forms.ModelForm):
         model = Image
         fields = ('name', 'description', 'isAI',)
         labels = {
-            'isAI': 'Is this Image AI generated?',
+            'isAI': 'Is this image AI generated?',
         }

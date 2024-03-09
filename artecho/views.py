@@ -4,10 +4,13 @@ from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.shortcuts import redirect
 from artecho.forms import UserForm, UserProfileForm, LoginForm
+from artecho.models import Image
 
 
 def index(request):
     context_dict = {'boldmessage': 'Welcome to ArtEcho!'}
+    display_images = Image.objects.order_by('-likes')[:10]
+    context_dict['display_images'] = display_images
     return render(request, 'artecho/index.html', context=context_dict)
 
 # added for html test viewing:

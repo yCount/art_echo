@@ -1,6 +1,8 @@
 from django.urls import path
 from artecho import views
 
+
+
 app_name = 'artecho'
 
 urlpatterns = [
@@ -13,4 +15,4 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('tree', views.tree_view, name='tree'),
     # html test urlpatters end here---
-]
+] 

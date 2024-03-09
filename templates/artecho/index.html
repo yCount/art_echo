@@ -11,13 +11,17 @@
 <div class="container">
     {% if display_images %}
         {% for image in display_images %}
-            <figure>
-                <img src="{{ image.file.url }}" 
-                    alt="{{image.name}}" />
-                <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
-                <figcaption class="likes">👍 {{image.likes}}</figcaption>
-                <figcaption class="download"><a href="">↓</a></figcaption>
-            </figure>
+            {% if image.slug == "base_root" %}
+                <!-- does not display base root-->
+            {% else %}
+                <figure>
+                    <img src="{{ image.file.url }}" 
+                        alt="{{image.name}}" />
+                    <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                    <figcaption class="likes">👍 {{image.likes}}</figcaption>
+                    <figcaption class="download"><a href="">↓</a></figcaption>
+                </figure>
+            {% endif %}
         {% endfor %}
     {% else %}
         <strong>No images were found</strong>

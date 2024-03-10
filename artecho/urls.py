@@ -12,5 +12,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('signup/', views.signup, name='signup'),
     path('tree', views.tree_view, name='tree'),
+    path('search', views.search_results, name="search"),
     # html test urlpatters end here---
 ]

@@ -16,6 +16,9 @@ def card(request):
 
 def add_root(request):
     return render(request, 'artecho/add-root.html')
+
+def search_results(request):
+    return render(request, 'artecho/search-results.html')
 # html test views end here---
 
 def about(request):

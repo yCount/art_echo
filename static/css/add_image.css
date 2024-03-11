@@ -86,10 +86,6 @@
     box-sizing: border-box; 
 }
 
-.button-section button:hover {
-    opacity: 0.8;
-}
-
 #imageDetailsForm {
     order: 1; 
 }
@@ -102,7 +98,7 @@
     background-color: #00008b; 
     padding: 20px; 
     box-sizing: border-box; 
-    width: calc(100%-40px); 
+    width: 100%; 
     margin: 20px;
     display: none; 
     border-radius: 5px;

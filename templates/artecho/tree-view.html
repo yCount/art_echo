@@ -1,10 +1,62 @@
 {% extends 'artecho/base-navbar.html' %}
+{% load static %}
 
 {% block title_block %}
     <title>ArtEch <!-- Name of the image should be should be here -->></title>
+    <link rel="stylesheet" href="{% static 'css/tree_view.css' %}">
+    <link rel="stylesheet" href="{% static 'css/figure_display.css' %}">
+    <link rel="stylesheet" href="{% static 'css/figure_tree.css' %}">
 {% endblock %}
 
 {% block body_block %}
 <!-- Tree-view demo should be integrated here -->
 <!--  http://127.0.0.1:8000/tree should lead to the view of current page -->
+
+    <div class="row">
+        <div class="tree">
+            <ul>
+                <!-- parent image starts after <li> (if exists) -->
+                <li> <figure><img src="{% static 'images/darth_vader_realistic.png' %}">
+                    <figcaption class="username"><a href="#">username01</a></figcaption>
+                    <figcaption class="likes">👍 45</figcaption>
+                    <figcaption class="download"><a href="">↓</a></figcaption>
+                </figure>
+                <!-- parent image ends here -->
+                <ul>
+                    <!-- focused/viewed image starts after <li> -->
+                    <li> <figure id="page-fig">
+                        <img src="{% static 'images/dart_vader.png' %}">
+                        <figcaption class="username"><a href="#">username01</a></figcaption>
+                        <figcaption class="likes">👍 145</figcaption>
+                        <figcaption class="download"><a href="">↓</a></figcaption>
+                    </figure>
+                    <!-- focused/viewed image ends here -->
+                    <ul>
+                        <!-- child image(s) starts from here, each in one <li> </li> element. There may be multiple images here or none.  -->
+                        <li><figure>
+                            <img src="{% static 'images/stranger_things_logo.png' %}">
+                            <figcaption class="username"><a href="#">username01</a></figcaption>
+                            <figcaption class="likes">👍 12165</figcaption>
+                            <figcaption class="download"><a href="">↓</a></figcaption>
+                        </figure> </li>
+                        <li><figure>
+                            <img src="{% static 'images/jim_hopper.png' %}">
+                            <figcaption class="username"><a href="#">username01</a></figcaption>
+                            <figcaption class="likes">👍 5</figcaption>
+                            <figcaption class="download"><a href="">↓</a></figcaption>  
+                        </figure></li>
+                        <li><figure>
+                            <img src="{% static 'images/dart_vader.png' %}">
+                            <figcaption class="username"><a href="#">username01</a></figcaption>
+                            <figcaption class="likes">👍 65</figcaption>
+                            <figcaption class="download"><a href="">↓</a></figcaption>  
+                        </figure></li>
+                        <!-- child image(s) end here -->
+                    </ul>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
 {% endblock %}

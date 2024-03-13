@@ -16,6 +16,12 @@ def card(request):
 
 def add_root(request):
     return render(request, 'artecho/add-root.html')
+
+def profile(request):
+    return render(request, 'artecho/profile.html')
+
+def profile_edit(request):
+        return render(request, 'artecho/profile-edit.html')
 # html test views end here---
 
 def about(request):

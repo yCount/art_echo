@@ -17,10 +17,146 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid #000;
+    border: none;
 }
 
 #displayImage {
     max-width: 100%;
     height: auto;
+}
+
+#imageDetailsForm {
+    margin-bottom: 20px; /* Adjust as needed */
+    width: 75%;
+}
+
+#imageDetailsForm p {
+    display: flex;
+    flex-direction: column;
+}
+
+#imageDetailsForm p > label {
+   font-family: helvetica;
+   font-size: 16px;
+   font-weight: 600;
+   color: #000;
+   margin: 5px;
+}
+#imageDetailsForm p > input {
+    border: 1px solid #efeeee;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: helvetica;
+}
+#imageDetailsForm p > textarea {
+    border: 1px solid #efeeee;
+    border-radius: 5px;
+    font-family: helvetica;
+}
+
+#imageDetailsForm p > select {
+    border: 1px solid #efeeee;
+}
+
+#imageDetailsForm input[type="submit"] {
+    background-color: grey;
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center; 
+    margin: auto;
+    display: block; 
+    font-size: 16px; ;
+}
+#imageDetailsForm input[type="submit"]:hover {
+    opacity: 0.8;
+}
+.button-section {
+    box-sizing: border-box;
+    width: calc(100% - 20px); 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.button-section button {
+    width: 50%;
+    padding: 10px 0; 
+    border-radius: 0; 
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: helvetica;
+    background-color: #007BFF;
+    color: white;
+    box-sizing: border-box; 
+}
+
+#imageDetailsForm {
+    order: 1; 
+}
+
+.button-section button.selected {
+    opacity: 0.8;
+    box-shadow: 0 0 2px 1px #007BFF;
+}
+#AI-section {
+    background-color: #00008b; 
+    padding: 20px; 
+    box-sizing: border-box; 
+    width: 100%; 
+    margin: 20px;
+    display: none; 
+    border-radius: 5px;
+}
+
+#AI-section h2 {
+    font-family: helvetica;
+    font-size: 24px; 
+    color: #fff; 
+    margin-bottom: 10px; 
+}
+
+#AI-section p {
+    font-family: helvetica;
+    font-size: 16px; 
+    color: #ccc; 
+}
+
+#upload-section {
+    background-color: #ccc; 
+    padding: 20px; 
+    box-sizing: border-box; 
+    width: calc(100%-40px); 
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block; 
+    border-radius: 5px;
+}
+#details-section {
+    background-color: #efeeee; 
+    padding: 20px; 
+    padding-left: 20px;
+    box-sizing: border-box; 
+    width: calc(100%-40px); 
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: -10px;
+    margin-right: auto;
+    display: none; 
+    border-radius: 5px;
+    max-width: 600px;
+    max-height: 600px;
+}
+#upload-section img, #details-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }

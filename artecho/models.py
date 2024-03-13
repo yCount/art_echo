@@ -19,7 +19,8 @@ class Category(models.Model):
 
     def __str__(self):
         return self.slug
-     
+
+
 class User(models.Model):
     username = models.CharField(max_length=128, unique=True, null = False)
     email = models.EmailField(null = False)
@@ -44,12 +45,18 @@ class User(models.Model):
         return self.slug
 
 class Image(models.Model):
+    CATEGORY_CHOICES = [
+        ('', 'Select Category'),
+        ('Art', 'Art'),
+        ('AI', 'AI'),
+        ('Other', 'Other'),
+    ]
     name = models.CharField(max_length=128, null = False)
     isAI = models.BooleanField(default = False)
     file = models.ImageField(null = False, upload_to= 'images/')
     parent = models.ForeignKey('Image', on_delete=models.DO_NOTHING, null = True) ###unsure if this is the correct delete mode
     likes = models.IntegerField(default = 0)
-    category = models.ForeignKey('Category', on_delete=models.DO_NOTHING, null = False)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, null = False)
     poster = models.ForeignKey('User', on_delete=models.DO_NOTHING, null = True)
     description = models.TextField(max_length=1000, unique=False)
     slug = models.SlugField()

@@ -105,5 +105,8 @@ def search_results(request):
     
     # Get images associated with matching categories
     images = Image.objects.filter(category__in=categories) if categories else []
+
+
+    image_search_results = Image.objects.filter(name__icontains=query) if query else []
     
-    return render(request, 'artecho/search_results.html', {'users': users, 'images': images, 'query': query})
+    return render(request, 'artecho/search_results.html', {'users': users, 'images': images,'image_search_results': image_search_results, 'query': query})

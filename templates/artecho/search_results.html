@@ -21,10 +21,10 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No results found.</p>
+            <p>No results found for "{{ query }}"</p>
         {% endif %}
 
-        <h2>Images:</h2>
+        <h2>Images by Category:</h2>
         {% if images %}
             {% regroup images by category.name as category_list %}
             {% for category in category_list %}
@@ -36,7 +36,18 @@
                 </ul>
             {% endfor %}
         {% else %}
-            <p>No image results found.</p>
+            <p>No image results found for "{{ query }}".</p>
+        {% endif %}
+
+        <h2>Images by Title:</h2>
+        {% if image_search_results %}
+            <ul>
+                {% for image in image_search_results %}
+                    <li><img src="{% static 'images/' %}{{ image.file }}" alt="{{ image.name }}"></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No image results found for "{{ query }}".</p>
         {% endif %}
     
         <!-- here all the search results should be displayed -->

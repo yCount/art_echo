@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from artecho.models import User as UserProfile
 from artecho.models import Image
+
 class LoginForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
     class Meta:
@@ -36,7 +37,7 @@ class SignUpForm(UserForm):
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
-        fields = ('name', 'description', 'isAI',)
+        fields = ('name', 'isAI', 'category', 'description', )
         labels = {
             'isAI': 'Is this image AI generated?',
         }

@@ -17,7 +17,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid #000;
+    border: none;
 }
 
 #displayImage {
@@ -27,6 +27,7 @@
 
 #imageDetailsForm {
     margin-bottom: 20px; /* Adjust as needed */
+    width: 75%;
 }
 
 #imageDetailsForm p {
@@ -37,18 +38,28 @@
 #imageDetailsForm p > label {
    font-family: helvetica;
    font-size: 16px;
+   font-weight: 600;
    color: #000;
    margin: 5px;
 }
 #imageDetailsForm p > input {
-    border: 1px solid #ccc;
+    border: 1px solid #efeeee;
     border-radius: 5px;
     padding: 10px;
     font-family: helvetica;
 }
+#imageDetailsForm p > textarea {
+    border: 1px solid #efeeee;
+    border-radius: 5px;
+    font-family: helvetica;
+}
+
+#imageDetailsForm p > select {
+    border: 1px solid #efeeee;
+}
 
 #imageDetailsForm input[type="submit"] {
-    background-color: #007BFF;
+    background-color: grey;
     color: white; 
     padding: 10px 20px; 
     border: none; 
@@ -130,13 +141,14 @@
     border-radius: 5px;
 }
 #details-section {
-    background-color: #fff; 
+    background-color: #efeeee; 
     padding: 20px; 
+    padding-left: 20px;
     box-sizing: border-box; 
     width: calc(100%-40px); 
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-left: auto;
+    margin-left: -10px;
     margin-right: auto;
     display: none; 
     border-radius: 5px;

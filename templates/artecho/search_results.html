@@ -8,11 +8,37 @@
 
 {% block body_block %}
     <div class="upper-body">
-        <p> Search results for <!-- the searched keyword here --> </p>
+        <p> Search results for "{{ request.GET.q }}" </p>
     </div>
 
 
     <div class="lower-body">
+        <h2>Users:</h2>
+        {% if users %}
+            <ul>
+                {% for user in users %}
+                <li><a href="{% url 'artecho:profile' user.slug %}">{{ user.username }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+
+        <h2>Images:</h2>
+        {% if images %}
+            {% regroup images by category.name as category_list %}
+            {% for category in category_list %}
+                <h4>{{ category.grouper }}</h4>
+                <ul>
+                    {% for image in category.list %}
+                        <li><img src="{% static 'images/' %}{{ image.file }}" alt="{{ image.name }}"></li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% else %}
+            <p>No image results found.</p>
+        {% endif %}
+    
         <!-- here all the search results should be displayed -->
         <!-- first start with text searches (profile_name search should be an easy start) -->
         <!-- Then you may work on image search (probably through 'category' parameter, when users type in 'sport' this page displays all images with sport category) -->

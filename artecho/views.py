@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.views.generic import ListView
 from artecho.forms import UserForm, UserProfileForm, LoginForm
+from django.db import models
+from artecho.models import User, Image, Category
 
 
 def index(request):
@@ -19,6 +22,7 @@ def add_root(request):
 
 def search_results(request):
     return render(request, 'artecho/search-results.html')
+
 # html test views end here---
 
 def about(request):
@@ -30,8 +34,9 @@ def about(request):
 def tree_view(request):
     return render(request, 'artecho/tree-view.html')
 
-def profile(request):
-    return render(request, 'artecho/profile.html')
+def profile(request, slug):
+    user = get_object_or_404(User, slug=slug)
+    return render(request, 'artecho/profile.html', {'user': user})
 
 def user_login(request):
     if request.method == 'POST':
@@ -88,3 +93,17 @@ def signup(request):
                   context={'user_form': user_form,
                            'profile_form': profile_form,
                            'signedup': registered})
+   
+def search_results(request):
+    query = request.GET.get('q')
+    
+    # Search for both users and images
+    users = User.objects.filter(username__icontains=query) if query else []
+    
+    # Filter categories that match the query
+    categories = Category.objects.filter(name__icontains=query) if query else []
+    
+    # Get images associated with matching categories
+    images = Image.objects.filter(category__in=categories) if categories else []
+    
+    return render(request, 'artecho/search_results.html', {'users': users, 'images': images, 'query': query})

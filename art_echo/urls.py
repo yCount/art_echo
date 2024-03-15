@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
 from artecho import views
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -24,10 +27,8 @@ urlpatterns = [
     path('card/', views.card, name='card'),
     path('add_root', views.add_root, name='add_root'),
     path('tree', views.tree_view, name='tree'),
-    path('profile', views.profile, name='profile'),
-    path('profileedit', views.profile_edit, name='profile_edit'),
     # html test urlpatters end here---
     path('artecho/', include('artecho.urls')),
     path('admin/', admin.site.urls),
     path('profile', views.profile, name='profile')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

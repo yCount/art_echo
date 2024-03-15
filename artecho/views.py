@@ -9,6 +9,8 @@ from artecho.models import Image
 
 def index(request):
     context_dict = {'boldmessage': 'Welcome to ArtEcho!'}
+    display_images = Image.objects.order_by('-likes')[:10]
+    context_dict['display_images'] = display_images
     return render(request, 'artecho/index.html', context=context_dict)
 
 # added for html test viewing:
@@ -17,12 +19,6 @@ def card(request):
 
 def add_root(request):
     return render(request, 'artecho/add-root.html')
-
-def profile(request):
-    return render(request, 'artecho/profile.html')
-
-def profile_edit(request):
-        return render(request, 'artecho/profile-edit.html')
 # html test views end here---
 
 def about(request):

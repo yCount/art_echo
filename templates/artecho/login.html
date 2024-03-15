@@ -11,7 +11,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <div class="button-container">
-                <button id="login" type="submit">Log In</button>
+                <button type="submit">Log In</button>
             </div>
         </form>
         <p>Don't have an account? <a href="{% url 'artecho:signup'%}">Sign Up</a></p>

@@ -1,0 +1,61 @@
+{% extends 'artecho/base-navbar.html' %}
+{% load static %}
+
+{% block title_block %}
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/figure_display.css' %}"> <!-- this imports all the styling for image display (for image search results) you should not worry about image search lastly -->
+{% endblock %}
+
+{% block body_block %}
+    <div class="upper-body">
+        <p> Search results for "{{ request.GET.q }}" </p>
+    </div>
+
+
+    <div class="lower-body">
+        <h2>Users:</h2>
+        {% if users %}
+            <ul>
+                {% for user in users %}
+                <li><a href="{% url 'artecho:profile' user.slug %}">{{ user.username }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results found for "{{ query }}"</p>
+        {% endif %}
+
+        <h2>Images by Category:</h2>
+        {% if images %}
+            {% regroup images by category.name as category_list %}
+            {% for category in category_list %}
+                <h4>{{ category.grouper }}</h4>
+                <ul>
+                    {% for image in category.list %}
+                        <li><img src="{% static 'images/' %}{{ image.file }}" alt="{{ image.name }}"></li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% else %}
+            <p>No image results found for "{{ query }}".</p>
+        {% endif %}
+
+        <h2>Images by Title:</h2>
+        {% if image_search_results %}
+            <ul>
+                {% for image in image_search_results %}
+                    <li><img src="{% static 'images/' %}{{ image.file }}" alt="{{ image.name }}"></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No image results found for "{{ query }}".</p>
+        {% endif %}
+    
+        <!-- here all the search results should be displayed -->
+        <!-- first start with text searches (profile_name search should be an easy start) -->
+        <!-- Then you may work on image search (probably through 'category' parameter, when users type in 'sport' this page displays all images with sport category) -->
+        <!-- This page can be viewed at http://127.0.0.1:8000/artecho/search this address is set for you to visually see and test the page. -->
+        
+        <!-- It should also be helpful to examine the database on the admin page -->
+        <!-- Dont forget to run command (see teams message posted on Wednesday) on the terminal for the databases to fully initialise -->
+    </div>
+{% endblock %}

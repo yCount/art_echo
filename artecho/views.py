@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.shortcuts import redirect
-from artecho.forms import UserForm, UserProfileForm, LoginForm
+from artecho.forms import UserForm, UserProfileForm, LoginForm, ImageForm
 from artecho.models import Image
 
 
@@ -88,3 +88,15 @@ def signup(request):
                   context={'user_form': user_form,
                            'profile_form': profile_form,
                            'signedup': registered})
+def add_root(request):
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.save()
+            return redirect(reverse('artecho:index'))
+        else:
+            print(form.errors)
+    else:
+        form = ImageForm()
+    return render(request, 'artecho/add-root.html', {'form': form})

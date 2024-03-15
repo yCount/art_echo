@@ -7,8 +7,8 @@ class LoginForm(forms.ModelForm):
     username = forms.CharField(help_text="")
     class Meta:
         model = UserProfile
-        fields = ('email', 'password',)
-        
+        fields = ('username', 'password',)
+
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
     username = forms.CharField(help_text="")

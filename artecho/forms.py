@@ -1,12 +1,14 @@
 from django import forms
 from django.contrib.auth.models import User
-from artecho.models import User as UserProfile
+from artecho.models import User as UserProfile 
 
 class LoginForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(help_text="")
     class Meta:
-        model = User
+        model = UserProfile
         fields = ('email', 'password',)
+        
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
     username = forms.CharField(help_text="")

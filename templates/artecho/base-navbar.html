@@ -18,6 +18,7 @@
             <!-- following anchor(a) tags have not yet have page links to direct the user -->
             <a class="nav-button" id="about-link" href="{% url 'artecho:about' %}">i</a>
             <a class="nav-button" id="add-root" href="{% url 'artecho:add_root' %}">+</a>
+            <a class="nav-button" id="logout-link" href="{% url 'artecho:logout' %}">Log out</a>
             {% else %}
             <a class="nav-button" id="artecho-link" href="">ArtEcho</a>
             <input type="text" placeholder="Search..">

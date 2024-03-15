@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
 from artecho.forms import UserForm, UserProfileForm, LoginForm, SignUpForm
@@ -53,6 +53,10 @@ def user_login(request):
     else:
         form = LoginForm()
     return render(request, 'artecho/login.html', {'form': form})
+
+def user_logout(request):
+    logout(request)
+    return(redirect(reverse('artecho:index')))
 
 def signup(request):
     registered = False

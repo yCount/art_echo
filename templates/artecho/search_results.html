@@ -3,7 +3,7 @@
 
 {% block title_block %}
     <title>Profile</title>
-    <link rel="stylesheet" href="{% static 'css/figure_display.css' %}"> <!-- this imports all the styling for image display (for image search results) you should not worry about image search lastly -->
+    <link rel="stylesheet" href="{% static 'css/figure_display.css' %}">
 {% endblock %}
 
 {% block body_block %}
@@ -49,13 +49,5 @@
         {% else %}
             <p>No image results found for "{{ query }}".</p>
         {% endif %}
-    
-        <!-- here all the search results should be displayed -->
-        <!-- first start with text searches (profile_name search should be an easy start) -->
-        <!-- Then you may work on image search (probably through 'category' parameter, when users type in 'sport' this page displays all images with sport category) -->
-        <!-- This page can be viewed at http://127.0.0.1:8000/artecho/search this address is set for you to visually see and test the page. -->
-        
-        <!-- It should also be helpful to examine the database on the admin page -->
-        <!-- Dont forget to run command (see teams message posted on Wednesday) on the terminal for the databases to fully initialise -->
     </div>
 {% endblock %}

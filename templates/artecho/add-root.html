@@ -1,6 +1,5 @@
-<!DOCTYPE html>
 {% extends 'artecho/base-navbar.html' %}
-{% load static %}
+{% load staticfiles %}
 
 {% block title_block %}
     <title> ArtEcho - Add Root </title>
@@ -8,11 +7,6 @@
 {% endblock %}
 
 {% block body_block %}
-<div class="button-section">
-    <button id="uploadImage" class="selected">Upload image from device</button>
-    <button id="aiTool">Use ArtEcho AI Tools</button>
-</div>
-<script src="{% static 'js/ai_tool.js' %}"></script>
 <div class="container">
     <div id="upload-section" class="section">
         <input type="file" id="imageInput" accept="image/add_image.css">
@@ -20,14 +14,15 @@
     </div>
     <div id="details-section" class="section" style="display:none;">
         <form id="imageDetailsForm">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Post">
+            <label for="imageName">Image Name:</label>
+            <input type="text" id="imageName" name="imageName"><br><br>
+            <label for="imageDescription">Description:</label>
+            <textarea id="imageDescription" name="imageDescription"></textarea><br><br>
+            <input type="submit" value="Submit">
         </form>
     </div>
-    <div id="AI-section" class="section" style="display: none;">
-        <h2>ArtEcho AI Tools</h2>
-        <p>Coming soon...</p>
+    <div id="AI-section" class="section">
+        <!-- API integration front-end goes here -->
     </div>
     <script src="{% static 'js/add_image.js' %}"></script>
 </div>

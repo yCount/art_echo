@@ -1,30 +1,9 @@
 {% extends 'artecho/base-navbar.html' %}
-{% load static %}
 
 {% block title_block %}
     <title> Profile Edit </title>
-    <link rel="stylesheet" href="{% static 'css/figure_display.css' %}">
-    <link rel="stylesheet" href="{% static 'css/figure_tiling.css' %}">
-    <link rel="stylesheet" href="{% static 'css/profile_details.css' %}">
 {% endblock %}
 
 {% block body_block %}
-    <div id="profile-details">
-        <!-- The img on the next line should render the profile picture -->
-        <img id="profile-pic" src="{% static 'images/jim_hopper.png' %}" alt="profile picture here. Should align to the center later">
-        
-        <div id="description">
-            <!-- The following three texts are not properly formatted yet. Needs some front end work -->
-            <!-- Work on here after profile.html The following will be 3 text inputs which already has the current profile info written inside. user will edit the text inputs and click on save button -->
-            <!-- Fullname -->
-            <p></p>
-            <!-- username -->
-            <p></p>
-            <!-- bio -->
-            <p></p>
-        </div>
-        <div>
-            <button>save</button>
-        </div>
-    </div>
+    
 {% endblock %}

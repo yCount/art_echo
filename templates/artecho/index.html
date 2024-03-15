@@ -4,50 +4,29 @@
 {% block title_block %}
     <title> ArtEcho </title>
     <link rel="stylesheet" href="{% static 'css/figure_display.css' %}">
+    <link rel="stylesheet" href="{% static 'css/figure_tiling.css' %}">
 {% endblock %}
 
 {% block body_block %}
 
 <div class="container">
-    <!-- Following lines are for display. They are to be deleted later -->
-    <!-- One sample active figure -->
-    <figure>
-        <img src="https://assets.codepen.io/12005/windmill.jpg" alt="A windmill" />
-        <figcaption class="username"><a href="#">username01</a></figcaption>
-        <figcaption class="likes">👍 45</figcaption>
-        <figcaption class="download"><a href="">↓</a></figcaption>
-    </figure>
-    <!-- the active image figure ends here -->
-    <figure>
-        <img src="https://assets.codepen.io/12005/suspension-bridge.jpg" alt="The Clifton Suspension Bridge" />
-    </figure>
-    <figure>
-        <img src="https://assets.codepen.io/12005/sunset.jpg" alt="Sunset and boats" />
-    </figure>
-    <figure>
-        <img src="https://assets.codepen.io/12005/snowy.jpg" alt="a river in the snow" />
-    </figure>
-    <figure>
-        <img src="https://assets.codepen.io/12005/bristol-balloons1.jpg" alt="a single checked balloon" />
-    </figure>
-    <figure>
-        <img src="https://assets.codepen.io/12005/dog-balloon.jpg" alt="a hot air balloon shaped like a dog" />
-    </figure>
-    <figure>
-        <img src="https://assets.codepen.io/12005/abq-balloons.jpg" alt="View from a hot air balloon of other balloons" />
-    </figure>
-    <figure>
-        <img src="https://assets.codepen.io/12005/disney-balloon.jpg" alt="a balloon fairground ride" />
-    </figure>
-    <figure>
-        <img src="https://assets.codepen.io/12005/bristol-harbor.jpg" alt="sunrise over a harbor" />
-    </figure>
-    <figure>
-        <img src="https://assets.codepen.io/12005/bristol-balloons2.jpg" alt="three hot air balloons in a blue sky" />
-    </figure>
-    <figure>
-        <img src="{% static '/images/dart_vader.png' %}" alt="dart vader" />
-    </figure>
+    {% if display_images %}
+        {% for image in display_images %}
+            {% if image.slug == "base_root" %}
+                <!-- does not display base root-->
+            {% else %}
+                <figure>
+                    <img src="{{ image.file.url }}" 
+                        alt="{{image.name}}" />
+                    <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                    <figcaption class="likes">👍 {{image.likes}}</figcaption>
+                    <figcaption class="download"><a href="">↓</a></figcaption>
+                </figure>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <strong>No images were found</strong>
+    {% endif %}
 </div>
 
 {% endblock %}

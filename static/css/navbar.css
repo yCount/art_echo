@@ -23,9 +23,14 @@
     font-size: 16px;
 }
 
-#topnav input[type="text"] {
+#topnav form {
     flex-grow: 1;
+    display: flex;
     margin: 0 20px;
+}
+
+#topnav form input[type="text"] {
+    flex-grow: 1;
     padding: 8px;
     border-radius: 8px;
 }

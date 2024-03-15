@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.shortcuts import redirect
-from artecho.forms import UserForm, UserProfileForm, LoginForm, ImageForm
+from artecho.forms import UserForm, UserProfileForm, LoginForm
 from artecho.models import Image
 
 

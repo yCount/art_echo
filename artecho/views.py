@@ -1,13 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
-from artecho.forms import UserForm, UserProfileForm, LoginForm, SignUpForm
+from artecho.forms import UserForm, UserProfileForm, LoginForm, SignUpForm, ImageForm
+from artecho.models import User, Image, Category
+from django.views.generic import ListView
+from django.db import models
 
 
 def index(request):
     context_dict = {'boldmessage': 'Welcome to ArtEcho!'}
+    display_images = Image.objects.order_by('-likes')[:10]
+    context_dict['display_images'] = display_images
     return render(request, 'artecho/index.html', context=context_dict)
 
 # added for html test viewing:
@@ -16,6 +21,15 @@ def card(request):
 
 def add_root(request):
     return render(request, 'artecho/add-root.html')
+
+def profile(request):
+    return render(request, 'artecho/profile.html')
+
+def profile_edit(request):
+        return render(request, 'artecho/profile-edit.html')
+  
+def search_results(request):
+    return render(request, 'artecho/search-results.html')
 # html test views end here---
 
 def about(request):
@@ -27,8 +41,9 @@ def about(request):
 def tree_view(request):
     return render(request, 'artecho/tree-view.html')
 
-def profile(request):
-    return render(request, 'artecho/profile.html')
+def profile(request, slug):
+    user = get_object_or_404(User, slug=slug)
+    return render(request, 'artecho/profile.html', {'user': user})
 
 def profile_edit(request):
     return render(request, 'artecho/profile-edit.html')
@@ -94,3 +109,32 @@ def signup(request):
                   context={'user_form': user_form,
                            'profile_form': profile_form,
                            'signedup': registered})
+def add_root(request):
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.save()
+            return redirect(reverse('artecho:index'))
+        else:
+            print(form.errors)
+    else:
+        form = ImageForm()
+    return render(request, 'artecho/add-root.html', {'form': form})
+   
+def search_results(request):
+    query = request.GET.get('q')
+    
+    # Search for both users and images
+    users = User.objects.filter(username__icontains=query) if query else []
+    
+    # Filter categories that match the query
+    categories = Category.objects.filter(name__icontains=query) if query else []
+    
+    # Get images associated with matching categories
+    images = Image.objects.filter(category__in=categories) if categories else []
+
+
+    image_search_results = Image.objects.filter(name__icontains=query) if query else []
+    
+    return render(request, 'artecho/search_results.html', {'users': users, 'images': images,'image_search_results': image_search_results, 'query': query})

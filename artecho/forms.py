@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-from artecho.models import User as UserProfile 
+from artecho.models import User as UserProfile
+from artecho.models import Image, Category
 
 class LoginForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -35,3 +36,11 @@ class SignUpForm(UserForm):
             self.add_error('password_confirm', 'Passwords must match')
 
         return cleaned_data
+class ImageForm(forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Select a category")
+    class Meta:
+        model = Image
+        fields = ('name', 'isAI', 'category', 'description', )
+        labels = {
+            'isAI': 'Is this image AI generated?',
+        }

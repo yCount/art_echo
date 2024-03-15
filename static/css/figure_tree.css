@@ -1,0 +1,11 @@
+.tree li figure {
+    /* border is for debugging purposes. Should be deleted later */
+	border: 1px solid #ccc;
+	display: inline-grid;
+	text-decoration-line: none;
+	transition: .5s;
+}
+
+#page-fig img{
+    width: 475px;
+}

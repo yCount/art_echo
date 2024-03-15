@@ -1,0 +1,68 @@
+{% extends 'artecho/base-navbar.html' %}
+{% load static %}
+
+{% block title_block %}
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/figure_display.css' %}">
+    <link rel="stylesheet" href="{% static 'css/figure_tiling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+    <div class="upper-body">
+        <p> Search results for "{{ request.GET.q }}" </p>
+    </div>
+
+
+    <div class="lower-body">
+        <h2>Users:</h2>
+        {% if users %}
+            
+            {% for user in users %}
+                <li><a href="{% url 'artecho:profile' user.slug %}">{{ user.username }}</a></li>
+                {% endfor %}
+            
+        {% else %}
+            <p>No results found for "{{ query }}"</p>
+        {% endif %}
+
+        <h2>Images by Category:</h2>
+
+        <div class="container">
+            {% if images %}
+                {% regroup images by category.name as category_list %}
+                {% for category in category_list %}
+                    <h4>{{ category.grouper }}</h4>
+                    {% for image in category.list %}
+                        <figure>
+                            <!-- img tag does not display image properly, make it work just like on index.html  -->
+                            <img src="{% static 'images/' %}{{ image.file }}" alt="{{ image.name }}">
+                            <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                            <figcaption class="likes">👍 {{image.likes}}</figcaption>
+                            <figcaption class="download"><a href="">↓</a></figcaption>
+                        </figure>
+                    {% endfor %}
+                {% endfor %}
+            {% else %}
+                <p>No image results found for "{{ query }}".</p>
+            {% endif %}
+        </div>
+
+        <h2>Images by Title:</h2>
+
+        <div class="container">
+            {% if image_search_results %}
+                {% for image in image_search_results %}
+                    <figure>
+                            <!-- img tag does not display image properly, make it work just like on index.html  -->
+                            <img src="{% static 'images/' %}{{ image.file }}" alt="{{ image.name }}">
+                            <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                            <figcaption class="likes">👍 {{image.likes}}</figcaption>
+                            <figcaption class="download"><a href="">↓</a></figcaption>
+                    </figure>
+                {% endfor %}
+            {% else %}
+                <p>No image results found for "{{ query }}".</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

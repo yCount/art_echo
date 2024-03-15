@@ -20,15 +20,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from artecho import views
 
-
 urlpatterns = [
     path('', views.index, name='index'),
     # added for html test viewing:
     path('card/', views.card, name='card'),
     path('add_root', views.add_root, name='add_root'),
     path('tree', views.tree_view, name='tree'),
+    path('profile', views.profile, name='profile'),
+    path('profileedit', views.profile_edit, name='profile_edit'),
     # html test urlpatters end here---
     path('artecho/', include('artecho.urls')),
     path('admin/', admin.site.urls),
     path('profile', views.profile, name='profile')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

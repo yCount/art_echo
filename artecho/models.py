@@ -50,7 +50,7 @@ class Image(models.Model):
     file = models.ImageField(null = False, upload_to= 'images/')
     parent = models.ForeignKey('Image', on_delete=models.DO_NOTHING, null = True) ###unsure if this is the correct delete mode
     likes = models.IntegerField(default = 0)
-    category = models.ForeignKey('Category', on_delete=models.DO_NOTHING, null = False)
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True)
     poster = models.ForeignKey('User', on_delete=models.DO_NOTHING, null = True)
     description = models.TextField(max_length=1000, unique=False)
     slug = models.SlugField()

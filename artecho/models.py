@@ -37,6 +37,10 @@ class User(models.Model):
         self.slug = slugify(self.username)
         super(User, self).save(*args, **kwargs)
 
+    def set_password(self, new_password):
+        self.set_password(new_password)
+        self.save()
+
     class Meta:
         verbose_name_plural = 'users'
 

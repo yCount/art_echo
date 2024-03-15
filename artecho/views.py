@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.shortcuts import redirect
 from artecho.forms import UserForm, UserProfileForm, LoginForm, ImageForm
+from artecho.models import Image
 
 
 def index(request):
@@ -16,12 +17,6 @@ def card(request):
 
 def add_root(request):
     return render(request, 'artecho/add-root.html')
-
-def profile(request):
-    return render(request, 'artecho/profile.html')
-
-def profile_edit(request):
-        return render(request, 'artecho/profile-edit.html')
 # html test views end here---
 
 def about(request):
@@ -103,3 +98,4 @@ def add_root(request):
     else:
         form = ImageForm()
     return render(request, 'artecho/add-root.html', {'form': form})
+

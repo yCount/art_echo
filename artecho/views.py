@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.shortcuts import redirect
-from artecho.forms import UserForm, UserProfileForm, LoginForm
+from artecho.forms import UserForm, UserProfileForm, LoginForm, SignUpForm
 
 
 def index(request):
@@ -29,6 +29,9 @@ def tree_view(request):
 
 def profile(request):
     return render(request, 'artecho/profile.html')
+
+def profile_edit(request):
+    return render(request, 'artecho/profile-edit.html')
 
 def user_login(request):
     if request.method == 'POST':
@@ -56,7 +59,7 @@ def signup(request):
 
     if request.method == 'POST':
         
-        user_form = UserForm(request.POST)
+        user_form = SignUpForm(request.POST)
         profile_form = UserProfileForm(request.POST)
 
         if user_form.is_valid() and profile_form.is_valid():
@@ -74,10 +77,12 @@ def signup(request):
             profile.save()
 
             registered = True
+
+            return redirect(reverse('artecho:profile_edit'))
         else:
             print(user_form.errors, profile_form.errors)
     else:
-        user_form = UserForm()
+        user_form = SignUpForm()
         profile_form = UserProfileForm()
 
     return render(request,

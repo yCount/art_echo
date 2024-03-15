@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.shortcuts import redirect
-from artecho.forms import UserForm, UserProfileForm, LoginForm, SignUpForm, ImageForm
+from artecho.forms import UserForm, UserProfileForm, LoginForm, ImageForm
 from artecho.models import User, Image, Category
 from django.views.generic import ListView
 from django.db import models
@@ -45,9 +45,6 @@ def profile(request, slug):
     user = get_object_or_404(User, slug=slug)
     return render(request, 'artecho/profile.html', {'user': user})
 
-def profile_edit(request):
-    return render(request, 'artecho/profile-edit.html')
-
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -69,16 +66,12 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'artecho/login.html', {'form': form})
 
-def user_logout(request):
-    logout(request)
-    return(redirect(reverse('artecho:index')))
-
 def signup(request):
     registered = False
 
     if request.method == 'POST':
         
-        user_form = SignUpForm(request.POST)
+        user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
 
         if user_form.is_valid() and profile_form.is_valid():
@@ -96,12 +89,10 @@ def signup(request):
             profile.save()
 
             registered = True
-
-            return redirect(reverse('artecho:profile_edit'))
         else:
             print(user_form.errors, profile_form.errors)
     else:
-        user_form = SignUpForm()
+        user_form = UserForm()
         profile_form = UserProfileForm()
 
     return render(request,

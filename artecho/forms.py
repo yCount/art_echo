@@ -5,11 +5,9 @@ from artecho.models import Image, Category
 
 class LoginForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
-    username = forms.CharField(help_text="")
     class Meta:
-        model = UserProfile
-        fields = ('username', 'password',)
-
+        model = User
+        fields = ('email', 'password',)
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
     username = forms.CharField(help_text="")

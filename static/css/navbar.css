@@ -53,7 +53,9 @@
 }
 
 #artecho-link {
-    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    background-image: url('/static/images/logo_background.png');
+    background-size: cover;
+    background-position: center;
 }
 
 #about-link {
@@ -70,6 +72,14 @@
 #login-link {
     background-color: #007BFF;
 }
+
+#add-root {
+    background-image: url('/static/images/logo_background.png');
+    background-size: cover;
+    background-position: center;
+    font-weight: bold;
+}
+
 
 .nav-button:hover {
     opacity: 0.8;

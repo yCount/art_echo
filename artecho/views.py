@@ -43,7 +43,10 @@ def tree_view(request):
 
 def profile(request, slug):
     user = get_object_or_404(User, slug=slug)
-    return render(request, 'artecho/profile.html', {'user': user})
+    display_images = Image.objects.get(poster = user)[:10]
+    context_dict = {'user': user,
+                    'display_images' : display_images}
+    return render(request, 'artecho/profile.html', context= context_dict)
 
 def profile_edit(request):
     return render(request, 'artecho/profile-edit.html')

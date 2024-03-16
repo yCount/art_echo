@@ -11,16 +11,16 @@
 {% block body_block %}
     <div id="profile-details">
         <!-- The img on the next line should render the profile picture -->
-        <img id="profile-pic" src="{% static 'images/blank_pfp.png' %}" alt="profile picture here. Should align to the center later">
+        <img id="profile-pic" src="{{ user.profilePicture.url }}" alt="profile picture here. Should align to the center later">
         
         <div id="description">
             <!-- The following three texts are not properly formatted yet. Needs some front end work -->
             <!-- Fullname -->
             <p></p>
             <!-- username -->
-            <p></p>
+            <p>{{user.username}}</p>
             <!-- bio -->
-            <p></p>
+            <p>{{user.bio}}</p>
         </div>
         <div>
             <button>edit</button>
@@ -28,17 +28,18 @@
     </div>
 
     <div class="container">
-        <!-- Following lines are for the display. They are to be deleted later -->
-        <!-- One sample active figure -->
-        <figure>
-            <img src="https://assets.codepen.io/12005/windmill.jpg" alt="A windmill" />
-            <figcaption class="username"><a href="#">username01</a></figcaption>
-            <figcaption class="likes">👍 45</figcaption>
-            <figcaption class="download"><a href="">↓</a></figcaption>
-        </figure>
-        <!-- the active image figure ends here -->
-        <figure>
-            <img src="{% static '/images/dart_vader.png' %}" alt="dart vader" />
-        </figure>
+        {% if display_images %}
+            {% for image in display_images %}
+                <figure>
+                    <img src="{{ image.file.url }}" 
+                        alt="{{image.name}}" />                    
+                    <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                    <figcaption class="likes">👍 {{image.likes}}</figcaption>
+                    <figcaption class="download"><a href="">↓</a></figcaption>
+                </figure>
+            {% endfor %}
+        {% else %}
+            <strong>No images were found</strong>
+        {% endif %}
     </div>
 {% endblock %}

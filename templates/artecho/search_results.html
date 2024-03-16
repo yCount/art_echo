@@ -20,7 +20,7 @@
             {% for user in users %}
                 <li><a href="{% url 'artecho:profile' user.slug %}">{{ user.username }}</a></li>
                 {% endfor %}
-            
+             
         {% else %}
             <p>No results found for "{{ query }}"</p>
         {% endif %}
@@ -34,8 +34,8 @@
                     <h4>{{ category.grouper }}</h4>
                     {% for image in category.list %}
                         <figure>
-                            <!-- img tag does not display image properly, make it work just like on index.html  -->
-                            <img src="{% static 'images/' %}{{ image.file }}" alt="{{ image.name }}">
+                            <img src="{{ image.file.url }}" 
+                            alt="{{image.name}}" />
                             <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
                             <figcaption class="likes">👍 {{image.likes}}</figcaption>
                             <figcaption class="download"><a href="">↓</a></figcaption>
@@ -53,11 +53,11 @@
             {% if image_search_results %}
                 {% for image in image_search_results %}
                     <figure>
-                            <!-- img tag does not display image properly, make it work just like on index.html  -->
-                            <img src="{% static 'images/' %}{{ image.file }}" alt="{{ image.name }}">
-                            <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
-                            <figcaption class="likes">👍 {{image.likes}}</figcaption>
-                            <figcaption class="download"><a href="">↓</a></figcaption>
+                        <img src="{{ image.file.url }}" 
+                        alt="{{image.name}}" />
+                        <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                        <figcaption class="likes">👍 {{image.likes}}</figcaption>
+                        <figcaption class="download"><a href="">↓</a></figcaption>
                     </figure>
                 {% endfor %}
             {% else %}

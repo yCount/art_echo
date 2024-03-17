@@ -84,7 +84,7 @@ figcaption {
     margin-left: 0;
     padding-left: 0;
 }            
-.button-section {
+.result-btn {
     box-sizing: border-box;
     width: calc(100% - 20px); 
     display: flex;
@@ -93,7 +93,7 @@ figcaption {
     margin-top: 20px;
 }
 
-.button-section button {
+.result-btn button {
     width: 50%;
     padding: 10px 0; 
     border-radius: 0; 
@@ -112,7 +112,7 @@ figcaption {
     right: 10px;
 }
 
-.button-section button.selected {
+.result-btn button.selected {
     opacity: 0.8;
     box-shadow: 0 0 2px 1px #007BFF;
 }

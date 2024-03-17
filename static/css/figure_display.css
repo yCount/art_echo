@@ -38,15 +38,17 @@ figure figcaption {
 }
 
 figure .likes{
-    margin-left: 70%;
+    margin-left: auto;
+    margin-right: 34px;
 }
 
-figure .download{
-    margin-left: 90%;
+figure .download {
+    margin-left: auto; /* Adjusted alignment */
+    margin-right: 5px;
 }
 
 figure .username{
-
+    font-family: helvetica;
 }
 
 figcaption {

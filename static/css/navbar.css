@@ -3,9 +3,10 @@
     height: 80px;
     display: flex;
     align-items: center;
-    background-color: #EEEEEE;
+    background-color: #f0f0f0;
     padding: 0 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: add a slight shadow for depth */
+    border-radius: 15px;
     position: fixed;
     top: 0;
     width: 99%;
@@ -38,7 +39,6 @@
 
 #blank_space {
     height: 100px;
-    background-color: #f2f2f2;
 }
 
 .nav-button {

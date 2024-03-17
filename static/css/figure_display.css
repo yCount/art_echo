@@ -17,20 +17,18 @@ figure > img {
     grid-row: 1 / -1;
     grid-column: 1;
     border-radius: 15px;
-    transition: transform 0.1s ease; /* Smooth transition for the transform */
+    transition: transform 0.25s ease; /* Smooth transition for the transform */
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
 }
-
 
 figure:hover img, figure:hover figcaption {
     cursor: pointer;
 }
 
 figure:hover img {
-    transform: translate(-2.5px, 2.5px)scale(1.03);
-}
-
-figure:hover figcaption {
-    transform: translate(-3px, 3px);
+    transform: scale(1.03);
 }
 
 figure a {

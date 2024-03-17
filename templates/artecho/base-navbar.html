@@ -11,7 +11,7 @@
     </head>
     <body>
         <nav id="topnav">
-            <a class="nav-button" id="artecho-link" href="">ArtEcho</a>
+            <a class="nav-button" id="artecho-link" href="{% url 'artecho:index' %}">ArtEcho</a>
             <form action="{% url 'artecho:search' %}" method="get">
                 <input name="q" type="text" placeholder="Search.." value="{{ request.GET.q }}">
             </form>

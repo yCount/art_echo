@@ -12,7 +12,6 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'), 
     path('about/', views.about, name='about'),
     path('signup/', views.signup, name='signup'),
-    path('profile-edit/', views.profile_edit, name='profile_edit'), 
     path('tree', views.tree_view, name='tree'),
     path('profile/<slug:slug>/', views.profile, name='profile'),
     path('profileedit', views.profile_edit, name='profile_edit'),

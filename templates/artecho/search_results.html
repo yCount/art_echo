@@ -9,30 +9,52 @@
 
 {% block body_block %}
     <div class="upper-body">
-        <p> Search results for "{{ request.GET.q }}" </p>
+        <p> Search results for "{{ request.GET.q }}" : </p>
     </div>
-
+    
 
     <div class="lower-body">
-        <h2>Users:</h2>
-        {% if users %}
-            
-            {% for user in users %}
-                <li><a href="{% url 'artecho:profile' user.slug %}">{{ user.username }}</a></li>
-                {% endfor %}
+        <div class="button-section">
+            <button id="user-btn" class="selected">Users<span class="result-count">{{ users|length }}</span></button>
+            <button id="cat-btn">Images by Category<span class="result-count">{{ images|length }}</span></button>
+            <button id="title-btn">Image by Title<span class="result-count">{{ image_search_results|length }}</span></button>
+        </div>
+        <script src="{% static 'js/search_results.js' %}"></script>
+        <div id="user-results" class="section">
+            {% if users %}
+                {% for user in users %}
+                    <li><a href="{% url 'artecho:profile' user.slug %}">{{ user.username }}</a></li>
+                    {% endfor %}
              
-        {% else %}
-            <p>No results found for "{{ query }}"</p>
-        {% endif %}
-
-        <h2>Images by Category:</h2>
-
-        <div class="container">
-            {% if images %}
-                {% regroup images by category.name as category_list %}
-                {% for category in category_list %}
-                    <h4>{{ category.grouper }}</h4>
-                    {% for image in category.list %}
+            {% else %}
+                <p>No results found for "{{ query }}"</p>
+            {% endif %}
+        </div>    
+        <div id="category-results" class="section">
+            {% if images %}    
+                <div class="container">
+                    {% regroup images by category.name as category_list %}
+                    {% for category in category_list %}
+                        <h4>{{ category.grouper }}</h4>
+                        {% for image in category.list %}
+                            <figure>
+                                <img src="{{ image.file.url }}" 
+                                alt="{{image.name}}" />
+                                <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                                <figcaption class="likes">👍 {{image.likes}}</figcaption>
+                                <figcaption class="download"><a href="">↓</a></figcaption>
+                            </figure>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No image results found for "{{ query }}".</p>
+            {% endif %}
+        </div>
+        <div id="title-results" class="section">    
+            {% if image_search_results %}
+                <div class="container">
+                    {% for image in image_search_results %}
                         <figure>
                             <img src="{{ image.file.url }}" 
                             alt="{{image.name}}" />
@@ -41,25 +63,7 @@
                             <figcaption class="download"><a href="">↓</a></figcaption>
                         </figure>
                     {% endfor %}
-                {% endfor %}
-            {% else %}
-                <p>No image results found for "{{ query }}".</p>
-            {% endif %}
-        </div>
-
-        <h2>Images by Title:</h2>
-
-        <div class="container">
-            {% if image_search_results %}
-                {% for image in image_search_results %}
-                    <figure>
-                        <img src="{{ image.file.url }}" 
-                        alt="{{image.name}}" />
-                        <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
-                        <figcaption class="likes">👍 {{image.likes}}</figcaption>
-                        <figcaption class="download"><a href="">↓</a></figcaption>
-                    </figure>
-                {% endfor %}
+                </div>
             {% else %}
                 <p>No image results found for "{{ query }}".</p>
             {% endif %}

@@ -12,7 +12,7 @@
     <body>
         <nav id="topnav">
             {% if user.is_authenticated %}
-            <a class="nav-button" id="artecho-link" href="">ArtEcho</a>
+            <a class="nav-button" id="artecho-link" href="{% url 'artecho:index' %}">ArtEcho</a>
             <form action="{% url 'artecho:search' %}" method="get">
                 <input name="q" type="text" placeholder="Search.." value="{{ request.GET.q }}">
             </form>
@@ -20,7 +20,7 @@
             <a class="nav-button" id="add-root" href="{% url 'artecho:add_root' %}">+</a>
             <a class="nav-button" id="logout-link" href="{% url 'artecho:logout' %}">Log out</a>
             {% else %}
-            <a class="nav-button" id="artecho-link" href="">ArtEcho</a>
+            <a class="nav-button" id="artecho-link" href="{% url 'artecho:index' %}">ArtEcho</a>
             <input type="text" placeholder="Search..">
             <a class="nav-button" id="signup-link" href="{% url 'artecho:signup'%}">Sign up</a>
             <a class="nav-button" id="login-link" href="{% url 'artecho:login' %}">Log in</a>

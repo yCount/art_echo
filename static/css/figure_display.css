@@ -1,14 +1,15 @@
 img {
-    max-width: 100%;
+    width: 100%;
     display: block;
     border-radius: 15px;
+    height: max-content;
 }
 
 figure {
     margin: 0;
     display: grid;
     grid-template-rows: 1fr auto;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     break-inside: avoid;
 }
 
@@ -16,11 +17,18 @@ figure > img {
     grid-row: 1 / -1;
     grid-column: 1;
     border-radius: 15px;
-    transition: transform 0.1s ease; /* Smooth transition for the transform */
+    transition: transform 0.25s ease; /* Smooth transition for the transform */
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
 }
 
-figure > img:hover  {
-    transform: translate(-5px, 5px);
+figure:hover img, figure:hover figcaption {
+    cursor: pointer;
+}
+
+figure:hover img {
+    transform: scale(1.03);
 }
 
 figure a {
@@ -36,15 +44,17 @@ figure figcaption {
 }
 
 figure .likes{
-    margin-left: 70%;
+    margin-left: auto;
+    margin-right: 34px;
 }
 
-figure .download{
-    margin-left: 90%;
+figure .download {
+    margin-left: auto;
+    margin-right: 5px;
 }
 
 figure .username{
-
+    font-family: helvetica;
 }
 
 figcaption {
@@ -53,4 +63,86 @@ figcaption {
     background-color: rgba(255,255,255,.5);
     padding: .2em .5em;
     justify-self: start;
+}
+.upper-body {
+    margin: 30px;
+    margin-bottom: 10px;
+}
+.upper-body p{
+    font-family: helvetica;
+    font-size: 16px;
+    color: black;
+    margin: 0;
+}
+.lower-body {
+    margin: 20px;
+}
+.section p {
+    text-align: start;
+    margin-left: 0;
+    padding-left: 0;
+}            
+.result-btn {
+    box-sizing: border-box;
+    width: calc(100% - 20px); 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.result-btn button {
+    width: 50%;
+    padding: 10px 0; 
+    border-radius: 0; 
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: helvetica;
+    background-color: #007BFF;
+    color: white;
+    box-sizing: border-box; 
+    position: relative;
+}
+
+.result-count {
+    position: absolute;
+    right: 10px;
+}
+
+.result-btn button.selected {
+    opacity: 0.8;
+    box-shadow: 0 0 2px 1px #007BFF;
+}
+
+.section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: none;
+}
+#category-results,
+#title-results {
+    display: none;
+}
+#user-results {
+    display: block;
+}
+#user-results h2,
+#category-results h2,
+#title-results h2 {
+    font-family: helvetica;
+    font-size: 24px; 
+    color: black; 
+    margin-bottom: 10px; 
+}
+
+#user-results p,
+#category-results p,
+#title-results p {
+    font-family: helvetica;
+    font-size: 16px; 
+    color: black; 
 }

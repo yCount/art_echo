@@ -44,3 +44,13 @@ class ImageForm(forms.ModelForm):
         labels = {
             'isAI': 'Is this image AI generated?',
         }
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['username', 'bio', 'totalLikes']
+        labels = {
+            'username': 'Username',
+            'bio': 'Biography',
+            'totalLikes': 'Total Likes',
+        }

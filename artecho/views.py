@@ -3,10 +3,11 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
-from artecho.forms import UserForm, UserProfileForm, LoginForm, SignUpForm, ImageForm
-from artecho.models import User, Image, Category
+from artecho.forms import UserForm, UserProfileForm, LoginForm, SignUpForm, ImageForm, ProfileForm
+from artecho.models import User, Image, Category, User
 from django.views.generic import ListView
 from django.db import models
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -138,3 +139,18 @@ def search_results(request):
     image_search_results = Image.objects.filter(name__icontains=query) if query else []
     
     return render(request, 'artecho/search_results.html', {'users': users, 'images': images,'image_search_results': image_search_results, 'query': query})
+
+@login_required
+def profile_edit(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=request.user)
+    return render(request, 'artecho/profile-edit.html', {'form': form})
+
+def profile(request, slug):
+    profile = User.objects.get(slug=slug)
+    return render(request, 'profile.html', {'profile': profile})

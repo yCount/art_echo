@@ -1,4 +1,6 @@
-var buttons = document.querySelectorAll('.result-btn button');
+// conflict between the two variables below
+//var buttons = document.querySelectorAll('.result-btn button');
+//var buttons = document.querySelectorAll('.button-section button');
 
 buttons.forEach(function(button) {
     button.addEventListener('click', function() {

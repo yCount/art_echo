@@ -51,4 +51,5 @@ class ProfileForm(forms.ModelForm):
         labels = {
             'username': 'Username',
             'totalLikes': 'Total Likes',
+            'profilePicture': 'Profile Picture',
         }

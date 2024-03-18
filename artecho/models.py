@@ -25,7 +25,7 @@ class User(models.Model):
     username = models.CharField(max_length=128, unique=True, null = False)
     email = models.EmailField(null = False)
     type = models.CharField(max_length=128, null = False)
-    profilePicture = models.ImageField(null = False, upload_to= 'profilePics/')  ##directory where profile pics will be stored
+    profilePicture = models.ImageField(null = False, upload_to= 'profilePics/', default='images/blank_pfp.png')  ##directory where profile pics will be stored
     bio = models.TextField(max_length=1000)
     forename = models.CharField(max_length=128, null = False)
     surname = models.CharField(max_length=128, null = False)

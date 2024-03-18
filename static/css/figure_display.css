@@ -13,7 +13,7 @@ figure {
     break-inside: avoid;
 }
 
-figure > img {
+figure > a img {
     grid-row: 1 / -1;
     grid-column: 1;
     border-radius: 15px;
@@ -23,17 +23,26 @@ figure > img {
     width: 100%;
 }
 
-figure:hover img, figure:hover figcaption {
-    cursor: pointer;
-}
-
-figure:hover img {
-    transform: scale(1.03);
+figure > a {
+    grid-row: 1 / -1;
+    grid-column: 1;
+    border-radius: 15px;
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
 }
 
 figure a {
     color: black;
     text-decoration: none;
+}
+
+figure:hover a img, figure:hover figcaption {
+    cursor: pointer;
+}
+
+figure:hover a img {
+    transform: scale(1.03);
 }
 
 figure figcaption {

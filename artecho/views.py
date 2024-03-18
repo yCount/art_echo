@@ -143,7 +143,7 @@ def search_results(request):
 @login_required
 def profile_edit(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=request.user)
+        form = ProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('profile')
@@ -152,5 +152,5 @@ def profile_edit(request):
     return render(request, 'artecho/profile-edit.html', {'form': form})
 
 def profile(request, slug):
-    profile = User.objects.get(slug=slug)
-    return render(request, 'profile.html', {'profile': profile})
+    user = User.objects.get(slug=slug)  # Fetch the User object
+    return render(request, 'artecho/profile.html', {'user': user})  # Pass the User object to the template

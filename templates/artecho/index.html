@@ -16,8 +16,10 @@
                 <!-- does not display base root-->
             {% else %}
                 <figure>
-                    <img src="{{ image.file.url }}" 
+                    <a href="">  <!-- URL needs to be mapped for tree-view -->
+                        <img src="{{ image.file.url }}" 
                         alt="{{image.name}}" />
+                    </a>
                     <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
                     <figcaption class="likes">👍 {{image.likes}}</figcaption>
                     <figcaption class="download"><a href="">↓</a></figcaption>

@@ -32,7 +32,7 @@ class User(models.Model):
     totalLikes = models.IntegerField(default = 0)
     liked = models.ManyToManyField('Image', default = None)  ###not working correctly
     password = models.CharField(max_length=128, null = False)  ###will be encrypted when taken in via a form "(widget=forms.PasswordInput()"
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.username)
@@ -42,6 +42,10 @@ class User(models.Model):
         self.set_password(new_password)
         self.save()
 
+    def get_full_name(self):
+        """Return the user's full name."""
+        return f"{self.forename} {self.surname}"
+    
     class Meta:
         verbose_name_plural = 'users'
 

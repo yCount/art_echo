@@ -17,7 +17,10 @@
         <div class="tree">
             <ul>
                 <!-- parent image starts after <li> (if exists) -->
-                <li> <figure><img src="{% static 'images/darth_vader_realistic.png' %}">
+                <li><figure>
+                    <a href=""> <!-- URL needs to be mapped for tree-view -->
+                        <img src="{% static 'images/darth_vader_realistic.png' %}">
+                    </a>
                     <figcaption class="username"><a href="#">username01</a></figcaption>
                     <figcaption class="likes">👍 45</figcaption>
                     <figcaption class="download"><a href="">↓</a></figcaption>
@@ -26,7 +29,9 @@
                 <ul>
                     <!-- focused/viewed image starts after <li> -->
                     <li> <figure id="page-fig">
-                        <img src="{% static 'images/dart_vader.png' %}">
+                        <a href=""> <!-- URL needs to be mapped for tree-view -->
+                            <img src="{% static 'images/dart_vader.png' %}">
+                        </a>
                         <figcaption class="username"><a href="#">username01</a></figcaption>
                         <figcaption class="likes">👍 145</figcaption>
                         <figcaption class="download"><a href="">↓</a></figcaption>
@@ -44,19 +49,25 @@
                     <ul>
                         <!-- child image(s) starts from here, each in one <li> </li> element. There may be multiple images here or none.  -->
                         <li><figure>
-                            <img src="{% static 'images/stranger_things_logo.png' %}">
+                            <a href=""> <!-- URL needs to be mapped for tree-view -->
+                                <img src="{% static 'images/stranger_things_logo.png' %}">
+                            </a>
                             <figcaption class="username"><a href="#">username01</a></figcaption>
                             <figcaption class="likes">👍 12165</figcaption>
                             <figcaption class="download"><a href="">↓</a></figcaption>
-                        </figure> </li>
+                        </figure></li>
                         <li><figure>
-                            <img src="{% static 'images/jim_hopper.png' %}">
+                            <a href=""> <!-- URL needs to be mapped for tree-view -->
+                                <img src="{% static 'images/jim_hopper.png' %}">
+                            </a>
                             <figcaption class="username"><a href="#">username01</a></figcaption>
                             <figcaption class="likes">👍 5</figcaption>
                             <figcaption class="download"><a href="">↓</a></figcaption>  
                         </figure></li>
                         <li><figure>
-                            <img src="{% static 'images/dart_vader.png' %}">
+                            <a href=""> <!-- URL needs to be mapped for tree-view -->
+                                <img src="{% static 'images/dart_vader.png' %}"> 
+                            </a>
                             <figcaption class="username"><a href="#">username01</a></figcaption>
                             <figcaption class="likes">👍 65</figcaption>
                             <figcaption class="download"><a href="">↓</a></figcaption>  

@@ -32,5 +32,5 @@ urlpatterns = [
     # html test urlpatters end here---
     path('artecho/', include('artecho.urls')),
     path('admin/', admin.site.urls),
-    path('login/', LoginView.as_view(), name='login')
+    path('login/', views.user_login, name='login')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

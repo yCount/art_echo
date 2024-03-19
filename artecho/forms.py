@@ -1,12 +1,15 @@
 from django import forms
-from django.contrib.auth.models import User
-from artecho.models import User as UserProfile, Image, Category
+from django.contrib.auth import get_user_model
+from artecho.models import Image, Category
+from django.contrib.auth.forms import AuthenticationForm
 
-class LoginForm(forms.ModelForm):
+User = get_user_model()
+
+class LoginForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput())
     username = forms.CharField(help_text="")
     class Meta:
-        model = UserProfile
+        model = User
         fields = ('username', 'password',)
 
 class UserForm(forms.ModelForm):
@@ -17,7 +20,7 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password',)
 class UserProfileForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = User
         fields = ( )
 
 class SignUpForm(UserForm):
@@ -46,7 +49,7 @@ class ImageForm(forms.ModelForm):
 
 class ProfileForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = User
         fields = ['username', 'totalLikes']  # Include 'username' and 'totalLikes' fields
         labels = {
             'username': 'Username',

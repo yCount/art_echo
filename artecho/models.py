@@ -1,6 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
  
@@ -21,31 +21,18 @@ class Category(models.Model):
         return self.slug
 
 
-class User(models.Model):
-    username = models.CharField(max_length=128, unique=True, null = False)
-    email = models.EmailField(null = False)
-    type = models.CharField(max_length=128, null = False)
-    profilePicture = models.ImageField(null = False, upload_to= 'profilePics/', default='images/blank_pfp.png')  ##directory where profile pics will be stored
+class User(AbstractUser):
+    type = models.CharField(max_length=128, null=False)
+    profilePicture = models.ImageField(null=False, upload_to='profilePics/', default='images/blank_pfp.png')
     bio = models.TextField(max_length=1000)
-    forename = models.CharField(max_length=128, null = False)
-    surname = models.CharField(max_length=128, null = False)
-    totalLikes = models.IntegerField(default = 0)
-    liked = models.ManyToManyField('Image', default = None)  ###not working correctly
-    password = models.CharField(max_length=128, null = False)  ###will be encrypted when taken in via a form "(widget=forms.PasswordInput()"
+    totalLikes = models.IntegerField(default=0)
+    liked = models.ManyToManyField('Image', default=None)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.username)
         super(User, self).save(*args, **kwargs)
 
-    def set_password(self, new_password):
-        self.set_password(new_password)
-        self.save()
-
-    def get_full_name(self):
-        """Return the user's full name."""
-        return f"{self.forename} {self.surname}"
-    
     class Meta:
         verbose_name_plural = 'users'
 

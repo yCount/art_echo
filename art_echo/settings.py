@@ -132,5 +132,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'artecho:login'
 LOGIN_REDIRECT_URL = 'profile'
-
-AUTH_USER_MODEL = 'artecho.User'

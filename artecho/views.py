@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
-from artecho.forms import UserProfileForm, LoginForm, SignUpForm, ImageForm, ProfileForm
-from artecho.models import Image, Category
+from artecho.forms import UserForm, UserProfileForm, LoginForm, SignUpForm, ImageForm, ProfileForm
+from artecho.models import User, Image, Category, User
+from django.views.generic import ListView
+from django.db import models
 from django.contrib.auth.decorators import login_required
 
-User = get_user_model()
 
 def index(request):
     context_dict = {'boldmessage': 'Welcome to ArtEcho!'}
@@ -19,6 +20,17 @@ def index(request):
 def card(request):
     return render(request, 'artecho/base-card.html')
 
+def add_root(request):
+    return render(request, 'artecho/add-root.html')
+
+def profile(request):
+    return render(request, 'artecho/profile.html')
+
+def profile_edit(request):
+        return render(request, 'artecho/profile-edit.html')
+  
+def search_results(request):
+    return render(request, 'artecho/search-results.html')
 # html test views end here---
 
 def about(request):
@@ -30,6 +42,12 @@ def about(request):
 def tree_view(request):
     return render(request, 'artecho/tree-view.html')
 
+def profile(request, slug):
+    user = get_object_or_404(User, slug=slug)
+    return render(request, 'artecho/profile.html', {'user': user})
+
+def profile_edit(request):
+    return render(request, 'artecho/profile-edit.html')
 
 def user_login(request):
     if request.method == 'POST':
@@ -56,7 +74,6 @@ def user_logout(request):
     logout(request)
     return(redirect(reverse('artecho:index')))
 
-
 def signup(request):
     registered = False
 
@@ -68,24 +85,20 @@ def signup(request):
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
 
-            # Check if a user with this username already exists
-            if User.objects.filter(username=user.username).exists():
-                user_form.add_error('username', 'A user with this username already exists')
-            else:
-                user.set_password(user.password)
-                user.save()
+            user.set_password(user.password)
+            user.save()
 
-                profile = profile_form.save(commit=False)
-                profile.user = user
+            profile = profile_form.save(commit=False)
+            profile.user = user
 
-                if 'picture' in request.FILES:
-                    profile.picture = request.FILES['picture']
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
 
-                profile.save()
+            profile.save()
 
-                registered = True
+            registered = True
 
-                return redirect(reverse('artecho:profile_edit'))
+            return redirect(reverse('artecho:profile_edit'))
         else:
             print(user_form.errors, profile_form.errors)
     else:

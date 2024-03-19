@@ -124,16 +124,17 @@ def populate():
 
 
 
-def add_user(username, email, forename, surname, password):
-    user, created = User.objects.get_or_create(username=username, defaults={
-        "email": email,
-        "first_name": forename,
-        "last_name": surname,
-    })
-    if created:
-        user.set_password(password)
-        user.save()
-    return user
+def add_user(username, fore, sur, email, password):
+    try:
+        u = User.objects.get(username = username)
+        return u
+    except(User.DoesNotExist):
+        u = User.objects.get_or_create(username = username, email = email, forename = fore, surname = sur, password = password)[0]
+        u.type = "user"
+        blank = img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'blank_pfp.png'))
+        u.profilePicture = convert_to_file(blank, username + "_pfp.png")
+        u.save()
+        return u
     
 
 def add_image(file, name, parent, poster, desc, category):

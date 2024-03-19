@@ -1,0 +1,157 @@
+img {
+    width: 100%;
+    display: block;
+    border-radius: 15px;
+    height: max-content;
+}
+
+figure {
+    margin: 0;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    margin-bottom: 15px;
+    break-inside: avoid;
+}
+
+figure > a img {
+    grid-row: 1 / -1;
+    grid-column: 1;
+    border-radius: 15px;
+    transition: transform 0.25s ease; /* Smooth transition for the transform */
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}
+
+figure > a {
+    grid-row: 1 / -1;
+    grid-column: 1;
+    border-radius: 15px;
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}
+
+figure a {
+    color: black;
+    text-decoration: none;
+}
+
+figure:hover a img, figure:hover figcaption {
+    cursor: pointer;
+}
+
+figure:hover a img {
+    transform: scale(1.03);
+}
+
+figure figcaption {
+    margin: 5px;
+    bottom: 5px; /* Align to bottom of figure */
+    position: relative;
+    border-radius: 10px;
+}
+
+figure .likes{
+    margin-left: auto;
+    margin-right: 34px;
+}
+
+figure .download {
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+figure .username{
+    font-family: helvetica;
+}
+
+figcaption {
+    grid-row: 2;
+    grid-column: 1;
+    background-color: rgba(255,255,255,.5);
+    padding: .2em .5em;
+    justify-self: start;
+}
+.upper-body {
+    margin: 30px;
+    margin-bottom: 10px;
+}
+.upper-body p{
+    font-family: helvetica;
+    font-size: 16px;
+    color: black;
+    margin: 0;
+}
+.lower-body {
+    margin: 20px;
+}
+.section p {
+    text-align: start;
+    margin-left: 0;
+    padding-left: 0;
+}            
+.result-btn {
+    box-sizing: border-box;
+    width: calc(100% - 20px); 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.result-btn button {
+    width: 50%;
+    padding: 10px 0; 
+    border-radius: 0; 
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: helvetica;
+    background-color: #007BFF;
+    color: white;
+    box-sizing: border-box; 
+    position: relative;
+}
+
+.result-count {
+    position: absolute;
+    right: 10px;
+}
+
+.result-btn button.selected {
+    opacity: 0.8;
+    box-shadow: 0 0 2px 1px #007BFF;
+}
+
+.section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: none;
+}
+#category-results,
+#title-results {
+    display: none;
+}
+#user-results {
+    display: block;
+}
+#user-results h2,
+#category-results h2,
+#title-results h2 {
+    font-family: helvetica;
+    font-size: 24px; 
+    color: black; 
+    margin-bottom: 10px; 
+}
+
+#user-results p,
+#category-results p,
+#title-results p {
+    font-family: helvetica;
+    font-size: 16px; 
+    color: black; 
+}

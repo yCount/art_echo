@@ -7,23 +7,120 @@
     padding: 0 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: add a slight shadow for depth */
     border-radius: 15px;
+    position: fixed;
+    top: 0;
+    width: 99%;
+    box-sizing: border-box;
+    /* 2 following lines should help navbar to center but not sure if it actually works */
+    margin-right: auto;
+    margin-left: auto;
+    z-index: 1000; /* High z-index to ensure it's on top */
 }
 
 #topnav a {
     text-decoration: none;
     margin-right: 20px;
-    color: #333;
     font-size: 16px;
 }
 
-#topnav input[type="text"] {
+#topnav form {
     flex-grow: 1;
+    display: flex;
     margin: 0 20px;
+}
+
+#topnav form input[type="text"] {
+    flex-grow: 1;
     padding: 8px;
     border-radius: 8px;
 }
 
-/* Optionally, :hover effects for the links. This may be deleted later */
-#topnav a:hover {
-    color: #007bff; /* Change color on hover */
+#blank_space {
+    height: 100px;
+}
+
+.nav-button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-family: Helvetica;
+    white-space: nowrap
+}
+
+#artecho-link {
+    background-image: url('/static/images/logo_background.png');
+    background-size: cover;
+    background-position: center;
+}
+
+#about-link {
+    background-color: #f4e330;
+    font-style: italic;
+    font-weight: bold;
+    color: black;
+    padding: 10px 15px;
+}
+
+#signup-link {
+    background-color: #00008b;
+}
+
+#login-link {
+    background-color: #007BFF;
+}
+
+#add-root {
+    background-image: url('/static/images/logo_background.png');
+    background-size: cover;
+    background-position: center;
+    font-weight: bold;
+    padding: 10px 15px;
+}
+
+.nav-button:hover {
+    opacity: 0.8;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: #cecece;
+    border-radius: 15px;
+    padding: 5px 5px;
+    /* position for .dropdown-menu: */
+    right: -1px;
+    top: 52px;
+}
+
+.dropdown-menu a {
+    padding: 8px 10px;
+    text-decoration: none;
+    margin: 10px auto 10px auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    background-color: #ddd;
+}
+  
+.dropdown img {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
 }

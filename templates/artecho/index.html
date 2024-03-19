@@ -1,10 +1,34 @@
 {% extends 'artecho/base-navbar.html' %}
-{% load staticfiles %}
+{% load static %}
 
 {% block title_block %}
-    Index
-    </title>
+    <title> ArtEcho </title>
+    <link rel="stylesheet" href="{% static 'css/figure_display.css' %}">
+    <link rel="stylesheet" href="{% static 'css/figure_tiling.css' %}">
 {% endblock %}
 
 {% block body_block %}
+
+<div class="container"> 
+    {% if display_images %}
+        {% for image in display_images %}
+            {% if image.slug == "base_root" %}
+                <!-- does not display base root-->
+            {% else %}
+                <figure>
+                    <a href="">  <!-- URL needs to be mapped for tree-view -->
+                        <img src="{{ image.file.url }}" 
+                        alt="{{image.name}}" />
+                    </a>
+                    <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                    <figcaption class="likes">👍 {{image.likes}}</figcaption>
+                    <figcaption class="download"><a href="">↓</a></figcaption>
+                </figure>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <strong>No images were found</strong>
+    {% endif %}
+</div>
+
 {% endblock %}

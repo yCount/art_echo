@@ -27,8 +27,8 @@ class User(models.Model):
     type = models.CharField(max_length=128, null = False)
     profilePicture = models.ImageField(null = False, upload_to= 'profilePics/')  ##directory where profile pics will be stored
     bio = models.TextField(max_length=1000)
-    forename = models.CharField(max_length=128, null = False)
-    surname = models.CharField(max_length=128, null = False)
+    #forename = models.CharField(max_length=128, null = False)
+    #surname = models.CharField(max_length=128, null = False)
     totalLikes = models.IntegerField(default = 0)
     liked = models.ManyToManyField('Image', default = None)  ###not working correctly
     password = models.CharField(max_length=128, null = False)  ###will be encrypted when taken in via a form "(widget=forms.PasswordInput()"

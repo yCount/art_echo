@@ -27,7 +27,7 @@ urlpatterns = [
     path('card/', views.card, name='card'),
     path('add_root', views.add_root, name='add_root'),
     path('tree', views.tree_view, name='tree'),
-    path('profileedit', views.profile_edit, name='profile_edit'),
+    path('profileedit/<slug:slug>/', views.profile_edit, name='profile_edit'),
     path('profile/<slug:slug>/', views.profile, name='profile'),
     # html test urlpatters end here---
     path('artecho/', include('artecho.urls')),

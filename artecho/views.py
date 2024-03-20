@@ -148,14 +148,17 @@ def search_results(request):
     return render(request, 'artecho/search_results.html', {'users': users, 'images': images,'image_search_results': image_search_results, 'query': query})
 
 @login_required
-def profile_edit(request):
+def profile_edit(request, slug):
+    user_profile = get_object_or_404(UserProfile, slug=slug)
+    if request.user != user_profile.user:
+        return HttpResponse("You are not allowed to edit this profile")
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=request.user)
+        form = ProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            return redirect('profile', slug=slug)
     else:
-        form = ProfileForm(instance=request.user)
+        form = ProfileForm(instance=user_profile)
     return render(request, 'artecho/profile-edit.html', {'form': form})
 
 def profile(request, slug):

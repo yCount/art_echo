@@ -10,7 +10,7 @@
 
 {% block body_block %}
     <div class="edit-btn" id="Cancel">
-        <a href="{% url 'artecho:profile' %}">Cancel</a>
+        <a href="{% url 'profile' slug=user.userprofile.slug %}">Cancel</a>
     </div>
     <div id="profile-details">
         

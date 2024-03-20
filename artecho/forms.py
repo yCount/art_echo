@@ -48,7 +48,7 @@ class ImageForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = [ 'totalLikes']  # Include 'username' and 'totalLikes' fields
+        fields = ['bio', 'profilePicture' ]
         labels = {
             'totalLikes': 'Total Likes',
             'profilePicture': 'Profile Picture',

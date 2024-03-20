@@ -23,7 +23,7 @@
         <div id="user-results" class="section">
             {% if users %}
                 {% for user in users %}
-                    <li><a href="{% url 'artecho:profile' user.slug %}">{{ user.username }}</a></li>
+                    <li><a href="{% url 'profile' slug=user.userprofile.slug %}">{{ user.username }}</a></li>
                     {% endfor %}
              
             {% else %}

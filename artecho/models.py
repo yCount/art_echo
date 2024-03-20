@@ -66,7 +66,7 @@ class Image(models.Model):
             slash_slug = self.name
         else:
             full_slug = str(self.poster) + "-" + self.name
-            slash_slug = slugify(str(self.poster)) + "/" + slugify(self.name)
+            slash_slug = slugify(str(self.poster)) + "/" + slugify(self.name) + "/"
         self.slug = slugify(full_slug) #Image slug is a concatenation of the user who posted it and the name
         self.slashSlug = slash_slug
 

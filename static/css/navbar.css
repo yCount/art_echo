@@ -1,35 +1,21 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: helvetica;
-}
 /* Style for the top navigation bar */
 #topnav {
     height: 80px;
     display: flex;
     align-items: center;
-    background-color: #292A38;
+    background-color: #f0f0f0;
     padding: 0 20px;
-    margin:5px;
-    border-radius: 16px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: add a slight shadow for depth */
+    border-radius: 15px;
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
-    width: calc(100% - 10px);
+    width: 99%;
     box-sizing: border-box;
     /* 2 following lines should help navbar to center but not sure if it actually works */
     margin-right: auto;
     margin-left: auto;
     z-index: 1000; /* High z-index to ensure it's on top */
 }
-#content{
-    background-color: #EEEEEE;
-    min-height: 100vh;
-}
-
 
 #topnav a {
     text-decoration: none;
@@ -47,18 +33,16 @@ html, body {
     flex-grow: 1;
     padding: 8px;
     border-radius: 8px;
-    border: none
 }
 
 #blank_space {
     height: 100px;
-    background-color: #EEEEEE;
 }
 
 .nav-button {
     display: inline-block;
     padding: 10px 20px;
-    color: #EEEEEE;
+    color: #fff;
     border: none;
     border-radius: 10px;
     text-decoration: none;
@@ -82,11 +66,11 @@ html, body {
 }
 
 #signup-link {
-    background-color: #26246C;
+    background-color: #00008b;
 }
 
 #login-link {
-    background-color: #4D4DA8;
+    background-color: #007BFF;
 }
 
 #add-root {

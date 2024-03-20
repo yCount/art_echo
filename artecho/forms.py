@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-from artecho.models import User as UserProfile, Image, Category
+from artecho.models import User as UserProfile
+from artecho.models import Image, Category
 
 class LoginForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -47,9 +48,9 @@ class ImageForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['username', 'totalLikes']  # Include 'username' and 'totalLikes' fields
+        fields = ['username', 'bio', 'totalLikes']
         labels = {
             'username': 'Username',
+            'bio': 'Biography',
             'totalLikes': 'Total Likes',
-            'profilePicture': 'Profile Picture',
         }

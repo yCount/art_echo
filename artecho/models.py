@@ -53,6 +53,7 @@ class Image(models.Model):
     isAI = models.BooleanField(default = False)
     file = models.ImageField(null = False, upload_to= 'images/')
     parent = models.ForeignKey('Image', on_delete=models.DO_NOTHING, null = True) ###unsure if this is the correct delete mode
+    children =  models.ManyToOneRel
     likes = models.IntegerField(default = 0)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True)
     poster = models.ForeignKey('User', on_delete=models.DO_NOTHING, null = True)
@@ -63,7 +64,7 @@ class Image(models.Model):
         if self.poster == None:
             full_slug = self.name
         else:
-            full_slug = str(self.poster) + "-" + self.name
+            full_slug = str(self.poster) + "/" + self.name
         self.slug = slugify(full_slug) #Image slug is a concatenation of the user who posted it and the name
         super(Image, self).save(*args, **kwargs)
 

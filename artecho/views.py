@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -15,6 +15,14 @@ def index(request):
     display_images = Image.objects.order_by('-likes')[:10]
     context_dict['display_images'] = display_images
     return render(request, 'artecho/index.html', context=context_dict)
+
+def download_image(request, image_id):
+    image = get_object_or_404(Image, pk=image_id)
+    file_path = image.file.path
+    response = FileResponse(open(file_path, 'rb'))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = f'attachment; filename="{image.name}"'
+    return response
 
 # added for html test viewing:
 def card(request):

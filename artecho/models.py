@@ -62,17 +62,13 @@ class Image(models.Model):
     poster = models.ForeignKey('User', on_delete=models.DO_NOTHING, null = True)
     description = models.TextField(max_length=1000, unique=False)
     slug = models.SlugField()
-    url_mapping = models.SlugField()
 
     def save(self, *args, **kwargs):
         if self.poster == None:
             full_slug = self.name
-            full_url_mapping = self.name
         else:
             full_slug = str(self.poster) + "-" + self.name
-            full_url_mapping = str(self.poster) + "/" + self.name
         self.slug = slugify(full_slug) #Image slug is a concatenation of the user who posted it and the name
-        self.url_mapping = slugify(full_url_mapping)
         super(Image, self).save(*args, **kwargs)
 
     class Meta:

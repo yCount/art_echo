@@ -53,7 +53,6 @@ class Image(models.Model):
     isAI = models.BooleanField(default = False)
     file = models.ImageField(null = False, upload_to= 'images/')
     parent = models.ForeignKey('Image', on_delete=models.DO_NOTHING, null = True) ###unsure if this is the correct delete mode
-    children =  models.ManyToOneRel
     likes = models.IntegerField(default = 0)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True)
     poster = models.ForeignKey('User', on_delete=models.DO_NOTHING, null = True)

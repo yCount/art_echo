@@ -24,8 +24,7 @@
             {% if users %}
                 {% for user in users %}
                     <li><a href="{% url 'profile' slug=user.userprofile.slug %}">{{ user.username }}</a></li>
-                    {% endfor %}
-             
+                {% endfor %}
             {% else %}
                 <p>No results found for "{{ query }}"</p>
             {% endif %}

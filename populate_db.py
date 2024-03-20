@@ -5,10 +5,10 @@ import django
 django.setup()
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files import File
-
+from artecho.models import UserProfile
 from artecho.models import Category, Image, User
 from art_echo import settings
-
+from django.template.defaultfilters import slugify
 from PIL import Image as img
 import io
 import sys 
@@ -57,8 +57,8 @@ def populate():
         print("added " + u.name)
 
     for user_data in users:
-        u = add_user(user_data["username"],user_data["email"],user_data["forename"],user_data["surname"],user_data["password"])
-        print("added " + user_data["username"])
+        u, slug= add_user(user_data["username"],user_data["email"],user_data["forename"],user_data["surname"],user_data["password"])
+        print("added " + user_data["username"]+ slug)
 
     base_images = [
         {"name" : "Darth Vader",
@@ -133,7 +133,11 @@ def add_user(username, email, forename, surname, password):
     if created:
         user.set_password(password)
         user.save()
-    return user
+        slug = slugify(username)
+        print(f'Slug for user {username}: {slug}')
+        user_profile = UserProfile.objects.create(user=user, slug=slug)
+        user_profile.save()
+    return user, slug
     
 
 def add_image(file, name, parent, poster, desc, category):

@@ -150,8 +150,9 @@ def search_results(request):
 @login_required
 def profile_edit(request, slug):
     user_profile = get_object_or_404(UserProfile, slug=slug)
-    if request.user != user_profile.user:
-        return HttpResponse("You are not allowed to edit this profile")
+    profile = UserProfile.objects.get(slug=slug)
+    if request.user != profile.user:
+        return redirect('login')
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():

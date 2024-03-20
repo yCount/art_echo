@@ -11,16 +11,15 @@
 {% block body_block %}
     <div id="profile-details">
         <!-- The img on the next line should render the profile picture -->
-        <img id="profile-pic" src="{% static 'images/blank_pfp.png' %}" alt="profile picture here. Should align to the center later">
+        <img id="profile-pic" src="{{ user.profilePicture.url }}" alt="Profile picture">
         
         <div id="description">
-            <!-- The following three texts are not properly formatted yet. Needs some front end work -->
-            <!-- Fullname -->
-            <p></p>
             <!-- username -->
-            <p></p>
+            <p>{{ user.username }}</p>
             <!-- bio -->
-            <p></p>
+            <p class="bio">{{ user.bio }}</p>
+            <!-- Total Likes -->
+            <p>Total Likes: {{ user.totalLikes }}</p>
         </div>
         <div class="edit-btn" id="Edit">
             <a href="{% url 'artecho:profile_edit' %}">Edit</a>
@@ -28,19 +27,6 @@
     </div>
 
     <div class="container">
-        <!-- Following lines are for the display. They are to be deleted later -->
-        <!-- One sample active figure -->
-        <figure>
-            <a href=""> <!-- URL needs to be mapped for tree-view -->
-                <img src="https://assets.codepen.io/12005/windmill.jpg" alt="A windmill" />
-            </a>
-            <figcaption class="username"><a href="#">username01</a></figcaption>
-            <figcaption class="likes">👍 45</figcaption>
-            <figcaption class="download"><a href="">↓</a></figcaption>
-        </figure>
-        <!-- the active image figure ends here -->
-        <figure>
-            <img src="{% static '/images/dart_vader.png' %}" alt="dart vader" />
-        </figure>
+        
     </div>
 {% endblock %}

@@ -27,11 +27,10 @@ urlpatterns = [
     path('card/', views.card, name='card'),
     path('add_root', views.add_root, name='add_root'),
     path('tree', views.tree_view, name='tree'),
-    path('profile', views.profile, name='profile'),
     path('profileedit', views.profile_edit, name='profile_edit'),
+    path('profile/<slug:slug>/', views.profile, name='profile'),
     # html test urlpatters end here---
     path('artecho/', include('artecho.urls')),
     path('admin/', admin.site.urls),
-    path('profile', views.profile, name='profile'),
     path('login/', LoginView.as_view(), name='login')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

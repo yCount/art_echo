@@ -11,10 +11,11 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    context_dict = {'boldmessage': 'Welcome to ArtEcho!'}
     display_images = Image.objects.order_by('-likes')[:10]
-    context_dict['display_images'] = display_images
-    return render(request, 'artecho/index.html', context=context_dict)
+    context = {
+        'display_images': display_images,
+    }
+    return render(request, 'artecho/index.html', context)
 
 # added for html test viewing:
 def card(request):
@@ -39,8 +40,18 @@ def about(request):
     print(request.user)
     return render(request, 'artecho/about.html', context=context_dict)
 
-def tree_view(request):
-    return render(request, 'artecho/tree-view.html')
+def tree_view(request, user_name, image_title):
+    # Reconstruct the slug from user_name and image_title
+    slug = f"{user_name}-{image_title}"
+    image = Image.objects.filter(slug=slug).first()
+
+    if image is None:
+        raise Http404("Image does not exist")
+
+    context = {
+        'image': image,
+    }
+    return render(request, 'artecho/tree-view.html', context)
 
 def profile(request, slug):
     user = get_object_or_404(User, slug=slug)

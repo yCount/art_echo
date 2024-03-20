@@ -11,15 +11,14 @@
 {% block body_block %}
     <div id="profile-details">
         <!-- The img on the next line should render the profile picture -->
-        <img id="profile-pic" src="{{ user.profilePicture.url }}" alt="Profile picture">
-        
+        <img id="profile-pic" src="{{ user_profile.profilePicture.url }}" alt="Profile picture">
         <div id="description">
             <!-- username -->
             <p>{{ user.username }}</p>
             <!-- bio -->
-            <p class="bio">{{ user.bio }}</p>
+            <p class="bio">{{ user_profile.bio }}</p>
             <!-- Total Likes -->
-            <p>Total Likes: {{ user.totalLikes }}</p>
+            <p>Total Likes: {{ user_profile.totalLikes }}</p>
         </div>
         <div class="edit-btn" id="Edit">
             <a href="{% url 'profile_edit' slug=user.userprofile.slug %}">Edit</a>

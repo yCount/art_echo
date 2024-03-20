@@ -163,4 +163,4 @@ def profile_edit(request, slug):
 
 def profile(request, slug):
     user_profile = get_object_or_404(UserProfile, slug=slug)
-    return render(request, 'artecho/profile.html', {'user': user_profile.user})
+    return render(request, 'artecho/profile.html', {'user_profile': user_profile})

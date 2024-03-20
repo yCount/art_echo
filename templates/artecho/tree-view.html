@@ -21,11 +21,11 @@
                     <!-- Does not display base root-->
                 {% else %}
                     <li><figure>
-                        <a href="{{ parent.slashSlug }}">  <!-- URL needs to be mapped for tree-view -->
+                        <a href="{% url 'artecho:tree' parent.poster.slug parent.nameSlug%}">
                             <img src="{{ parent.file.url }}">
                         </a>
-                        <figcaption class="username"><a href="#">username01</a></figcaption>
-                        <figcaption class="likes">👍 45</figcaption>
+                        <figcaption class="username"><a href="#">{{parent.poster.username}}</a></figcaption>
+                        <figcaption class="likes">👍 {{parent.likes}}</figcaption>
                         <figcaption class="download"><a href="">↓</a></figcaption>
                     </figure>
                 {% endif %}
@@ -55,7 +55,7 @@
                         {% if children %}
                             {% for child in children %}
                                 <figure>
-                                    <a href="{{ child.slashSlug }}">  <!-- URL needs to be mapped for tree-view -->
+                                    <a href="{% url 'artecho:tree' child.poster.slug child.nameSlug%}">  <!-- URL needs to be mapped for tree-view -->
                                         <img src="{{ child.file.url }}" 
                                         alt="{{child.name}}" />
                                     </a>

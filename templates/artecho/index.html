@@ -17,7 +17,7 @@
                 <!-- does not display base root-->
             {% else %}
                 <figure>
-                    <a href="">  <!-- URL needs to be mapped for tree-view -->
+                    <a href="{{ image.url_mapping }}">  <!-- URL needs to be mapped for tree-view -->
                         <img src="{{ image.file.url }}" 
                         alt="{{image.name}}" />
                     </a>

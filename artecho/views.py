@@ -34,6 +34,14 @@ def download_image(request, slug):
     response['Content-Disposition'] = f'attachment; filename="{image.name}"'
     return response
 
+def download_image(request, slug):
+    image = get_object_or_404(Image, slug=slug)
+    file_path = image.file.path
+    response = FileResponse(open(file_path, 'rb'))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = f'attachment; filename="{image.name}"'
+    return response
+
 # added for html test viewing:
 def card(request):
     return render(request, 'artecho/base-card.html')

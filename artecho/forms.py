@@ -48,7 +48,6 @@ class ImageForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-login-signup
         fields = ['bio', 'profilePicture' ]
         labels = {
             'totalLikes': 'Total Likes',
@@ -68,6 +67,5 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = [ ] 
         labels = {
-database-login-merge
             'totalLikes': 'Total Likes',
         }

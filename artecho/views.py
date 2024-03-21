@@ -31,7 +31,12 @@ def card(request):
     return render(request, 'artecho/base-card.html')
 
 def add_root(request):
-    return render(request, 'artecho/add-root.html')
+    context = {}
+    try:
+        context['user_profile'] = UserProfile.objects.get(user=request.user)
+    except:
+        pass
+    return render(request, 'artecho/add-root.html', context= context)
 
 def profile(request):
     return render(request, 'artecho/profile.html')
@@ -40,7 +45,12 @@ def profile_edit(request):
         return render(request, 'artecho/profile-edit.html')
   
 def search_results(request):
-    return render(request, 'artecho/search-results.html')
+    context = {}
+    try:
+        context['user_profile'] = UserProfile.objects.get(user=request.user)
+    except:
+        pass
+    return render(request, 'artecho/search-results.html', context = context)
 # html test views end here---
 
 def about(request):
@@ -64,6 +74,10 @@ def tree_view(request, user_name, image_title):
         'parent':image.parent,
         'children': Image.objects.filter(parent = image)
     }
+    try:
+        context['user_profile'] = UserProfile.objects.get(user=request.user)
+    except:
+        pass
     return render(request, 'artecho/tree-view.html', context)
 
 def user_logout(request):
@@ -151,6 +165,8 @@ def user_login(request):
     else:
         form = AuthenticationForm()
     return render(request, 'artecho/login.html', {'form': form})
+
+@login_required
 def add_root(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
@@ -162,7 +178,12 @@ def add_root(request):
             print(form.errors)
     else:
         form = ImageForm()
-    return render(request, 'artecho/add-root.html', {'form': form})
+    context = {'form': form}
+    try:
+        context['user_profile'] = UserProfile.objects.get(user=request.user)
+    except:
+        pass
+    return render(request, 'artecho/add-root.html', context= context)
    
 def search_results(request):
     query = request.GET.get('q')
@@ -178,8 +199,13 @@ def search_results(request):
 
 
     image_search_results = Image.objects.filter(name__icontains=query) if query else []
+    context = {'users': users, 'images': images,'image_search_results': image_search_results, 'query': query}
+    try:
+        context['user_profile'] = UserProfile.objects.get(user=request.user)
+    except:
+        pass
     
-    return render(request, 'artecho/search_results.html', {'users': users, 'images': images,'image_search_results': image_search_results, 'query': query})
+    return render(request, 'artecho/search_results.html', context=context)
 
 @login_required
 def profile_edit(request, slug):

@@ -15,9 +15,9 @@
 <script src="{% static 'js/ai_tool.js' %}"></script>
 <div class="container">
     <div id="upload-section" class="section">
-        <img src="{{ parent.file.url }}"  alt="{{parent.name}}" />
+        <img id="child-img" src="{{ parent.file.url }}"  alt="{{parent.name}}" />
     </div>
-    <div id="details-section" class="section" style="display:none;">
+    <div id="details-section" class="section">
         <form method="post" enctype="multipart/form-data" id="imageDetailsForm">
             {% csrf_token %}
             {{ form.as_p }}
@@ -28,6 +28,8 @@
         <h2>ArtEcho AI Tools</h2>
         <p>Coming soon...</p>
     </div>
-    <script src="{% static 'js/add_image.js' %}"></script>
+    <script>window.onload = function() {
+        document.getElementById('details-section').style.display = 'block';
+    };</script>
 </div>
 {% endblock %}

@@ -11,6 +11,7 @@ figure {
     grid-template-rows: 1fr auto;
     margin-bottom: 15px;
     break-inside: avoid;
+    position: relative;
 }
 
 figure > a img {
@@ -154,4 +155,33 @@ figcaption {
     font-family: helvetica;
     font-size: 16px; 
     color: black; 
+}
+figure form {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    color: #292A38;
+    transition: transform 0.2s ease;
+}
+.delete-button:hover {
+    transform: scale(1.55);
 }

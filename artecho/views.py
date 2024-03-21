@@ -212,3 +212,13 @@ def profile(request, slug):
                     'images': images
                     }
     return render(request, 'artecho/profile.html', context_dict)
+
+@login_required
+def delete_image(request, image_id):
+    image = get_object_or_404(Image, id=image_id)
+    if request.user != image.poster:
+        return redirect('index')
+    if request.method == 'POST':
+        image.file.delete(save=True)
+        image.delete()
+        return redirect('profile', slug=request.user.userprofile.slug)

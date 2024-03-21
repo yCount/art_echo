@@ -16,5 +16,6 @@ urlpatterns = [
     path('profile/<slug:slug>/', views.profile, name='profile'),
     path('profileedit/<slug:slug>/', views.profile_edit, name='profile_edit'),
     path('search/', views.search_results, name="search"),
+    path('delete_image/<int:image_id>/', views.delete_image, name='delete_image'),
     # html test urlpatters end here---
 ]

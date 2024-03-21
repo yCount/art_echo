@@ -7,7 +7,7 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput())
     username = forms.CharField(help_text="")
     class Meta:
-        model = User
+        model = UserProfile
         fields = ('username', 'password',)
 
 class UserForm(forms.ModelForm):
@@ -18,7 +18,7 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password',)
 class UserProfileForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = UserProfile
         fields = ( )
 
 class SignUpForm(UserForm):
@@ -48,6 +48,7 @@ class ImageForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
+login-signup
         fields = ['bio', 'profilePicture' ]
         labels = {
             'totalLikes': 'Total Likes',
@@ -67,6 +68,6 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = [ ] 
         labels = {
+database-login-merge
             'totalLikes': 'Total Likes',
-            'profilePicture': 'Profile Picture',
         }

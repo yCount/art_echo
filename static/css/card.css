@@ -11,6 +11,7 @@ html {
     font-family: helvetica;
     align-items: center;
 }
+
 .card {
     display: flex;
     flex-direction: column;
@@ -65,11 +66,11 @@ button{
 }
 
 #login{
-    background-color: #4D4DA8;
+    background-color: #007bff;
 }
 
 #signup{
-   background-color: #26246C;
+   background-color: #00008b;
 }
 button:hover {
     opacity: 0.8;

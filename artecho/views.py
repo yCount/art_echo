@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 
 def index(request):
     context_dict = {'boldmessage': 'Welcome to ArtEcho!'}
-    display_images = Image.objects.order_by('-likes')[:10]
+    display_images = Image.objects.order_by('-likes')[:30]
     context_dict['display_images'] = display_images
     return render(request, 'artecho/index.html', context=context_dict)
 
@@ -21,6 +21,17 @@ def index(request):
 def card(request):
     return render(request, 'artecho/base-card.html')
 
+def add_root(request):
+    return render(request, 'artecho/add-root.html')
+
+def profile(request):
+    return render(request, 'artecho/profile.html')
+
+def profile_edit(request):
+        return render(request, 'artecho/profile-edit.html')
+  
+def search_results(request):
+    return render(request, 'artecho/search-results.html')
 # html test views end here---
 
 def about(request):
@@ -29,13 +40,26 @@ def about(request):
     print(request.user)
     return render(request, 'artecho/about.html', context=context_dict)
 
-def tree_view(request):
-    return render(request, 'artecho/tree-view.html')
+def tree_view(request, user_name, image_title):
+    # Reconstruct the slug from user_name and image_title
+    slug = f"{user_name}-{image_title}"
+    image = Image.objects.filter(slug=slug).first()
+
+
+    if image is None:
+        raise Http404("Image does not exist")
+    
+
+    context = {
+        'image': image,
+        'parent':image.parent,
+        'children': Image.objects.filter(parent = image)
+    }
+    return render(request, 'artecho/tree-view.html', context)
 
 def user_logout(request):
     logout(request)
     return(redirect(reverse('artecho:index')))
-
 
 def signup(request):
     # A boolean value for telling the template
@@ -53,6 +77,7 @@ def signup(request):
 
         # If the two forms are valid...
         if user_form.is_valid() and profile_form.is_valid():
+
             # Save the user's form data to the database.
             user = user_form.save()
 

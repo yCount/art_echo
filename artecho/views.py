@@ -12,9 +12,18 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import get_object_or_404
 
 def index(request):
-    context_dict = {'boldmessage': 'Welcome to ArtEcho!'}
-    display_images = Image.objects.order_by('-likes')[:30]
-    context_dict['display_images'] = display_images
+    try:
+        display_images = Image.objects.order_by('-likes')[:30]
+        user_profile=UserProfile.objects.get(user=request.user)
+        context_dict = {'boldmessage': 'Welcome to ArtEcho!',
+                        'user_profile': user_profile,
+                        'display_images': display_images
+                        }
+    except:
+        display_images = Image.objects.order_by('-likes')[:30]
+        context_dict = {'boldmessage': 'Welcome to ArtEcho!',
+                        'display_images': display_images
+                        }
     return render(request, 'artecho/index.html', context=context_dict)
 
 # added for html test viewing:

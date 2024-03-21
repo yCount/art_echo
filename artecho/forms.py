@@ -36,12 +36,11 @@ class SignUpForm(UserForm):
             self.add_error('password_confirm', 'Passwords must match')
 
         return cleaned_data
-
 class ImageForm(forms.ModelForm):
     category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Select a category")
     class Meta:
         model = Image
-        fields = ('name', 'isAI', 'category', 'description', 'file' )
+        fields = ('name', 'isAI', 'category', 'description', )
         labels = {
             'isAI': 'Is this image AI generated?',
         }

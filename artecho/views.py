@@ -30,15 +30,13 @@ def index(request):
 def card(request):
     return render(request, 'artecho/base-card.html')
 
-  
-def search_results(request):
+def add_root(request):
     context = {}
     try:
         context['user_profile'] = UserProfile.objects.get(user=request.user)
     except:
         pass
-    return render(request, 'artecho/search-results.html', context = context)
-# html test views end here---
+    return render(request, 'artecho/add-root.html', context= context)
 
 def about(request):
     context_dict = {'boldmessage': "This is about ArtEcho"}
@@ -159,14 +157,40 @@ def add_root(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
-            image.poster = request.user
             image.save()
             return redirect(reverse('artecho:index'))
         else:
             print(form.errors)
     else:
         form = ImageForm()
-    return render(request, 'artecho/add-root.html', {'form': form, 'user_profile': UserProfile.objects.get(user=request.user)})
+    context = {'form': form}
+    try:
+        context['user_profile'] = UserProfile.objects.get(user=request.user)
+    except:
+        pass
+    return render(request, 'artecho/add-root.html', context= context)
+
+@login_required
+def add_child(request, user_name, image_title):
+    slug = f"{user_name}-{image_title}"
+    parent = Image.objects.filter(slug=slug).first()
+
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.parent = parent
+            image.save()
+            return redirect(reverse('artecho:index'))
+        else:
+            print(form.errors)
+    else:
+        form = ImageForm()
+    context = {'form': form,
+               'parent': parent,
+               'user_profile': UserProfile.objects.get(user=request.user)
+               }
+    return render(request, 'artecho/add-child.html', context= context)
    
 def search_results(request):
     query = request.GET.get('q')

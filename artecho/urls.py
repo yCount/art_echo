@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     # added for html test viewing:
     path('addroot', views.add_root, name='add_root'),
+    path('addchild/<str:user_name>/<str:image_title>/', views.add_child, name= 'add_child'),
     path('card', views.card, name='card'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'), 

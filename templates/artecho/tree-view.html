@@ -40,12 +40,10 @@
                         <figcaption class="likes">👍 {{image.likes}}</figcaption>
                         <figcaption class="download"><a href="">↓</a></figcaption>
                         <!-- has the following plus button as extra -->
-                        <b href="{% url 'artecho:add_child' image.poster.userprofile.slug image.nameSlug%}">
-                            <strong>Add a child</strong>
-                        </b>
                     </figure>
                     <!-- image-description is not yet properly positioned. Please imagine it as being on the side on a gray rectangle -->
                     <div class="image-description">
+                        <div class="add-child"><a href="{% url 'artecho:add_child' image.poster.userprofile.slug image.nameSlug%}">Add a child</a></div>
                         <h1>{{image.name}}</h1>
                         <h4>{{image.category.name}}</h4>
                         <p>{{image.description}}</p>

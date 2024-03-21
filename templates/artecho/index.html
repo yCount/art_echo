@@ -19,7 +19,18 @@
                     <img src="{{ image.file.url }}" 
                         alt="{{image.name}}" />
                     <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
-                    <figcaption class="likes">👍 {{image.likes}}</figcaption>
+                    <figcaption class="likes"><a href ="{% url 'artecho:like_image' image.slug %}">👍
+                        <form action="{% url 'artecho:like_image' image.name %}" method="POST">
+                            {% csrf_token %}
+                            <button name="q" type="submit" class="like-button">
+                                {% if request.user in image.likes.all %}
+                                    Unlike
+                                {% else %}
+                                    Like
+                                {% endif %}
+                            </button>
+                        </form>
+                    </a> {{image.number_of_likes}}</figcaption>
                     <figcaption class="download"><a href="">↓</a></figcaption>
                 </figure>
             {% endif %}

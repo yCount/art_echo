@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -114,27 +114,31 @@ def add_root(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
+            image.poster = request.user
             image.save()
             return redirect(reverse('artecho:index'))
         else:
             print(form.errors)
     else:
         form = ImageForm()
-    return render(request, 'artecho/add-root.html', {'form': form})
+    return render(request, 'artecho/add-root.html', {'form': form, 'image': None})
    
 def search_results(request):
     query = request.GET.get('q')
-    
-    # Search for both users and images
     users = User.objects.filter(username__icontains=query) if query else []
-    
-    # Filter categories that match the query
     categories = Category.objects.filter(name__icontains=query) if query else []
-    
-    # Get images associated with matching categories
     images = Image.objects.filter(category__in=categories) if categories else []
-
-
     image_search_results = Image.objects.filter(name__icontains=query) if query else []
-    
     return render(request, 'artecho/search_results.html', {'users': users, 'images': images,'image_search_results': image_search_results, 'query': query})
+
+def like_image(request, image_name):
+    if request.method == 'POST':
+        query = request.POST.get('q')
+        image = get_object_or_404(Image, name=image_name)
+        if request.user in image.likes.all():
+            image.likes.remove(request.user)
+        else:
+            image.likes.add(request.user)
+
+        likes_count = image.number_of_likes()
+    return redirect('artecho:index') 

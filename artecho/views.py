@@ -189,4 +189,8 @@ def profile_edit(request, slug):
 
 def profile(request, slug):
     user_profile = get_object_or_404(UserProfile, slug=slug)
-    return render(request, 'artecho/profile.html', {'user_profile': user_profile})
+    images = Image.objects.filter(poster = user_profile.user)[:10]
+    context_dict = {'user_profile': user_profile,
+                    'images': images
+                    }
+    return render(request, 'artecho/profile.html', context_dict)

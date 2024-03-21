@@ -29,19 +29,20 @@
     </div>
 
     <div class="container">
-        <!-- Following lines are for the display. They are to be deleted later -->
-        <!-- One sample active figure -->
-        <figure>
-            <a href=""> <!-- URL needs to be mapped for tree-view -->
-                <img src="https://assets.codepen.io/12005/windmill.jpg" alt="A windmill" />
-            </a>
-            <figcaption class="username"><a href="#">username01</a></figcaption>
-            <figcaption class="likes">👍 45</figcaption>
-            <figcaption class="download"><a href="">↓</a></figcaption>
-        </figure>
-        <!-- the active image figure ends here -->
-        <figure>
-            <img src="{% static '/images/dart_vader.png' %}" alt="dart vader" />
-        </figure>
+        {% if images %}
+            {% for image in images %}
+                <figure>
+                    <a href="{{ image.slashSlug }}">  <!-- URL needs to be mapped for tree-view -->
+                        <img src="{{ image.file.url }}" 
+                        alt="{{image.name}}" />
+                    </a>
+                    <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                    <figcaption class="likes">👍 {{image.likes}}</figcaption>
+                    <figcaption class="download"><a href="">↓</a></figcaption>
+                </figure>
+            {% endfor %}
+        {% else %}
+            <strong>No images have been posted</strong>
+        {% endif %}
     </div>
 {% endblock %}

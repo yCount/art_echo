@@ -30,19 +30,6 @@ def index(request):
 def card(request):
     return render(request, 'artecho/base-card.html')
 
-def add_root(request):
-    context = {}
-    try:
-        context['user_profile'] = UserProfile.objects.get(user=request.user)
-    except:
-        pass
-    return render(request, 'artecho/add-root.html', context= context)
-
-def profile(request):
-    return render(request, 'artecho/profile.html')
-
-def profile_edit(request):
-        return render(request, 'artecho/profile-edit.html')
   
 def search_results(request):
     context = {}
@@ -172,18 +159,14 @@ def add_root(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
+            image.poster = request.user
             image.save()
             return redirect(reverse('artecho:index'))
         else:
             print(form.errors)
     else:
         form = ImageForm()
-    context = {'form': form}
-    try:
-        context['user_profile'] = UserProfile.objects.get(user=request.user)
-    except:
-        pass
-    return render(request, 'artecho/add-root.html', context= context)
+    return render(request, 'artecho/add-root.html', {'form': form, 'user_profile': UserProfile.objects.get(user=request.user)})
    
 def search_results(request):
     query = request.GET.get('q')

@@ -27,8 +27,8 @@ class User(models.Model):
     type = models.CharField(max_length=128, null = False)
     profilePicture = models.ImageField(null = False, upload_to= 'profilePics/')  ##directory where profile pics will be stored
     bio = models.TextField(max_length=1000)
-    forename = models.CharField(max_length=128, null = False)
-    surname = models.CharField(max_length=128, null = False)
+    #forename = models.CharField(max_length=128, null = False)
+    #surname = models.CharField(max_length=128, null = False)
     totalLikes = models.IntegerField(default = 0)
     liked = models.ManyToManyField('Image', default = None)  ###not working correctly
     password = models.CharField(max_length=128, null = False)  ###will be encrypted when taken in via a form "(widget=forms.PasswordInput()"
@@ -58,13 +58,20 @@ class Image(models.Model):
     poster = models.ForeignKey('User', on_delete=models.DO_NOTHING, null = True)
     description = models.TextField(max_length=1000, unique=False)
     slug = models.SlugField()
+    nameSlug = models.SlugField()
+    slashSlug = models.CharField(max_length=128, default = "null")
 
     def save(self, *args, **kwargs):
         if self.poster == None:
             full_slug = self.name
+            slash_slug = self.name
         else:
             full_slug = str(self.poster) + "-" + self.name
+            slash_slug = slugify(str(self.poster)) + "/" + slugify(self.name) + "/"
         self.slug = slugify(full_slug) #Image slug is a concatenation of the user who posted it and the name
+        self.nameSlug = slugify(self.name)
+        self.slashSlug = slash_slug
+
         super(Image, self).save(*args, **kwargs)
 
     class Meta:

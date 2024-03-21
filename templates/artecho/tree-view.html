@@ -17,61 +17,56 @@
         <div class="tree">
             <ul>
                 <!-- parent image starts after <li> (if exists) -->
-                <li><figure>
-                    <a href=""> <!-- URL needs to be mapped for tree-view -->
-                        <img src="{% static 'images/darth_vader_realistic.png' %}">
-                    </a>
-                    <figcaption class="username"><a href="#">username01</a></figcaption>
-                    <figcaption class="likes">👍 45</figcaption>
-                    <figcaption class="download"><a href="">↓</a></figcaption>
-                </figure>
+                {% if parent.slug == "base_root" %}
+                    <!-- Does not display base root-->
+                {% else %}
+                    <li><figure>
+                        <a href="{% url 'artecho:tree' parent.poster.slug parent.nameSlug%}">
+                            <img src="{{ parent.file.url }}">
+                        </a>
+                        <figcaption class="username"><a href="#">{{parent.poster.username}}</a></figcaption>
+                        <figcaption class="likes">👍 {{parent.likes}}</figcaption>
+                        <figcaption class="download"><a href="">↓</a></figcaption>
+                    </figure>
+                {% endif %}
                 <!-- parent image ends here -->
                 <ul>
                     <!-- focused/viewed image starts after <li> -->
                     <li> <figure id="page-fig">
                         <a href=""> <!-- URL needs to be mapped for tree-view -->
-                            <img src="{% static 'images/dart_vader.png' %}">
+                            <img src="{{ image.file.url }}">
                         </a>
-                        <figcaption class="username"><a href="#">username01</a></figcaption>
-                        <figcaption class="likes">👍 145</figcaption>
+                        <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                        <figcaption class="likes">👍 {{image.likes}}</figcaption>
                         <figcaption class="download"><a href="">↓</a></figcaption>
                         <!-- has the following plus button as extra -->
                         <button class="add-branch-btn">+</button> <!-- I am not sure if the button will have the width of the image or a set width (like 25px) -->
                     </figure>
                     <!-- image-description is not yet properly positioned. Please imagine it as being on the side on a gray rectangle -->
                     <div class="image-description">
-                        <h1>Image Title Here</h1>
-                        <h4>Image Category Here</h4>
-                        <p>Image description/explanation here</p>
+                        <h1>{{image.name}}</h1>
+                        <h4>{{image.category.name}}</h4>
+                        <p>{{image.description}}</p>
                         <!-- Dont need to specify if created with AI here. Users will distinguish AI and human made art by the coloing of the like button and colouring of this form -->
                     </div>
                     <!-- focused/viewed image ends here -->
                     <ul>
                         <!-- child image(s) starts from here, each in one <li> </li> element. There may be multiple images here or none.  -->
-                        <li><figure>
-                            <a href=""> <!-- URL needs to be mapped for tree-view -->
-                                <img src="{% static 'images/stranger_things_logo.png' %}">
-                            </a>
-                            <figcaption class="username"><a href="#">username01</a></figcaption>
-                            <figcaption class="likes">👍 12165</figcaption>
-                            <figcaption class="download"><a href="">↓</a></figcaption>
-                        </figure></li>
-                        <li><figure>
-                            <a href=""> <!-- URL needs to be mapped for tree-view -->
-                                <img src="{% static 'images/jim_hopper.png' %}">
-                            </a>
-                            <figcaption class="username"><a href="#">username01</a></figcaption>
-                            <figcaption class="likes">👍 5</figcaption>
-                            <figcaption class="download"><a href="">↓</a></figcaption>  
-                        </figure></li>
-                        <li><figure>
-                            <a href=""> <!-- URL needs to be mapped for tree-view -->
-                                <img src="{% static 'images/dart_vader.png' %}"> 
-                            </a>
-                            <figcaption class="username"><a href="#">username01</a></figcaption>
-                            <figcaption class="likes">👍 65</figcaption>
-                            <figcaption class="download"><a href="">↓</a></figcaption>  
-                        </figure></li>
+                        {% if children %}
+                            {% for child in children %}
+                                <figure>
+                                    <a href="{% url 'artecho:tree' child.poster.slug child.nameSlug%}">  <!-- URL needs to be mapped for tree-view -->
+                                        <img src="{{ child.file.url }}" 
+                                        alt="{{child.name}}" />
+                                    </a>
+                                    <figcaption class="username"><a href="#">{{child.poster}}</a></figcaption>
+                                    <figcaption class="likes">👍 {{child.likes}}</figcaption>
+                                    <figcaption class="download"><a href="">↓</a></figcaption>
+                                </figure>
+                            {% endfor %}
+                        {% else %}
+                            <strong>No children were found</strong>
+                        {% endif %}
                         <!-- child image(s) end here -->
                     </ul>
                     </li>

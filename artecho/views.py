@@ -16,8 +16,8 @@ def index(request):
     context_dict['display_images'] = display_images
     return render(request, 'artecho/index.html', context=context_dict)
 
-def download_image(request, image_id):
-    image = get_object_or_404(Image, pk=image_id)
+def download_image(request, slug):
+    image = get_object_or_404(Image, slug=slug)
     file_path = image.file.path
     response = FileResponse(open(file_path, 'rb'))
     response['Content-Type'] = 'application/octet-stream'

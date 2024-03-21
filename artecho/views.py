@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -7,6 +7,7 @@ from artecho.forms import UserForm, UserProfileForm, LoginForm, SignUpForm, Imag
 from artecho.models import User, Image, Category
 from django.views.generic import ListView
 from django.db import models
+from django.views.generic.detail import DetailView
 
 
 def index(request):
@@ -124,17 +125,32 @@ def add_root(request):
    
 def search_results(request):
     query = request.GET.get('q')
-    
-    # Search for both users and images
     users = User.objects.filter(username__icontains=query) if query else []
-    
-    # Filter categories that match the query
     categories = Category.objects.filter(name__icontains=query) if query else []
-    
-    # Get images associated with matching categories
     images = Image.objects.filter(category__in=categories) if categories else []
-
-
     image_search_results = Image.objects.filter(name__icontains=query) if query else []
     
     return render(request, 'artecho/search_results.html', {'users': users, 'images': images,'image_search_results': image_search_results, 'query': query})
+
+def ImageLike(request, pk):
+    image = get_object_or_404(Image, id=request.POST.get('image_id'))
+    if image.likes.filter(id=request.user.id).exists():
+        image.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+    
+    return HttpResponseRedirect(reverse('artecho:index', args=[str(pk)]))
+
+class ImageDetailView(DetailView):
+    model = Image
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        likes_connected = get_object_or_404(Image, id=self.kwargs['pk'])
+        liked = False
+        if likes_connected.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        data['number_of_likes'] = likes_connected.number_of_likes()
+        data['post_is_liked'] = liked
+        return data

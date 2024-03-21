@@ -19,7 +19,7 @@
                     <img src="{{ image.file.url }}" 
                         alt="{{image.name}}" />
                     <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
-                    <figcaption class="likes">👍 {{image.likes}}</figcaption>
+                    <figcaption class="likes"><a href ="">👍</a> {{image.likes.number_of_likes}}</figcaption>
                     <figcaption class="download"><a href="">↓</a></figcaption>
                 </figure>
             {% endif %}

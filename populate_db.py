@@ -5,10 +5,10 @@ import django
 django.setup()
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files import File
-
+from artecho.models import UserProfile
 from artecho.models import Category, Image, User
 from art_echo import settings
-
+from django.template.defaultfilters import slugify
 from PIL import Image as img
 import io
 import sys 
@@ -54,8 +54,8 @@ def populate():
         print("added " + u.name)
 
     for user_data in users:
-        u = add_user(user_data["username"],user_data["email"],user_data["password"])
-        print("added " + user_data["username"])
+        u, slug= add_user(user_data["username"],user_data["email"],user_data["password"])
+
 
     base_images = [
         {"name" : "Darth Vader",
@@ -257,26 +257,26 @@ def populate():
          "AI": True
         },
     ]
-
+    
     for image_data in tier3images:
         i = add_image(image_data["file"], image_data["name"], image_data["parent"], image_data["poster"], 
                       image_data["desc"], image_data["category"], image_data["AI"])
         print("added " + image_data["name"])
 
 
-
 def add_user(username, email, password):
-    try:
-        u = User.objects.get(username = username)
-        return u
-    except(User.DoesNotExist):
-        u = User.objects.get_or_create(username = username, email = email, password = password)[0]
-        u.type = "user"
+    user, created = User.objects.get_or_create(username=username, defaults={
+        "email": email,
+    })
+    if created:
+        user.set_password(password)
+        user.save()
+        slug = slugify(username)
+        user_profile = UserProfile.objects.create(user=user, slug=slug)
         blank = img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'blank_pfp.png'))
-        u.profilePicture = convert_to_file(blank, username + "_pfp.png")
-        u.save()
-        return u
-    
+        user_profile.profilePicture = convert_to_file(blank, username + "_pfp.png")
+        user_profile.save()
+    return user, slug
 
 def add_image(file, name, parent, poster, desc, category, AI):
     i = Image.objects.get_or_create(name = name, file = convert_to_file(file, name + ".png"), poster = poster, category = category, 

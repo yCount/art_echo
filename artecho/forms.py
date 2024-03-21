@@ -1,9 +1,9 @@
 from django import forms
+from artecho.models import Image, Category, UserProfile
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
-from artecho.models import User as UserProfile
-from artecho.models import Image, Category
 
-class LoginForm(forms.ModelForm):
+class LoginForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput())
     username = forms.CharField(help_text="")
     class Meta:
@@ -48,9 +48,26 @@ class ImageForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['username', 'bio', 'totalLikes']
+login-signup
+        fields = ['bio', 'profilePicture' ]
         labels = {
-            'username': 'Username',
-            'bio': 'Biography',
+            'totalLikes': 'Total Likes',
+            'profilePicture': 'Profile Picture',
+        }
+class UserForm(forms.ModelForm):
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        return username
+    password = forms.CharField(widget=forms.PasswordInput())
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password',)
+    
+class UserProfileForm(forms.ModelForm):
+     class Meta:
+        model = UserProfile
+        fields = [ ] 
+        labels = {
+database-login-merge
             'totalLikes': 'Total Likes',
         }

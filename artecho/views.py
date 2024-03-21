@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
@@ -11,9 +12,12 @@ from django.db import models
 
 def index(request):
     context_dict = {'boldmessage': 'Welcome to ArtEcho!'}
+    context_dict['visits'] = int(request.COOKIES.get('visits', '1'))
     display_images = Image.objects.order_by('-likes')[:10]
     context_dict['display_images'] = display_images
-    return render(request, 'artecho/index.html', context=context_dict)
+    response = render(request, 'artecho/index.html', context=context_dict)
+    visitor_cookie_handler(request, response)
+    return response
 
 # added for html test viewing:
 def card(request):
@@ -47,6 +51,21 @@ def profile(request, slug):
 
 def profile_edit(request):
     return render(request, 'artecho/profile-edit.html')
+
+#cookie get the number of visits to the site
+def visitor_cookie_handler(request, response):
+    visits = int(request.COOKIES.get('visits', '1'))
+
+    last_visit_cookie = request.COOKIES.get('last_visit', str(datetime.now()))
+    last_visit_time = datetime.strptime(last_visit_cookie[:-7], '%Y-%m-%d %H:%M:%S')
+
+    if (datetime.now() - last_visit_time).days > 0:
+        visits = visits + 1
+        response.set_cookie('last_visit', str(datetime.now()))
+    else:
+        response.set_cookie('last_visit', last_visit_cookie)
+    
+    response.set_cookie('visits', visits)
 
 def user_login(request):
     if request.method == 'POST':

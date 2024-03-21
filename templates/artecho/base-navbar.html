@@ -19,7 +19,7 @@
             {% if user.is_authenticated %}
             <a class="nav-button" id="add-root" href="{% url 'artecho:add_root' %}">+</a>
             <div class="dropdown">
-                <img src="https://pbs.twimg.com/media/FmSgc2-aAAIXH80.jpg" alt="Profile" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img id="profile-pic" src="{{ user_profile.profilePicture.url }}" alt="Profile" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" default='images/blank_pfp.png'>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <p>{{ user.username }}</p>
                     <a href="{% url 'profile' slug=user.userprofile.slug %}">Profile</a>

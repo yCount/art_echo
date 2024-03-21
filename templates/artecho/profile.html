@@ -32,9 +32,8 @@
         {% if images %}
             {% for image in images %}
                 <figure>
-                    <a href="{{ image.slashSlug }}">  <!-- URL needs to be mapped for tree-view -->
-                        <img src="{{ image.file.url }}" 
-                        alt="{{image.name}}" />
+                    <a href="{% url 'artecho:tree' image.poster.userprofile.slug image.nameSlug%}">
+                        <img src="{{ image.file.url }}">
                     </a>
                     <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
                     <figcaption class="likes">👍 {{image.likes}}</figcaption>

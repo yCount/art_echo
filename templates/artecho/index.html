@@ -25,7 +25,7 @@
                         <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
                         <div class="likes-download-wrapper">
                             <figcaption class="likes"><i class="fa-regular fa-heart"></i> {{image.likes}}</figcaption>
-                            <figcaption class="download"><a href=""><i class="fa-solid fa-download fa-bounce"></i></a></figcaption>
+                            <figcaption class="download"><a href="{% url 'artecho:download_image' image.slug %}"><i class="fa-solid fa-download fa-bounce"></i></a></figcaption>
                         </div>
                     </div>
                 </figure>

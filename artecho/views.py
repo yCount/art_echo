@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, FileResponse, Http404
+from django.shortcuts import render
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -15,24 +15,16 @@ def index(request):
     try:
         display_images = Image.objects.order_by('-likes')[:30]
         user_profile=UserProfile.objects.get(user=request.user)
-        context = {
+        context_dict = {'boldmessage': 'Welcome to ArtEcho!',
                         'user_profile': user_profile,
-                        'display_images': display_images,
-                  }
+                        'display_images': display_images
+                        }
     except:
         display_images = Image.objects.order_by('-likes')[:30]
-        context = {
-                        'display_images': display_images,
-        }
-    return render(request, 'artecho/index.html', context)
-
-def download_image(request, slug):
-    image = get_object_or_404(Image, slug=slug)
-    file_path = image.file.path
-    response = FileResponse(open(file_path, 'rb'))
-    response['Content-Type'] = 'application/octet-stream'
-    response['Content-Disposition'] = f'attachment; filename="{image.name}"'
-    return response
+        context_dict = {'boldmessage': 'Welcome to ArtEcho!',
+                        'display_images': display_images
+                        }
+    return render(request, 'artecho/index.html', context=context_dict)
 
 def download_image(request, slug):
     image = get_object_or_404(Image, slug=slug)

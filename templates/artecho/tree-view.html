@@ -24,9 +24,11 @@
                         <a href="{% url 'artecho:tree' parent.poster.userprofile.slug parent.nameSlug%}">
                             <img src="{{ parent.file.url }}">
                         </a>
-                        <figcaption class="username"><a href="#">{{parent.poster.username}}</a></figcaption>
-                        <figcaption class="likes">👍 {{parent.likes}}</figcaption>
-                        <figcaption class="download"><a href="">↓</a></figcaption>
+                        <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                        <div class="likes-download-wrapper">
+                            <figcaption class="likes"><i class="fa-regular fa-heart"></i> {{image.likes}}</figcaption>
+                            <figcaption class="download"><a href="{% url 'artecho:download_image' image.slug %}"><i class="fa-solid fa-download fa-bounce"></i></a></figcaption>
+                        </div>
                     </figure>
                 {% endif %}
                 <!-- parent image ends here -->
@@ -62,9 +64,11 @@
                                         <img src="{{ child.file.url }}" 
                                         alt="{{child.name}}" />
                                     </a>
-                                    <figcaption class="username"><a href="#">{{child.poster}}</a></figcaption>
-                                    <figcaption class="likes">👍 {{child.likes}}</figcaption>
-                                    <figcaption class="download"><a href="">↓</a></figcaption>
+                                    <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                                    <div class="likes-download-wrapper">
+                                        <figcaption class="likes"><i class="fa-regular fa-heart"></i> {{image.likes}}</figcaption>
+                                        <figcaption class="download"><a href="{% url 'artecho:download_image' image.slug %}"><i class="fa-solid fa-download fa-bounce"></i></a></figcaption>
+                                    </div>
                                 </figure>
                             {% endfor %}
                         {% else %}

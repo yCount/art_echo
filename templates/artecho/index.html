@@ -22,7 +22,7 @@
                         alt="{{image.name}}" />
                     </a>
                     <div class="caption-wrapper">
-                        <figcaption class="username"><a href="{% url 'artecho:profile' slug=image.poster.userprofile.slug %}">{{image.poster}}</a></figcaption>
+                        <figcaption class="username"><a href="{% url 'artecho:profile' image.poster.userprofile.slug %}">{{image.poster}}</a></figcaption>
                         <div class="likes-download-wrapper">
                             <figcaption class="likes"><i class="fa-regular fa-heart"></i> {{image.likes}}</figcaption>
                             <figcaption class="download"><a href="{% url 'artecho:download_image' image.slug %}"><i class="fa-solid fa-download fa-bounce"></i></a></figcaption>

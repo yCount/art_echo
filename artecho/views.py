@@ -212,12 +212,18 @@ def profile_edit(request, slug):
     return render(request, 'artecho/profile-edit.html', {'form': form})
 
 def profile(request, slug):
-    user_profile = get_object_or_404(UserProfile, slug=slug)
-    images = Image.objects.filter(poster = user_profile.user)[:10]
-    context_dict = {'user_profile': user_profile,
+    current_user_profile = get_object_or_404(UserProfile, slug=slug)
+    current_user= current_user_profile.user
+    images = Image.objects.filter(poster = current_user_profile.user)[:10]
+    context_dict = {'current_user_profile': current_user_profile,
                     'current_slug': slug,
-                    'images': images
+                    'images': images,
+                    'current_user': current_user
                     }
+    try:
+        context_dict['user_profile'] = UserProfile.objects.get(user=request.user)
+    except:
+        pass
     return render(request, 'artecho/profile.html', context_dict)
 
 @login_required

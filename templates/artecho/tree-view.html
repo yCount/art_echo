@@ -63,7 +63,7 @@
                         {% if children %}
                             {% for child in children %}
                                 <figure>
-                                    <a href="{% url 'artecho:tree' child.poster.userprofile.slug child.nameSlug%}">  <!-- URL needs to be mapped for tree-view -->
+                                    <a href="{% url 'artecho:tree' child.poster.userprofile.slug child.nameSlug %}">  <!-- URL needs to be mapped for tree-view -->
                                         <img src="{{ child.file.url }}" 
                                         alt="{{child.name}}" />
                                     </a>

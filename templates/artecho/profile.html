@@ -12,15 +12,15 @@
 
 {% block body_block %}
     <div id="profile-details">
-        <img id="profile-pic" src="{{ user_profile.profilePicture.url }}" alt="Profile picture">
+        <img id="profile-pic" src="{{ current_user_profile.profilePicture.url }}" alt="Profile picture">
         <div id="description">
-            <p>{{ user.username }}</p>
-            <p class="bio">{{ user.bio }}</p>
-            <p>Total Likes: {{ user.totalLikes }}</p>
+            <p>{{ current_user_profile.user.username }}</p>
+            <p class="bio">{{ current_user_profile.user.bio }}</p>
+            <p>Total Likes: {{ current_user_profile.user.totalLikes }}</p>
         </div>
         {% if user_profile.slug == current_slug %}
             <div class="edit-btn" id="Edit">
-                <a href="{% url 'profile_edit' slug=user.userprofile.slug %}">Edit</a>
+                <a href="#">Edit</a>
             </div>
         {% else %}    
         {% endif %}

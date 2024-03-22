@@ -1,8 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
-
-# Create your models here.
  
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True, null = False)
@@ -58,7 +56,7 @@ class Image(models.Model):
         else:
             full_slug = str(self.poster) + "-" + self.name
             slash_slug = slugify(str(self.poster)) + "/" + slugify(self.name) + "/"
-        self.slug = slugify(full_slug) #Image slug is a concatenation of the user who posted it and the name
+        self.slug = slugify(full_slug)
         self.nameSlug = slugify(self.name)
         self.slashSlug = slash_slug
 

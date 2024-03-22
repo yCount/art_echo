@@ -5,7 +5,6 @@ app_name = 'artecho'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    # added for html test viewing:
     path('addroot', views.add_root, name='add_root'),
     path('download/<slug:slug>/', views.download_image, name='download_image'),
     path('addchild/<str:user_name>/<str:image_title>/', views.add_child, name='add_child'),
@@ -19,5 +18,4 @@ urlpatterns = [
     path('profileedit/<slug:slug>/', views.profile_edit, name='profile_edit'),
     path('search/', views.search_results, name="search"),
     path('delete_image/<int:image_id>/', views.delete_image, name='delete_image'),
-    # html test urlpatters end here---
 ]

@@ -18,7 +18,7 @@ figure > a img {
     grid-row: 1 / -1;
     grid-column: 1;
     border-radius: 15px;
-    transition: transform 0.25s ease; /* Smooth transition for the transform */
+    transition: transform 0.25s ease;
     object-fit: contain;
     height: 100%;
     width: 100%;

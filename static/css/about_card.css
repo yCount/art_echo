@@ -1,14 +1,9 @@
-/* Style for any card like webpage, which include Sign in, Log in, and About page */
-/* Style for any card like webpage, which include Sign in, Log in, and About page */
-
-
-
 .main-body{
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
-    background-color: #EEEEEE; /* Update this with your actual image URL. It may not work properly currently */
+    background-color: #EEEEEE;
     background-position: center;
     background-size: cover;
     display: flex;
@@ -333,10 +328,10 @@ footer li {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 200px; /* Adjust this value to fit your design */
+    max-width: 200px;
     list-style-type: none;
     padding: 0;
-    margin-top: 20px; /* Space between the p element and the links */
+    margin-top: 20px;
     margin-top: 10px;
 }
 

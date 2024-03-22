@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% extends 'artecho/base-navbar.html' %}
 {% load static %}
 
@@ -14,15 +15,14 @@
     {% if display_images %}
         {% for image in display_images %}
             {% if image.slug == "base_root" %}
-                <!-- does not display base root-->
             {% else %}
                 <figure>
-                    <a href="{{ image.slashSlug }}">  <!-- URL needs to be mapped for tree-view -->
+                    <a href="{{ image.slashSlug }}">
                         <img src="{{ image.file.url }}" 
                         alt="{{image.name}}" />
                     </a>
                     <div class="caption-wrapper">
-                        <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                        <figcaption class="username"><a href="{% url 'artecho:profile' slug=image.poster.userprofile.slug %}">{{image.poster}}</a></figcaption>
                         <div class="likes-download-wrapper">
                             <figcaption class="likes"><i class="fa-regular fa-heart"></i> {{image.likes}}</figcaption>
                             <figcaption class="download"><a href="{% url 'artecho:download_image' image.slug %}"><i class="fa-solid fa-download fa-bounce"></i></a></figcaption>

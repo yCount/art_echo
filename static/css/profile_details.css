@@ -1,9 +1,6 @@
 #profile-details {
     display: flex;
     justify-content: space-between;
-    /* flex-wrap: nowrap; */
-    /* align-items: flex-start; */
-    /* justify-content: center; */
     margin: 10px auto 50px auto;
     width: 800px;
 }

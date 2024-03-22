@@ -35,3 +35,7 @@
 	border: none;
 	color: white;
 }
+
+.add-branch-btn:hover {
+	cursor: pointer;
+}

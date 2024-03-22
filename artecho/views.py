@@ -87,7 +87,9 @@ def user_login(request):
             if user:
                 if user.is_active:
                     login(request, user)
-                    return redirect(reverse('artecho:index'))
+                    response = redirect(reverse('artecho:index'))
+                    response.set_cookie('auth_token', 'response_token', max_age=3600)
+                    return response
                 else:
                     return HttpResponse("Your artecho account is disabled.")
             else:

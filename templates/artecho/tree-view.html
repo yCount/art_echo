@@ -39,8 +39,6 @@
                         <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
                         <figcaption class="likes">👍 {{image.likes}}</figcaption>
                         <figcaption class="download"><a href="">↓</a></figcaption>
-                        <!-- has the following plus button as extra -->
-                        <button class="add-branch-btn">+</button> <!-- I am not sure if the button will have the width of the image or a set width (like 25px) -->
                     </figure>
                     <!-- image-description is not yet properly positioned. Please imagine it as being on the side on a gray rectangle -->
                     <div class="image-description">
@@ -49,6 +47,9 @@
                         <p>{{image.description}}</p>
                         <!-- Dont need to specify if created with AI here. Users will distinguish AI and human made art by the coloing of the like button and colouring of this form -->
                     </div>
+                    <!-- has the following plus button as extra -->
+                    <button class="add-branch-btn">+</button> <!-- I am not sure if the button will have the width of the image or a set width (like 25px) -->
+
                     <!-- focused/viewed image ends here -->
                     <ul>
                         <!-- child image(s) starts from here, each in one <li> </li> element. There may be multiple images here or none.  -->

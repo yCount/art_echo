@@ -15,6 +15,7 @@ ul {
 	/* flex-wrap: nowrap; */
 	/* align-items: flex-start; */
 	justify-content: center;
+	align-items: flex-start;
 }
 
 .tree li {

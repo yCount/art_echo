@@ -12,6 +12,7 @@ figure {
     margin-bottom: 15px;
     break-inside: avoid;
     position: relative;
+    align-items: flex-start;
 }
 
 figure > a img {

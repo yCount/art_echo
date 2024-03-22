@@ -53,10 +53,13 @@
                     <div class="image-description">
                         <div class="add-child"><a href="{% url 'artecho:add_child' image.poster.userprofile.slug image.nameSlug %}">Add a Image</a></div>
                         <h1>{{image.name}}</h1>
-                        <h4>{{image.category.name}}</h4>
+                        <h4>category: {{image.category.name}}</h4>
                         <p>{{image.description}}</p>
                         <!-- Dont need to specify if created with AI here. Users will distinguish AI and human made art by the coloing of the like button and colouring of this form -->
                     </div>
+                    <!-- has the following plus button as extra -->
+                    <button class="add-branch-btn">+</button> <!-- I am not sure if the button will have the width of the image or a set width (like 25px) -->
+
                     <!-- focused/viewed image ends here -->
                     <ul>
                         <!-- child image(s) starts from here, each in one <li> </li> element. There may be multiple images here or none.  -->

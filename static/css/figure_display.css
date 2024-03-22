@@ -46,21 +46,30 @@ figure:hover a img {
     transform: scale(1.03);
 }
 
+figure .likes-download-wrapper figcaption,
 figure figcaption {
     margin: 5px;
     bottom: 5px; /* Align to bottom of figure */
     position: relative;
     border-radius: 10px;
+    background-color: rgba(255,255,255,.5);
 }
 
-figure .likes{
-    margin-left: auto;
-    margin-right: 34px;
+figure .caption-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right:0;
 }
 
-figure .download {
-    margin-left: auto;
-    margin-right: 5px;
+figure .likes-download-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    
+    gap: 2.5px;
 }
 
 figure .username{
@@ -156,6 +165,7 @@ figcaption {
     font-size: 16px; 
     color: black; 
 }
+
 figure form {
     position: absolute;
     top: 0;

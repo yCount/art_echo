@@ -1,0 +1,138 @@
+
+.main-body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #EEEEEE;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    font-family: helvetica;
+    align-items: center;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 100%;
+    max-width: 900px;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: helvetica;
+}
+.hero{
+    background-color: #292A38;
+    width: 100%;
+    height: 80px;
+    padding: 8px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+.card {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.carousel {
+    margin-top: 79px;
+    width: 100%;
+    height: 500px;
+}
+.carousel-item::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+.carousel-item img {
+    object-fit: cover;
+    min-height: 500px;
+    max-height: 500px;
+    width:100%;
+    opacity: 0.8;
+}
+.carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 10px 30px; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: helvetica;
+    padding: 8px;
+}
+
+.carousel-indicators {
+    justify-content: center;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-image: none;
+}
+
+.carousel-control-prev .visually-hidden, .carousel-control-next .visually-hidden {
+    font-size: 2rem;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 35px;
+    height: 100%;
+    background: transparent;
+    border: none;
+}
+
+footer {
+    background-color: #EEEEEE;
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.card p {
+    margin-top: 30px;
+    font-family: helvetica;
+    font-weight: 400;
+    font-size: 18px;
+    color: #000;
+}
+.card h2 {
+    font-family: helvetica;
+    font-weight: 400;
+    color: #EEEEEE;
+}
+.card h1 {
+    font-family: helvetica;
+    font-weight: 400;
+    color: #000;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}

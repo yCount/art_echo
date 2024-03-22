@@ -1,9 +1,9 @@
 #profile-details {
     display: flex;
     justify-content: space-between;
-	/* flex-wrap: nowrap; */
-	/* align-items: flex-start; */
-	/* justify-content: center; */
+    /* flex-wrap: nowrap; */
+    /* align-items: flex-start; */
+    /* justify-content: center; */
     margin: 10px auto 50px auto;
     width: 800px;
 }
@@ -84,4 +84,23 @@ form label {
     margin-bottom: 5px;
     font-weight: bold;
     color: black;
+}
+
+.bio {
+    border: 1px solid #000;
+    border-radius: 15px;
+    width: 300px;
+    height: 150px;
+    font-family: Helvetica;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.bio:empty::before {
+    content: "No Bio yet. Add your bio with Edit";
+    color: #999;
+}
+#description p {
+    font-family: helvetica;
+    font-size: 16px;
 }

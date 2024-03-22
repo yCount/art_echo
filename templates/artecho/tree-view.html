@@ -37,8 +37,10 @@
                             <img src="{{ image.file.url }}">
                         </a>
                         <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
-                        <figcaption class="likes">👍 {{image.likes}}</figcaption>
-                        <figcaption class="download"><a href="">↓</a></figcaption>
+                        <div class="likes-download-wrapper">
+                            <figcaption class="likes"><i class="fa-regular fa-heart"></i> {{image.likes}}</figcaption>
+                            <figcaption class="download"><a href="{% url 'artecho:download_image' image.slug %}"><i class="fa-solid fa-download fa-bounce"></i></a></figcaption>
+                        </div>
                         <!-- has the following plus button as extra -->
                         <button class="add-branch-btn">+</button> <!-- I am not sure if the button will have the width of the image or a set width (like 25px) -->
                     </figure>

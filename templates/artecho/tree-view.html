@@ -21,26 +21,34 @@
                     <!-- Does not display base root-->
                 {% else %}
                     <li><figure>
-                        <a href="{% url 'artecho:tree' parent.poster.slug parent.nameSlug%}">
-                            <img src="{{ parent.file.url }}">
+                        <a href="{% url 'artecho:tree' parent.poster.slug parent.nameSlug %}">
+                            <img src="{{ parent.file.url }}" 
+                            alt="{{image.name}}" />
                         </a>
-                        <figcaption class="username"><a href="#">{{parent.poster.username}}</a></figcaption>
-                        <figcaption class="likes">👍 {{parent.likes}}</figcaption>
-                        <figcaption class="download"><a href="">↓</a></figcaption>
+                        <div class="caption-wrapper">
+                            <figcaption class="username"><a href="#">{{parent.poster.username}}</a></figcaption>
+                            <div class="likes-download-wrapper">
+                                <figcaption class="likes"><i class="fa-regular fa-heart"></i> {{parent.likes}}</figcaption>
+                                <figcaption class="download"><a href="{% url 'artecho:download_image' image.slug %}"><i class="fa-solid fa-download fa-bounce"></i></a></figcaption>
+                            </div>
+                        </div>
                     </figure>
                 {% endif %}
                 <!-- parent image ends here -->
                 <ul>
                     <!-- focused/viewed image starts after <li> -->
-                    <li> <figure id="page-fig">
-                        <a href=""> <!-- URL needs to be mapped for tree-view -->
-                            <img src="{{ image.file.url }}">
+                    <li><figure id="page-fig">
+                        <a href="">
+                            <img src="{{ image.file.url }}" 
+                            alt="{{image.name}}" />
                         </a>
-                        <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
-                        <figcaption class="likes">👍 {{image.likes}}</figcaption>
-                        <figcaption class="download"><a href="">↓</a></figcaption>
-                        <!-- has the following plus button as extra -->
-                        <button class="add-branch-btn">+</button> <!-- I am not sure if the button will have the width of the image or a set width (like 25px) -->
+                        <div class="caption-wrapper">
+                            <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                            <div class="likes-download-wrapper">
+                                <figcaption class="likes"><i class="fa-regular fa-heart"></i> {{image.likes}}</figcaption>
+                                <figcaption class="download"><a href="{% url 'artecho:download_image' image.slug %}"><i class="fa-solid fa-download fa-bounce"></i></a></figcaption>
+                            </div>
+                        </div>
                     </figure>
                     <!-- image-description is not yet properly positioned. Please imagine it as being on the side on a gray rectangle -->
                     <div class="image-description">
@@ -55,13 +63,17 @@
                         {% if children %}
                             {% for child in children %}
                                 <figure>
-                                    <a href="{% url 'artecho:tree' child.poster.slug child.nameSlug%}">  <!-- URL needs to be mapped for tree-view -->
+                                    <a href="{% url 'artecho:tree' child.poster.slug child.nameSlug%}">
                                         <img src="{{ child.file.url }}" 
                                         alt="{{child.name}}" />
                                     </a>
-                                    <figcaption class="username"><a href="#">{{child.poster}}</a></figcaption>
-                                    <figcaption class="likes">👍 {{child.likes}}</figcaption>
-                                    <figcaption class="download"><a href="">↓</a></figcaption>
+                                    <div class="caption-wrapper">
+                                        <figcaption class="username"><a href="#">{{child.poster}}</a></figcaption>
+                                        <div class="likes-download-wrapper">
+                                            <figcaption class="likes"><i class="fa-regular fa-heart"></i> {{child.likes}}</figcaption>
+                                            <figcaption class="download"><a href="{% url 'artecho:download_image' child.slug %}"><i class="fa-solid fa-download fa-bounce"></i></a></figcaption>
+                                        </div>
+                                    </div>
                                 </figure>
                             {% endfor %}
                         {% else %}

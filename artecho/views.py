@@ -163,6 +163,7 @@ def user_login(request):
 
 @login_required
 def add_root(request):
+    
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
@@ -175,7 +176,28 @@ def add_root(request):
     else:
         form = ImageForm()
     return render(request, 'artecho/add-root.html', {'form': form, 'user_profile': UserProfile.objects.get(user=request.user)})
-   
+
+@login_required
+def add_child(request, user_name, image_title):
+    slug = f"{user_name}-{image_title}"
+    parent = Image.objects.filter(slug=slug).first()
+
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.poster = request.user
+            image.parent= parent
+            image.save()
+            return redirect(reverse('artecho:index'))
+        else:
+            print(form.errors)
+    else:
+        form = ImageForm()
+    context = {'form': form, 'user_profile': UserProfile.objects.get(user=request.user), 'parent': parent}
+    return render(request, 'artecho/add-child.html', context=context)
+
+
 def search_results(request):
     query = request.GET.get('q')
     

@@ -247,6 +247,7 @@ def delete_image(request, image_id):
         image.delete()
         return redirect('profile', slug=request.user.userprofile.slug)
 
+
 def download_image(request, slug):
     image = get_object_or_404(Image, slug=slug)
     file_path = image.file.path

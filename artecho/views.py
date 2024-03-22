@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, FileResponse, Http404
+from django.http import HttpResponse, FileResponse, Http404, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -11,6 +11,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import get_object_or_404
 from datetime import datetime
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     try:
@@ -244,3 +246,11 @@ def download_image(request, slug):
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = f'attachment; filename="{image.name}"'
     return response
+
+@csrf_exempt
+@require_POST
+def like_image(request, image_id):
+    image = get_object_or_404(Image, id=image_id)
+    image.likes += 1
+    image.save()
+    return JsonResponse({'likes': image.likes})

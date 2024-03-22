@@ -36,7 +36,6 @@
                 <div class="container">
                     {% regroup images by category.name as category_list %}
                     {% for category in category_list %}
-                        <h4>{{ category.grouper }}</h4>
                         {% for image in category.list %}
                             <figure>
                                 <img src="{{ image.file.url }}" 

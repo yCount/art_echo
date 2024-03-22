@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('addroot', views.add_root, name='add_root'),
     path('download/<slug:slug>/', views.download_image, name='download_image'),
+    path('like_image/<int:image_id>/', views.like_image, name='like_image'),
     path('profile/<slug:slug>/', views.profile, name='profile'),
     path('addchild/<str:user_name>/<str:image_title>/', views.add_child, name='add_child'),
     path('card', views.card, name='card'),

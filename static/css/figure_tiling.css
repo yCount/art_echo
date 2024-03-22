@@ -5,6 +5,8 @@
     /* following two lines center .container horizontally */
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 30px;
+
 }
 
 @media (max-width: 1560px) {

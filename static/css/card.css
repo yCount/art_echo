@@ -12,8 +12,7 @@ html {
     align-items: center;
 }
 
-/* conflict between the two */
-.card , .card-container {
+.card {
     display: flex;
     flex-direction: column;
     justify-content: center;

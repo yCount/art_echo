@@ -11,6 +11,7 @@ figure {
     grid-template-rows: 1fr auto;
     margin-bottom: 15px;
     break-inside: avoid;
+    position: relative;
 }
 
 figure > a img {
@@ -45,21 +46,30 @@ figure:hover a img {
     transform: scale(1.03);
 }
 
+figure .likes-download-wrapper figcaption,
 figure figcaption {
     margin: 5px;
     bottom: 5px; /* Align to bottom of figure */
     position: relative;
     border-radius: 10px;
+    background-color: rgba(255,255,255,.5);
 }
 
-figure .likes{
-    margin-left: auto;
-    margin-right: 34px;
+figure .caption-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right:0;
 }
 
-figure .download {
-    margin-left: auto;
-    margin-right: 5px;
+figure .likes-download-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    
+    gap: 2.5px;
 }
 
 figure .username{
@@ -91,9 +101,7 @@ figcaption {
     margin-left: 0;
     padding-left: 0;
 }            
-
-/* conflict between two classes below */
-.result-btn, .button-section {
+.result-btn {
     box-sizing: border-box;
     width: calc(100% - 20px); 
     display: flex;
@@ -102,8 +110,7 @@ figcaption {
     margin-top: 20px;
 }
 
-/* conflict between two classes below */
-.result-btn button, button-section button {
+.result-btn button {
     width: 50%;
     padding: 10px 0; 
     border-radius: 0; 
@@ -122,8 +129,7 @@ figcaption {
     right: 10px;
 }
 
-/* conflict between two classes below */
-.result-btn button.selected, .button-section button.selected {
+.result-btn button.selected {
     opacity: 0.8;
     box-shadow: 0 0 2px 1px #007BFF;
 }

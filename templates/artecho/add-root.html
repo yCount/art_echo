@@ -19,10 +19,10 @@
         <img id="displayImage" src="" alt="" style="display:none;">
     </div>
     <div id="details-section" class="section" style="display:none;">
-        <form id="imageDetailsForm">
+        <form method="post" enctype="multipart/form-data" id="imageDetailsForm">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Post">
+            <button type="submit">Submit</button>
         </form>
     </div>
     <div id="AI-section" class="section" style="display: none;">

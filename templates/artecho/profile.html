@@ -6,13 +6,13 @@
     <link rel="stylesheet" href="{% static 'css/figure_display.css' %}">
     <link rel="stylesheet" href="{% static 'css/figure_tiling.css' %}">
     <link rel="stylesheet" href="{% static 'css/profile_details.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% endblock %}
 
 {% block body_block %}
     <div id="profile-details">
         <!-- The img on the next line should render the profile picture -->
-        <img id="profile-pic" src="{% static 'images/blank_pfp.png' %}" alt="profile picture here. Should align to the center later">
-        
+        <img id="profile-pic" src="{{ user_profile.profilePicture.url }}" alt="Profile picture">
         <div id="description">
             <!-- The following three texts are not properly formatted yet. Needs some front end work -->
             <!-- Fullname -->
@@ -20,27 +20,33 @@
             <!-- username -->
             <p></p>
             <!-- bio -->
-            <p></p>
+            <p class="bio">{{ user_profile.bio }}</p>
+            <!-- Total Likes -->
+            <p>Total Likes: {{ user_profile.totalLikes }}</p>
         </div>
         <div class="edit-btn" id="Edit">
-            <a href="{% url 'artecho:profile_edit' %}">Edit</a>
+            <a href="{% url 'profile_edit' slug=user.userprofile.slug %}">Edit</a>
         </div>
     </div>
 
     <div class="container">
-        <!-- Following lines are for the display. They are to be deleted later -->
-        <!-- One sample active figure -->
-        <figure>
-            <a href=""> <!-- URL needs to be mapped for tree-view -->
-                <img src="https://assets.codepen.io/12005/windmill.jpg" alt="A windmill" />
-            </a>
-            <figcaption class="username"><a href="#">username01</a></figcaption>
-            <figcaption class="likes">👍 45</figcaption>
-            <figcaption class="download"><a href="">↓</a></figcaption>
-        </figure>
-        <!-- the active image figure ends here -->
-        <figure>
-            <img src="{% static '/images/dart_vader.png' %}" alt="dart vader" />
-        </figure>
+        {% if images %}
+            {% for image in images %}
+                <figure>
+                    <a href="{% url 'artecho:tree' image.poster.userprofile.slug image.nameSlug%}">
+                        <img src="{{ image.file.url }}">
+                    </a>
+                    <form method="POST" action="{% url 'delete_image' image.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-button"><i class="fa-solid fa-x"></i></button>
+                    </form>
+                    <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                    <figcaption class="likes">👍 {{image.likes}}</figcaption>
+                    <figcaption class="download"><a href="">↓</a></figcaption>
+                </figure>
+            {% endfor %}
+        {% else %}
+            <strong>No images have been posted</strong>
+        {% endif %}
     </div>
 {% endblock %}

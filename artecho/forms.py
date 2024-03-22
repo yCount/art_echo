@@ -1,9 +1,9 @@
 from django import forms
+from artecho.models import Image, Category, UserProfile
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
-from artecho.models import User as UserProfile
-from artecho.models import Image, Category
 
-class LoginForm(forms.ModelForm):
+class LoginForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput())
     username = forms.CharField(help_text="")
     class Meta:
@@ -36,11 +36,12 @@ class SignUpForm(UserForm):
             self.add_error('password_confirm', 'Passwords must match')
 
         return cleaned_data
+
 class ImageForm(forms.ModelForm):
     category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Select a category")
     class Meta:
         model = Image
-        fields = ('name', 'isAI', 'category', 'description', )
+        fields = ('name', 'isAI', 'category', 'description', 'file' )
         labels = {
             'isAI': 'Is this image AI generated?',
         }
@@ -48,9 +49,24 @@ class ImageForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['username', 'bio', 'totalLikes']
+        fields = ['bio', 'profilePicture' ]
         labels = {
-            'username': 'Username',
-            'bio': 'Biography',
+            'totalLikes': 'Total Likes',
+            'profilePicture': 'Profile Picture',
+        }
+class UserForm(forms.ModelForm):
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        return username
+    password = forms.CharField(widget=forms.PasswordInput())
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password',)
+    
+class UserProfileForm(forms.ModelForm):
+     class Meta:
+        model = UserProfile
+        fields = [ ] 
+        labels = {
             'totalLikes': 'Total Likes',
         }

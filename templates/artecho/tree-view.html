@@ -21,9 +21,9 @@
                     <!-- Does not display base root-->
                 {% else %}
                     <li><figure>
-                        <a href="{% url 'artecho:tree' parent.poster.slug parent.nameSlug %}">
-                            <img src="{{ parent.file.url }}" 
-                            alt="{{image.name}}" />
+                        <a href="{% url 'artecho:tree' parent.poster.userprofile.slug parent.nameSlug%}"> <!-- conflict, alternatively try <a href="{% url 'artecho:tree' parent.poster.slug parent.nameSlug %}"> -->
+                            <img src="{{ parent.file.url }}"
+                                 alt="{{iamge.name}}" />
                         </a>
                         <div class="caption-wrapper">
                             <figcaption class="username"><a href="#">{{parent.poster.username}}</a></figcaption>
@@ -63,7 +63,7 @@
                         {% if children %}
                             {% for child in children %}
                                 <figure>
-                                    <a href="{% url 'artecho:tree' child.poster.slug child.nameSlug%}">
+                                    <a href="{% url 'artecho:tree' child.poster.userprofile.slug child.nameSlug%}">  <!-- conflict, alternatively try <a href="{% url 'artecho:tree' child.poster.slug child.nameSlug%}"> -->
                                         <img src="{{ child.file.url }}" 
                                         alt="{{child.name}}" />
                                     </a>

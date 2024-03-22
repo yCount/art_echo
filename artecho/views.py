@@ -26,13 +26,6 @@ def index(request):
                         }
     return render(request, 'artecho/index.html', context=context_dict)
 
-def download_image(request, slug):
-    image = get_object_or_404(Image, slug=slug)
-    file_path = image.file.path
-    response = FileResponse(open(file_path, 'rb'))
-    response['Content-Type'] = 'application/octet-stream'
-    response['Content-Disposition'] = f'attachment; filename="{image.name}"'
-    return response
 
 # added for html test viewing:
 def card(request):
@@ -239,6 +232,7 @@ def profile(request, slug):
     user_profile = get_object_or_404(UserProfile, slug=slug)
     images = Image.objects.filter(poster = user_profile.user)[:10]
     context_dict = {'user_profile': user_profile,
+                    'current_slug': slug,
                     'images': images
                     }
     return render(request, 'artecho/profile.html', context_dict)
@@ -252,3 +246,11 @@ def delete_image(request, image_id):
         image.file.delete(save=True)
         image.delete()
         return redirect('profile', slug=request.user.userprofile.slug)
+
+def download_image(request, slug):
+    image = get_object_or_404(Image, slug=slug)
+    file_path = image.file.path
+    response = FileResponse(open(file_path, 'rb'))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = f'attachment; filename="{image.name}"'
+    return response

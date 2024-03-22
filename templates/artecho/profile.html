@@ -24,9 +24,12 @@
             <!-- Total Likes -->
             <p>Total Likes: {{ user_profile.totalLikes }}</p>
         </div>
-        <div class="edit-btn" id="Edit">
-            <a href="{% url 'profile_edit' slug=user.userprofile.slug %}">Edit</a>
-        </div>
+        {% if user_profile.slug == current_slug %}
+            <div class="edit-btn" id="Edit">
+                <a href="{% url 'profile_edit' slug=user.userprofile.slug %}">Edit</a>
+            </div>
+        {% else %}    
+        {% endif %}
     </div>
 
     <div class="container">
@@ -41,8 +44,8 @@
                         <button type="submit" class="delete-button"><i class="fa-solid fa-x"></i></button>
                     </form>
                     <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
-                    <figcaption class="likes">👍 {{image.likes}}</figcaption>
-                    <figcaption class="download"><a href="">↓</a></figcaption>
+                    <figcaption class="likes"><i class="fa-regular fa-heart"></i> {{image.likes}}</figcaption>
+                    <figcaption class="download"><a href="{% url 'artecho:download_image' image.slug %}"><i class="fa-solid fa-download fa-bounce"></i></a></figcaption>
                 </figure>
             {% endfor %}
         {% else %}

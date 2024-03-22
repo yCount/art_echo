@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends 'artecho/base-navbar.html' %}
+{% load static %}
+
+{% block title_block %}
+    <title> ArtEcho - Add Root </title>
+    <link rel="stylesheet" href="{% static 'css/add_image.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<div class="button-section">
+    <button id="uploadImage" class="selected">Upload image from device</button>
+    <button id="aiTool">Use ArtEcho AI Tools</button>
+</div>
+<script src="{% static 'js/ai_tool.js' %}"></script>
+<div class="container">
+    <div id="upload-section" class="section">
+        <img id="child-img" src="{{ parent.file.url }}"  alt="{{parent.name}}" />
+    </div>
+    <div id="details-section" class="section">
+        <form method="post" enctype="multipart/form-data" id="imageDetailsForm">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Post">
+        </form>
+    </div>
+    <div id="AI-section" class="section" style="display: none;">
+        <h2>ArtEcho AI Tools</h2>
+        <p>Coming soon...</p>
+    </div>
+    <script>window.onload = function() {
+        document.getElementById('details-section').style.display = 'block';
+    };</script>
+</div>
+{% endblock %}

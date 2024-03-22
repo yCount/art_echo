@@ -40,5 +40,14 @@
             {% block body_block %}
             {% endblock %}
         </div>
+        <footer>
+            <p>© 2024 ArtEcho</p>
+            <li>
+                <a href="{% url 'artecho:index' %}">Home</a>
+                <a href="{% url 'artecho:about' %}">About</a>
+                <a href="{% url 'artecho:login' %}">Login</a>
+                <a href="{% url 'artecho:signup' %}">Signup</a>
+            </li>
+        </footer>
     </body>
 </html>

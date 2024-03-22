@@ -12,8 +12,6 @@
 
 ul {
 	display: flex;
-	/* flex-wrap: nowrap; */
-	/* align-items: flex-start; */
 	justify-content: center;
 	align-items: flex-start;
 }
@@ -83,15 +81,3 @@ ul {
 	border-radius: 15px;
 	margin: auto;
 }
-
-/*Hover-Section*/
-/* .tree li figure:hover, .tree li figure:hover i, .tree li figure:hover span, .tree li figure:hover+ul li figure {
-	background: #c8e4f8;
-	color: #000;
-	border: 1px solid #94a0b4;
-}
-
-.tree li a:hover+ul li::after, .tree li a:hover+ul li::before, .tree li a:hover+ul::before, .tree li a:hover+ul ul::before {
-	border-color: #94a0b4;
-} */
-

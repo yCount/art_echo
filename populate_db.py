@@ -30,7 +30,7 @@ def populate():
         i.save()
 
 
-    categories = ["movies", "TV shows", "nature", "Art", "Sports"]
+    categories = ["movies", "TV shows", "nature", "Art", "Sports", "building"]
 
     users = [
         {"username": 'Gary17',
@@ -65,22 +65,6 @@ def populate():
          "category" : Category.objects.get(name = "movies"),
          "desc" : "Image of the star wars villian",
          "AI": True
-        },
-        {"name" : "Stranger Things Logo",
-         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'stranger_things_logo.png')),
-         "parent" : Image.objects.get(name = "base_root"),
-         "poster" : User.objects.get(username = "Gary17"),
-         "category" : Category.objects.get(name = "TV shows"),
-         "desc" : "Logo for the netflix show",
-         "AI": False
-        },
-        {"name" : "Forest",
-         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'forest.png')),
-         "parent" : Image.objects.get(name = "base_root"),
-         "poster" : User.objects.get(username = "ogrant22"),
-         "category" : Category.objects.get(name = "nature"),
-         "desc" : "Clip art of a forest",
-         "AI": False
         },
         {"name" : "Landscape",
          "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'landscape.png')),
@@ -130,6 +114,143 @@ def populate():
          "desc" : "A woman surrounded by flowers",
          "AI": False
         },
+        {"name" : "Green wall",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'green-wall.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "Angel"),
+         "category" : Category.objects.get(name = "nature"),
+         "desc" : "A green spiky wall",
+         "AI": True
+        },
+        {"name" : "Greek Gods",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'greek_gods.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "ogrant22"),
+         "category" : Category.objects.get(name = "building"),
+         "desc" : "A green spiky wall",
+         "AI": True
+        },
+        {"name" : "White arch",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'white_arch.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "Angel"),
+         "category" : Category.objects.get(name = "building"),
+         "desc" : "A sunny white arch",
+         "AI": True
+        },
+        {"name" : "Flowers",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'flowers.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "JoeJ"),
+         "category" : Category.objects.get(name = "nature"),
+         "desc" : "A field of flowers",
+         "AI": True
+        },
+        {"name" : "Boat building",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'boat_building.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "JoeJ"),
+         "category" : Category.objects.get(name = "building"),
+         "desc" : "A boat and a building",
+         "AI": True
+        },
+        {"name" : "Spaceman",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'spaceman.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "ogrant22"),
+         "category" : Category.objects.get(name = "none"),
+         "desc" : "An astronaut",
+         "AI": True
+        },
+        {"name" : "Stripes",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'stripes.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "Gary17"),
+         "category" : Category.objects.get(name = "none"),
+         "desc" : "some guys with some stripes",
+         "AI": True
+        },
+        {"name" : "Modern House",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'modern.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "Angel"),
+         "category" : Category.objects.get(name = "building"),
+         "desc" : "A modern house",
+         "AI": True
+        },
+        {"name" : "Blue Sky",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'blue_sky.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "JoeJ"),
+         "category" : Category.objects.get(name = "none"),
+         "desc" : "A blue sky and sea",
+         "AI": True
+        },
+        {"name" : "Fortress",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'mountain_fortress.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "ogrant22"),
+         "category" : Category.objects.get(name = "building"),
+         "desc" : "A fortress in a mountain",
+         "AI": True
+        },
+        {"name" : "Pillars",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'pillars.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "Angel"),
+         "category" : Category.objects.get(name = "building"),
+         "desc" : "A bunch of pillars",
+         "AI": True
+        },
+        {"name" : "Alleyways",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'alleys.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "Gary17"),
+         "category" : Category.objects.get(name = "building"),
+         "desc" : "A town with long alleyways",
+         "AI": True
+        },
+        {"name" : "Witch",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'witch.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "Angel"),
+         "category" : Category.objects.get(name = "Art"),
+         "desc" : "A witch with her face distorted",
+         "AI": True
+        },
+        {"name" : "Face",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'face.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "Angel"),
+         "category" : Category.objects.get(name = "Art"),
+         "desc" : "A colourful face",
+         "AI": True
+        },
+        {"name" : "Robot artist",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'robot.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "Gary17"),
+         "category" : Category.objects.get(name = "Art"),
+         "desc" : "A robot painting a picture",
+         "AI": True
+        },
+        {"name" : "Jellyfish",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'jellyfish.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "ogrant22"),
+         "category" : Category.objects.get(name = "nature"),
+         "desc" : "A few jellyfish",
+         "AI": True
+        },
+        {"name" : "Swings",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'swings.png')),
+         "parent" : Image.objects.get(name = "base_root"),
+         "poster" : User.objects.get(username = "JoeJ"),
+         "category" : Category.objects.get(name = "none"),
+         "desc" : "A number of swings",
+         "AI": True
+        },
+        
     ]
     
     ### adds 3 images with the "base_root" as their parent to the database
@@ -140,30 +261,6 @@ def populate():
         print("added " + image_data["name"])
 
     child_images = [
-        {"name" : "Darth Vader (Live action)",
-         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'darth_vader_realistic.png')),
-         "parent" : Image.objects.get(slug = "ogrant22-darth-vader"),
-         "poster" : User.objects.get(username = "JoeJ"),
-         "category" : Category.objects.get(name = "movies"),
-         "desc" : "A photo of the live action darth vader",
-         "AI": False
-        },
-        {"name" : "Jim Hopper",
-         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'jim_hopper.png')),
-         "parent" : Image.objects.get(slug = "gary17-stranger-things-logo"),
-         "poster" : User.objects.get(username = "Gary17"),
-         "category" : Category.objects.get(name = "TV shows"),
-         "desc" : "One of the protagonists of the show",
-         "AI": False
-        },
-        {"name" : "Tree",
-         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'tree.png')),
-         "parent" : Image.objects.get(slug = "ogrant22-forest"),
-         "poster" : User.objects.get(username = "ogrant22"),
-         "category" : Category.objects.get(name = "nature"),
-         "desc" : "Clip art of a tree",
-         "AI": False
-        },
         {"name" : "Coffee splash",
          "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'coffee_splash.png')),
          "parent" : Image.objects.get(slug = "gary17-droplet"),
@@ -212,14 +309,6 @@ def populate():
          "desc" : "Vader fighting on a starship",
          "AI": True
         },
-        #{"name" : "Darth Vader Baseball (Oil)",
-        # "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'vader_baseball_oil.png')),
-        # "parent" : Image.objects.get(slug = "gary17-darth-vader-baseball"),
-        # "poster" : User.objects.get(username = "JoeJ"),
-        # "category" : Category.objects.get(name = "movies"),
-        # "desc" : "Vader fighting on a starship",
-        # "AI": True
-        #},
         {"name" : "Darth Vader Water Fountain",
          "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'vader_water_fountain.png')),
          "parent" : Image.objects.get(slug = "ogrant22-darth-vader"),
@@ -234,6 +323,14 @@ def populate():
          "poster" : User.objects.get(username = "Angel"),
          "category" : Category.objects.get(name = "movies"),
          "desc" : "Vader sculpted from clay",
+         "AI": True
+        },
+        {"name" : "Spaceman in a jungle",
+         "file" : img.open(os.path.join(os.path.join(settings.STATIC_DIR, 'images'), 'jungle-spaceman.png')),
+         "parent" : Image.objects.get(slug = "ogrant22-spaceman"),
+         "poster" : User.objects.get(username = "ogrant22"),
+         "category" : Category.objects.get(name = "none"),
+         "desc" : "An astronaut in a jungle",
          "AI": True
         },
     ]

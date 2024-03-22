@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% extends 'artecho/base-navbar.html' %}
 {% load static %}
 
@@ -11,22 +12,18 @@
 
 {% block body_block %}
     <div id="profile-details">
-        <!-- The img on the next line should render the profile picture -->
-        <img id="profile-pic" src="{{ user_profile.profilePicture.url }}" alt="Profile picture">
+        <img id="profile-pic" src="{{ current_user_profile.profilePicture.url }}" alt="Profile picture">
         <div id="description">
-            <!-- The following three texts are not properly formatted yet. Needs some front end work -->
-            <!-- Fullname -->
-            <p></p>
-            <!-- username -->
-            <p></p>
-            <!-- bio -->
-            <p class="bio">{{ user_profile.bio }}</p>
-            <!-- Total Likes -->
-            <p>Total Likes: {{ user_profile.totalLikes }}</p>
+            <p>{{ current_user_profile.user.username }}</p>
+            <p class="bio">{{ current_user_profile.user.bio }}</p>
+            <p>Total Likes: {{ current_user_profile.user.totalLikes }}</p>
         </div>
-        <div class="edit-btn" id="Edit">
-            <a href="{% url 'profile_edit' slug=user.userprofile.slug %}">Edit</a>
-        </div>
+        {% if user_profile.slug == current_slug %}
+            <div class="edit-btn" id="Edit">
+                <a href="#">Edit</a>
+            </div>
+        {% else %}    
+        {% endif %}
     </div>
 
     <div class="container">
@@ -40,9 +37,13 @@
                         {% csrf_token %}
                         <button type="submit" class="delete-button"><i class="fa-solid fa-x"></i></button>
                     </form>
-                    <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
-                    <figcaption class="likes">👍 {{image.likes}}</figcaption>
-                    <figcaption class="download"><a href="">↓</a></figcaption>
+                    <div class="caption-wrapper">
+                        <figcaption class="username"><a href="#">{{image.poster}}</a></figcaption>
+                        <div class="likes-download-wrapper">
+                            <figcaption class="likes"><i class="fa-regular fa-heart"></i> {{image.likes}}</figcaption>
+                            <figcaption class="download"><a href="{% url 'artecho:download_image' image.slug %}"><i class="fa-solid fa-download fa-bounce"></i></a></figcaption>
+                        </div>
+                    </div>
                 </figure>
             {% endfor %}
         {% else %}

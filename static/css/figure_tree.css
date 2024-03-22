@@ -1,5 +1,5 @@
 .tree li figure {
-    display: inline-grid;
+	display: inline-grid;
 	text-decoration-line: none;
 	transition: .5s;
 }

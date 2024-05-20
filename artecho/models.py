@@ -60,6 +60,14 @@ class Image(models.Model):
         self.nameSlug = slugify(self.name)
         self.slashSlug = slash_slug
 
+
+        duplicates = Image.objects.filter(slug = self.slug)
+        if int(duplicates.count()) > 1:
+            num = str(duplicates.count())
+            self.slug = slugify(full_slug + num) #Image slug is a concatenation of the user who posted it and the name
+            self.nameSlug = slugify(self.name + num)
+            self.slashSlug = slash_slug[:-1] + num + "/"
+
         super(Image, self).save(*args, **kwargs)
 
     class Meta:

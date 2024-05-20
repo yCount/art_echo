@@ -23,7 +23,7 @@
         <form method="post" enctype="multipart/form-data" id="imageDetailsForm">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Submit</button>
+            <input type="submit" value="Post">
         </form>
     </div>
     <div id="AI-section" class="section" style="display: none;">

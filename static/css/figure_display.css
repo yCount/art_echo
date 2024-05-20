@@ -11,13 +11,15 @@ figure {
     grid-template-rows: 1fr auto;
     margin-bottom: 15px;
     break-inside: avoid;
+    position: relative;
+    align-items: flex-start;
 }
 
 figure > a img {
     grid-row: 1 / -1;
     grid-column: 1;
     border-radius: 15px;
-    transition: transform 0.25s ease; /* Smooth transition for the transform */
+    transition: transform 0.25s ease;
     object-fit: contain;
     height: 100%;
     width: 100%;
@@ -45,21 +47,30 @@ figure:hover a img {
     transform: scale(1.03);
 }
 
+figure .likes-download-wrapper figcaption,
 figure figcaption {
     margin: 5px;
     bottom: 5px; /* Align to bottom of figure */
     position: relative;
     border-radius: 10px;
+    background-color: rgba(255,255,255,.5);
 }
 
-figure .likes{
-    margin-left: auto;
-    margin-right: 34px;
+figure .caption-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right:0;
 }
 
-figure .download {
-    margin-left: auto;
-    margin-right: 5px;
+figure .likes-download-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    
+    gap: 2.5px;
 }
 
 figure .username{
@@ -69,7 +80,6 @@ figure .username{
 figcaption {
     grid-row: 2;
     grid-column: 1;
-    background-color: rgba(255,255,255,.5);
     padding: .2em .5em;
     justify-self: start;
 }
@@ -154,4 +164,33 @@ figcaption {
     font-family: helvetica;
     font-size: 16px; 
     color: black; 
+}
+figure form {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    font-size: 18px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    color: #292A38;
+    transition: transform 0.2s ease;
+}
+.delete-button:hover {
+    transform: scale(1.55);
 }

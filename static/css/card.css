@@ -1,9 +1,8 @@
-/* Style for any card like webpage, which include Sign in, Log in, and About page */
 html {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-image: url('/static/images/about-bg.png'); /* Update this with your actual image URL. It may not work properly currently */
+    background-image: url('/static/images/about-bg.png');
     background-position: center;
     background-size: cover;
     display: flex;
@@ -11,7 +10,6 @@ html {
     font-family: helvetica;
     align-items: center;
 }
-
 .card {
     display: flex;
     flex-direction: column;
@@ -36,7 +34,7 @@ html {
 .card h2 {
     font-family: helvetica;
     font-weight: 400;
-    color: #ffff;
+    color: #EEEEEE;
 }
 .card h1 {
     font-family: helvetica;
@@ -44,7 +42,7 @@ html {
     color: #000;
 }
 form .helptext {
-    display: block;
+    display: none;
     color: red;
     font-size:10px ;
     font-style: italic;
@@ -57,7 +55,7 @@ button{
     margin-top: 20px;
     padding: 10px;
     border-radius: 8px;
-    color: white;
+    color: #EEEEEE;
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -66,11 +64,11 @@ button{
 }
 
 #login{
-    background-color: #007bff;
+    background-color: #4D4DA8;
 }
 
 #signup{
-   background-color: #00008b;
+   background-color: #26246C;
 }
 button:hover {
     opacity: 0.8;

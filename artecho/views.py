@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse, Http404, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -10,6 +10,9 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import get_object_or_404
+from datetime import datetime
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     try:
@@ -26,7 +29,6 @@ def index(request):
                         }
     return render(request, 'artecho/index.html', context=context_dict)
 
-# added for html test viewing:
 def card(request):
     return render(request, 'artecho/base-card.html')
 
@@ -45,7 +47,6 @@ def about(request):
     return render(request, 'artecho/about.html', context=context_dict)
 
 def tree_view(request, user_name, image_title):
-    # Reconstruct the slug from user_name and image_title
     slug = f"{user_name}-{image_title}"
     image = Image.objects.filter(slug=slug).first()
 
@@ -70,66 +71,51 @@ def user_logout(request):
     return(redirect(reverse('artecho:index')))
 
 def signup(request):
-    # A boolean value for telling the template
-    # whether the registration was successful.
-    # Set to False initially. Code changes value to
-    # True when registration succeeds.
     registered = False
-
-    # If it's a HTTP POST, we're interested in processing form data.
     if request.method == 'POST':
-        # Attempt to grab information from the raw form information.
-        # Note that we make use of both UserForm and UserProfileForm.
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
-
-        # If the two forms are valid...
         if user_form.is_valid() and profile_form.is_valid():
-
-            # Save the user's form data to the database.
             user = user_form.save()
-
-            # Now we hash the password with the set_password method.
-            # Once hashed, we can update the user object.
             user.set_password(user.password)
             user.save()
 
-            # Now sort out the UserProfile instance.
-            # Since we need to set the user attribute ourselves,
-            # we set commit=False. This delays saving the model
-            # until we're ready to avoid integrity problems.
             profile = profile_form.save(commit=False)
             profile.user = user
-
-            # Did the user provide a profile picture?
-            # If so, we need to get it from the input form and
-            # put it in the UserProfile model.
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
-
-            # Now we save the UserProfile model instance.
             profile.save()
-
-            # Update our variable to indicate that the template
-            # registration was successful.
             registered = True
         else:
-            # Invalid form or forms - mistakes or something else?
-            # Print problems to the terminal.
             print(user_form.errors, profile_form.errors)
     else:
-        # Not a HTTP POST, so we render our form using two ModelForm instances.
-        # These forms will be blank, ready for user input.
         user_form = UserForm()
         profile_form = UserProfileForm()
-
-    # Render the template depending on the context.
     return render(request,
                   'artecho/signup.html',
                   context={'user_form': user_form,
                            'profile_form': profile_form,
                            'registered': registered})
 
+def get_server_side_cookie(request, cookie, default_val=None):
+    val = request.session.get(cookie)
+    if not val:
+        val = default_val
+    return val
+
+def visitor_cookie_handler(request):
+    visits = int(get_server_side_cookie(request, 'visits', '1'))
+
+    last_visit_cookie = get_server_side_cookie(request, 'last_visit', str(datetime.now()))
+    last_visit_time = datetime.strptime(last_visit_cookie[:-7], '%Y-%m-%d %H:%M:%S')
+
+    if (datetime.now() - last_visit_time).days >= 0:
+        visits = visits + 1
+        request.session['last_visit'] = str(datetime.now())
+    else:
+        request.session['last_visit'] = last_visit_cookie
+    
+    request.session['visits'] = visits
 def user_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -141,7 +127,9 @@ def user_login(request):
             if user:
                 if user.is_active:
                     login(request, user)
-                    return redirect(reverse('artecho:index'))
+                    response = redirect(reverse('artecho:index'))
+                    response.set_cookie('auth_token', 'repsonse_token', max_age=3600)
+                    return response
                 else:
                     return HttpResponse("Your artecho account is disabled.")
             else:
@@ -153,6 +141,7 @@ def user_login(request):
 
 @login_required
 def add_root(request):
+    
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
@@ -179,6 +168,7 @@ def add_child(request, user_name, image_title):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
+            image.poster = request.user
             image.parent = parent
             image.save()
             return redirect(reverse('artecho:index'))
@@ -190,20 +180,16 @@ def add_child(request, user_name, image_title):
                'parent': parent,
                'user_profile': UserProfile.objects.get(user=request.user)
                }
-    return render(request, 'artecho/add-child.html', context= context)
-   
+    return render(request, 'artecho/add-child.html', context=context)
+
 def search_results(request):
     query = request.GET.get('q')
     
-    # Search for both users and images
     users = User.objects.filter(username__icontains=query) if query else []
     
-    # Filter categories that match the query
     categories = Category.objects.filter(name__icontains=query) if query else []
     
-    # Get images associated with matching categories
     images = Image.objects.filter(category__in=categories) if categories else []
-
 
     image_search_results = Image.objects.filter(name__icontains=query) if query else []
     context = {'users': users, 'images': images,'image_search_results': image_search_results, 'query': query}
@@ -230,9 +216,43 @@ def profile_edit(request, slug):
     return render(request, 'artecho/profile-edit.html', {'form': form})
 
 def profile(request, slug):
-    user_profile = get_object_or_404(UserProfile, slug=slug)
-    images = Image.objects.filter(poster = user_profile.user)[:10]
-    context_dict = {'user_profile': user_profile,
-                    'images': images
+    current_user_profile = get_object_or_404(UserProfile, slug=slug)
+    current_user= current_user_profile.user
+    images = Image.objects.filter(poster = current_user_profile.user)[:10]
+    context_dict = {'current_user_profile': current_user_profile,
+                    'current_slug': slug,
+                    'images': images,
+                    'current_user': current_user
                     }
+    try:
+        context_dict['user_profile'] = UserProfile.objects.get(user=request.user)
+    except:
+        pass
     return render(request, 'artecho/profile.html', context_dict)
+
+@login_required
+def delete_image(request, image_id):
+    image = get_object_or_404(Image, id=image_id)
+    if request.user != image.poster:
+        return redirect('index')
+    if request.method == 'POST':
+        image.file.delete(save=True)
+        image.delete()
+        return redirect('profile', slug=request.user.userprofile.slug)
+
+
+def download_image(request, slug):
+    image = get_object_or_404(Image, slug=slug)
+    file_path = image.file.path
+    response = FileResponse(open(file_path, 'rb'))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = f'attachment; filename="{image.name}"'
+    return response
+
+@csrf_exempt
+@require_POST
+def like_image(request, image_id):
+    image = get_object_or_404(Image, id=image_id)
+    image.likes += 1
+    image.save()
+    return JsonResponse({'likes': image.likes})

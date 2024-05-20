@@ -1,21 +1,34 @@
-/* Style for the top navigation bar */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: helvetica;
+}
+
 #topnav {
     height: 80px;
     display: flex;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #292A38;
     padding: 0 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: add a slight shadow for depth */
-    border-radius: 15px;
+    margin:5px;
+    border-radius: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     position: fixed;
     top: 0;
-    width: 99%;
+    left: 0;
+    right: 0;
+    width: calc(100% - 10px);
     box-sizing: border-box;
-    /* 2 following lines should help navbar to center but not sure if it actually works */
     margin-right: auto;
     margin-left: auto;
-    z-index: 1000; /* High z-index to ensure it's on top */
+    z-index: 1000;
 }
+#content{
+    background-color: #EEEEEE;
+    min-height: 100vh;
+}
+
 
 #topnav a {
     text-decoration: none;
@@ -33,16 +46,18 @@
     flex-grow: 1;
     padding: 8px;
     border-radius: 8px;
+    border: none
 }
 
 #blank_space {
     height: 100px;
+    background-color: #EEEEEE;
 }
 
 .nav-button {
     display: inline-block;
     padding: 10px 20px;
-    color: #fff;
+    color: #EEEEEE;
     border: none;
     border-radius: 10px;
     text-decoration: none;
@@ -66,11 +81,11 @@
 }
 
 #signup-link {
-    background-color: #00008b;
+    background-color: #26246C;
 }
 
 #login-link {
-    background-color: #007BFF;
+    background-color: #4D4DA8;
 }
 
 #add-root {
@@ -97,7 +112,6 @@
     background-color: #cecece;
     border-radius: 15px;
     padding: 5px 5px;
-    /* position for .dropdown-menu: */
     right: -1px;
     top: 52px;
 }
@@ -123,4 +137,47 @@
     width: 50px;
     height: 50px;
     border-radius: 15px;
+}
+footer {
+    background-color: #292A38;
+    padding: 10px;
+    text-align: center;
+    
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height:80px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 100px;
+    padding-left: 0px;
+    text-align: center;
+    justify-content: center;
+}
+footer p {
+    font-family: helvetica;
+    color: #EEEEEE;
+    margin-top: 0;
+    margin-right: 50px;
+    margin-bottom: 0;
+    font-size: 22px;
+}
+footer li {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 200px;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    margin-top: 10px;
+}
+
+footer li a {
+    margin-bottom: 10px;
+    color: #EEEEEE;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 20px;
 }

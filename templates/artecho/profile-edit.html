@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 {% extends 'artecho/base-navbar.html' %}
 {% load static %}
 
 {% block title_block %}
-    <title> Profile Edit </title>
+    <title> Profile Edit | ArtEcho </title>
     <link rel="stylesheet" href="{% static 'css/figure_display.css' %}">
     <link rel="stylesheet" href="{% static 'css/figure_tiling.css' %}">
     <link rel="stylesheet" href="{% static 'css/profile_details.css' %}">
@@ -13,7 +14,6 @@
         <a href="{% url 'profile' slug=user.userprofile.slug %}">Cancel</a>
     </div>
     <div id="profile-details">
-        <!-- The img on the next line should render the profile picture -->
         <img id="profile-pic" src="{{ user.userprofile.profilePicture.url }}" alt="profile picture here. Should align to the center later">
        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}

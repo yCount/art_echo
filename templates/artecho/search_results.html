@@ -24,15 +24,17 @@
         <script src="{% static 'js/search_results.js' %}"></script>
         <div id="user-results" class="section">
             {% if users %}
+                </br>
                 {% for user in users %}
                     <li><a href="{% url 'artecho:profile' slug=user.userprofile.slug %}">{{ user.username }}</a></li>
                 {% endfor %}
             {% else %}
                 <p>No results found for "{{ query }}"</p>
             {% endif %}
-        </div>    
+        </div>
+        </br>
         <div id="category-results" class="section">
-            {% if images %}    
+            {% if images %}
                 <div class="container">
                     {% regroup images by category.name as category_list %}
                     {% for category in category_list %}
@@ -55,7 +57,7 @@
                 <p>No image results found for "{{ query }}".</p>
             {% endif %}
         </div>
-        <div id="title-results" class="section">    
+        <div id="title-results" class="section">
             {% if image_search_results %}
                 <div class="container">
                     {% for image in image_search_results %}

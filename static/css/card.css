@@ -121,3 +121,8 @@ button:hover {
     border-radius: 5px;
     padding: 10px;
 }
+
+ul.errorlist {
+    list-style-type: none;  /* Removes the marker that come by default */
+    padding-left: 0;  /* Removes default padding */
+}

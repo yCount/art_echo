@@ -2,6 +2,7 @@ from django import forms
 from artecho.models import Image, Category, UserProfile
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+import re
 
 class LoginForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -56,6 +57,8 @@ class ProfileForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     def clean_username(self):
         username = self.cleaned_data.get('username')
+        if re.match(r'^\d+$', username):
+            raise forms.ValidationError("Username cannot be entirely numeric")
         return username
     password = forms.CharField(widget=forms.PasswordInput())
     class Meta:
